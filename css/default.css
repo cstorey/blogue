@@ -1,56 +1,61 @@
-body {
+.content {
     color: black;
-    font-size: 16px;
     margin: 0px auto 0px auto;
-    width: 600px;
+    width: 40em;
 }
 
-div#header {
+#header {
     border-bottom: 2px solid black;
-    margin-bottom: 30px;
-    padding: 12px 0px 12px 0px;
+    margin-bottom: 2em;
+    padding: 2ex 0px 2ex 0px;
 }
 
-div#logo a {
+#logo a {
     color: black;
     float: left;
-    font-size: 18px;
+    font-size: 1.2em;
     font-weight: bold;
     text-decoration: none;
 }
 
-div#header #navigation {
-    text-align: right;
+#header #navigation {
+    text-align: justify;
+    width: 100%;
 }
 
-div#header #navigation a {
+#header #navigation a {
     color: black;
-    font-size: 18px;
+    font-size: 1.2em;
     font-weight: bold;
-    margin-left: 12px;
+    /* margin-left: 0.75em;*/
     text-decoration: none;
     text-transform: uppercase;
 }
 
-div#footer {
+#footer {
     border-top: solid 2px black;
     color: #555;
-    font-size: 12px;
-    margin-top: 30px;
-    padding: 12px 0px 12px 0px;
+    font-size: 0.75em;
+    margin-top: 2em;
+    padding: 0.75em 0px 0.75em 0px;
     text-align: right;
 }
 
 h1 {
-    font-size: 24px;
+    font-size: 1.5em;
 }
 
 h2 {
-    font-size: 20px;
+    font-size: 1.25px;
 }
 
-div.info {
+.info {
     color: #555;
-    font-size: 14px;
+    font-size: 0.75em;
     font-style: italic;
+}
+
+code, kbd, pre, samp {
+    font-family: Monaco, mono, monospace;
+    font-size: 1em
 }
