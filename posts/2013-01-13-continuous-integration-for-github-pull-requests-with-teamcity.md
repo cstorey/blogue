@@ -20,11 +20,11 @@ HEAD revision of the remote branch, and a commit which merges said HEAD
 revision into master. For example:
 
     : ceri@misssplendid; git ls-remote origin | fgrep pull
-    9d1b88f3a67d2704e08b142b776136ddb1bdf3c1  refs/pull/1/head
+    9d1b88f3a67d2704e08b142b776136ddb1bdf3c1    refs/pull/1/head
     454fd4ab3d439e5b10c68b98ea60fbf7a0bf81cb    refs/pull/1/merge
-    80b11080005b5176564c369e1b4053268d3d4efb   refs/pull/2/head
+    80b11080005b5176564c369e1b4053268d3d4efb    refs/pull/2/head
     2222b016401e0b3dc9e7455aeeeeef9a2c4a3b26    refs/pull/2/merge
-    358197ab037e5f50417ed7f5ea3d977e53a08006   refs/pull/3/head
+    358197ab037e5f50417ed7f5ea3d977e53a08006    refs/pull/3/head
     371e7f88898217a72d5bd8322304bc1fc6b8e8ee    refs/pull/3/merge
     : ceri@misssplendid;
 
