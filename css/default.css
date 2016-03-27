@@ -3,10 +3,12 @@ body {
 }
 
 .content {
-    color: black;
     margin: 0px auto 0px auto;
     max-width: 40em;
-    font-family: verdana, arial, sans-serif;
+    background: #ffe;
+    color: #000;
+    font-size: 12pt;
+    font-family: lucidia grande, lucidia, verdana, tahoma, sans;
 }
 
 #header {
