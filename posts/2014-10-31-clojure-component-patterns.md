@@ -3,8 +3,6 @@ date: '2014-10-31'
 orig_url: http://www.lshift.net/blog/2014/10/31/clojure-component-patterns
 title: More Clojure component patterns
 ---
-<div class="content" html="http://www.w3.org/1999/xhtml">
-
 Like the proper nerd that I am, I’ve been recently playing around with
 the [National Rail data
 feeds](http://nrodwiki.rockshore.net/index.php/Main_Page), with a view
@@ -37,24 +35,15 @@ Now, the component library gives us one main way to achieve ordering,
 and that's by specifying inter-component dependencies, with the
 component/using function, eg:
 
-<div class="codecolorer-container text default"
-style="overflow:auto;white-space:nowrap;width:100%;">
-
-<div class="text codecolorer">
-
-  (defn bootstrap \[config\]\
-     (component/system-map\
-       :db (database-pool (:db config))\
-       :app (component/using\
-           (my-lovely-application)\
-           \[:db\])\
-       :http (component/using\
-           (make-http-server (:http config))\
-           \[:app\])))
-
-</div>
-
-</div>
+      (defn bootstrap [config]
+         (component/system-map
+           :db (database-pool (:db config))
+           :app (component/using
+               (my-lovely-application)
+               [:db])
+           :http (component/using
+               (make-http-server (:http config))
+               [:app])))
 
 To summarize the behaviour of the component library, a `system-map`
 represents a hash-map that represents the topology of the system, and
@@ -91,35 +80,24 @@ the go-routine when it completes. So, we can stash a reference to this
 channel within the component state, and use that to determine when this
 component is fully done. For example:
 
-<div class="codecolorer-container text default"
-style="overflow:auto;white-space:nowrap;width:100%;">
+      (def consumer-loop [ingress-ch]
+         (go-loop []
+           (when-let [msg (<! ingress-ch)]
+         (do-something-exciting-with msg)
+         (loop))))
 
-<div class="text codecolorer">
-
-  (def consumer-loop \[ingress-ch\]\
-     (go-loop \[\]\
-       (when-let \[msg (&lt;! ingress-ch)\]\
-     (do-something-exciting-with msg)\
-     (loop))))\
-\
-   (defrecord MyBatConsumer \[ingress-ch proc-ch\]\
-     component/Lifecycle\
-     (start \[self\]\
-       (let \[ingress-ch (chan)\
-         p (consumer-loop ingress-ch)\]\
-     (assoc self :ingress-ch ingress-ch :proc-ch p)))\
-     (stop \[self\]\
-       (close! ingress-ch)\
-       (&lt;!! proc-ch)\
-       (assoc self :ingress-ch nil :proc-ch nil)))
-
-</div>
-
-</div>
+       (defrecord MyBatConsumer [ingress-ch proc-ch]
+         component/Lifecycle
+         (start [self]
+           (let [ingress-ch (chan)
+             p (consumer-loop ingress-ch)]
+         (assoc self :ingress-ch ingress-ch :proc-ch p)))
+         (stop [self]
+           (close! ingress-ch)
+           (<!! proc-ch)
+           (assoc self :ingress-ch nil :proc-ch nil)))
 
 As you can see, we do a blocking wait on the channel returned by
 `consumer-loop` when we shut down. Granted, this is a proof of concept;
 in fully production-ready code, you'll need to allow for the risk of the
 component failing, and timing-out on shut down.
-
-</div>
