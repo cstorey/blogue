@@ -1,7 +1,12 @@
+body {
+  margin: 0px 1em 0px 1em;
+}
+
 .content {
     color: black;
     margin: 0px auto 0px auto;
-    width: 40em;
+    max-width: 40em;
+    font-family: verdana, arial, sans-serif;
 }
 
 #header {
@@ -56,6 +61,6 @@ h2 {
 }
 
 code, kbd, pre, samp {
-    font-family: Monaco, mono, monospace;
+    font-family: Consolas,Menlo,"Liberation Mono",Courier,monospace;
     font-size: 1em
 }
