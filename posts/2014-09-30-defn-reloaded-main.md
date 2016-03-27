@@ -3,7 +3,6 @@ date: '2014-09-30'
 orig_url: http://www.lshift.net/blog/2014/09/30/defn-reloaded-main
 title: (defn reloaded/-main [] …)
 ---
-<div class="content" html="http://www.w3.org/1999/xhtml">
 
 I’ve been using [Stuart Sierra’s reloaded
 pattern](http://thinkrelevance.com/blog/2013/06/04/clojure-workflow-reloaded)
@@ -34,50 +33,39 @@ extract the values directly from the command line, or the environment
 (perhaps using the [environ](https://github.com/weavejester/environ)
 module).
 
-<div class="codecolorer-container text default"
-style="overflow:auto;white-space:nowrap;width:100%;height:300px;">
+    (ns horse.main
+       (:require
+                 [clojure.tools.logging :as log]
+                 [clojure.java.io :as io]
+                 [clojure.edn :as edn]
+                 [com.stuartsierra.component :as component])
+       (:gen-class))
 
-<div class="text codecolorer">
+     (defn add-shutdown-hook! [^Runnable f]
+       (.addShutdownHook (Runtime/getRuntime)
+         (Thread. f)))
 
-(ns horse.main\
-   (:require\
-             \[clojure.tools.logging :as log\]\
-             \[clojure.java.io :as io\]\
-             \[clojure.edn :as edn\]\
-             \[com.stuartsierra.component :as component\])\
-   (:gen-class))\
-\
- (defn add-shutdown-hook! \[\^Runnable f\]\
-   (.addShutdownHook (Runtime/getRuntime)\
-     (Thread. f)))\
-\
- (defn logged-shutdown \[system\]\
-   (log/info ::shutting-down)\
-   (swap! system component/stop)\
-   (log/info ::shutdown-done))\
-\
- (defn run-forever \[\]\
-   (let \[forever (java.util.concurrent.Semaphore. 0)\]\
-     (.acquire forever)))\
-\
- (defn make-system \[{:keys \[stuff\] :as config}\]\
-   (component/system-map\
-      ;; :thing (map-&gt;Thingy {:stuff stuff})\
-    ))\
-\
- (defn -main \[configfile & argv\]\
-   (log/info ::booting-from configfile)\
-   (let \[config (-&gt; (io/reader configfile) slurp edn/read-string)\
-         sys (atom (make-system config))\]\
-     (add-shutdown-hook! (partial logged-shutdown sys))\
-\
-     (log/info ::starting)\
-     (swap! sys component/start)\
-     (log/info ::running)\
-     (run-forever)))
+     (defn logged-shutdown [system]
+       (log/info ::shutting-down)
+       (swap! system component/stop)
+       (log/info ::shutdown-done))
 
-</div>
+     (defn run-forever []
+       (let [forever (java.util.concurrent.Semaphore. 0)]
+         (.acquire forever)))
 
-</div>
+     (defn make-system [{:keys [stuff] :as config}]
+       (component/system-map
+          ;; :thing (map->Thingy {:stuff stuff})
+        ))
 
-</div>
+     (defn -main [configfile & argv]
+       (log/info ::booting-from configfile)
+       (let [config (-> (io/reader configfile) slurp edn/read-string)
+             sys (atom (make-system config))]
+         (add-shutdown-hook! (partial logged-shutdown sys))
+
+         (log/info ::starting)
+         (swap! sys component/start)
+         (log/info ::running)
+         (run-forever)))
