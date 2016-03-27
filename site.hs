@@ -5,6 +5,17 @@ import           Hakyll
 
 
 --------------------------------------------------------------------------------
+
+myFeedConfiguration :: FeedConfiguration
+myFeedConfiguration = FeedConfiguration
+    { feedTitle       = "Ceri Storey"
+    , feedDescription = "An Blog"
+    , feedAuthorName  = "Ceri Storey"
+    , feedAuthorEmail = "atom@ceri.storey.name"
+    , feedRoot        = "http://ceri.storey.name"
+    }
+
+
 main :: IO ()
 main = hakyll $ do
     match "images/*" $ do
@@ -15,7 +26,7 @@ main = hakyll $ do
         route   idRoute
         compile compressCssCompiler
 
-    match (fromList ["about.rst", "contact.markdown"]) $ do
+    match (fromList ["about.md"]) $ do
         route   $ setExtension "html"
         compile $ pandocCompiler
             >>= loadAndApplyTemplate "templates/default.html" defaultContext
@@ -58,6 +69,16 @@ main = hakyll $ do
                 >>= relativizeUrls
 
     match "templates/*" $ compile templateCompiler
+
+    create ["atom.xml"] $ do
+        route idRoute
+        compile $ do
+            let feedCtx = postCtx `mappend`
+                    constField "description" "This is the post description"
+
+            posts <- fmap (take 10) . recentFirst =<< loadAll "posts/*"
+            renderAtom myFeedConfiguration feedCtx posts
+
 
 
 --------------------------------------------------------------------------------
