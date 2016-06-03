@@ -8,7 +8,7 @@ body {
     background: #ffe;
     color: #000;
     font-size: 12pt;
-    font-family: lucidia grande, lucidia, verdana, tahoma, sans;
+    font-family: Palatino, "Palatino Linotype", "Palatino LT STD", "Book Antiqua", Georgia, serif;
 }
 
 #header {
@@ -67,6 +67,8 @@ code, kbd, pre, samp {
     font-size: 1em
 }
 
+.post-summaries dt {
+}
 .post-summaries dd {
   margin-left: 0px;
   padding-left: 1em;
