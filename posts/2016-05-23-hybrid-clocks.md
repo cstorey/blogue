@@ -8,7 +8,7 @@ Coming from an operations background, I've found that one of the best ways to un
 
 However, if we want to collate log events from different machines, say, one service calling out to another, then clock drift can make it appear that the request was processed by the receiver before the caller requested it, as in the following diageram:
 
-![Lamport diagram with wall clock skew](https://cdn.rawgit.com/cstorey/82f058a4b6a92695145030c574624da1/raw/3c2d7481c11e1f61a4466716b3053679691a236b/lamport-clock-skew.svg)
+![Lamport diagram with wall clock skew](../images/2016-05-23-hybrid-clocks/lamport-clock-skew.svg)
 
 ------- ------- ---------------
 Process Time    Event
@@ -22,7 +22,7 @@ Judging from the timestamps, it appears that the message was processed by B befo
 
 A common solution to this is to use a logical timestamp usually known as a Lamport Clock. In this scheme, a node keeps track of the timestamps from messages it had received, and ensures that it emits timestamps that are greater (IE after) any previously observed timestamp.
 
-![Lamport diagram with causally ordered clocks](https://cdn.rawgit.com/cstorey/82f058a4b6a92695145030c574624da1/raw/3c2d7481c11e1f61a4466716b3053679691a236b/lamport-clocks.svg)
+![Lamport diagram with causally ordered clocks](../images/2016-05-23-hybrid-clocks/lamport-clocks.svg)
 
 We can see at this point, that the clock at process B is forced to catch up when it receives the message from A.
 
@@ -41,7 +41,7 @@ However, although the trace is now rather more coherently ordered, the fact that
 
 So, we can have our cake and eat it by, basically using both techniques, defining our timestamps as a tuple of (wall time, counter). 
 
-![Lamport diagram with hybrid logical clocks](https://cdn.rawgit.com/cstorey/82f058a4b6a92695145030c574624da1/raw/3c2d7481c11e1f61a4466716b3053679691a236b/lamport-hybrid-clocks.svg)
+![Lamport diagram with hybrid logical clocks](../images/2016-05-23-hybrid-clocks/lamport-hybrid-clocks.svg)
 
 We can avoid problems caused by clocks running slow, and hence causing the observed time to jump backwards by keeping a record of the most greatest observed timestamp, including the logical counter. Then, when we want to timestamp an event, we take the greater of the observed timestamp, and the local clock.
 
