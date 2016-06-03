@@ -66,3 +66,12 @@ code, kbd, pre, samp {
     font-family: Consolas,Menlo,"Liberation Mono",Courier,monospace;
     font-size: 1em
 }
+
+.post-summaries dd {
+  margin-left: 0px;
+  padding-left: 1em;
+  font-style: italic;
+}
+.post-summaries dd p {
+  margin: 0em;
+}

@@ -1,7 +1,10 @@
-<dl>
+<dl class='post-summaries'>
     $for(posts)$
         <dt>
-            <a href="$url$">$title$</a> - $date$
+            <a href="$url$">$title$</a>ー$date$
         </dt>
+        <dd>
+            <p>$description$</p>
+        </dd>
     $endfor$
 </dl>
