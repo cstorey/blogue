@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.0//EN" "http://www.w3.org/TR/2001/PR-SVG-20010719/DTD/svg10.dtd">
+<svg width="15cm" height="12cm" viewBox="80 68 287 235" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <g>
+    <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x1="140" y1="100" x2="140" y2="290.264"/>
+    <polygon style="fill: #000000" points="140,297.764 135,287.764 140,290.264 145,287.764 "/>
+    <polygon style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="140,297.764 135,287.764 140,290.264 145,287.764 "/>
+  </g>
+  <g>
+    <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x1="240" y1="100" x2="240" y2="290.264"/>
+    <polygon style="fill: #000000" points="240,297.764 235,287.764 240,290.264 245,287.764 "/>
+    <polygon style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="240,297.764 235,287.764 240,290.264 245,287.764 "/>
+  </g>
+  <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:sans-serif;font-style:normal;font-weight:normal" x="140" y="80">
+    <tspan x="140" y="80">A</tspan>
+  </text>
+  <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:sans-serif;font-style:normal;font-weight:normal" x="240" y="80">
+    <tspan x="240" y="80">B</tspan>
+  </text>
+  <g>
+    <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x1="140" y1="140" x2="230.96" y2="176.384"/>
+    <polygon style="fill: #000000" points="237.924,179.17 226.782,180.098 230.96,176.384 230.496,170.813 "/>
+    <polygon style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="237.924,179.17 226.782,180.098 230.96,176.384 230.496,170.813 "/>
+  </g>
+  <g>
+    <rect style="fill: #ffffff" x="160" y="148.1" width="52.05" height="14.9"/>
+    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:sans-serif;font-style:normal;font-weight:normal" x="160" y="160">
+      <tspan x="160" y="160">Request</tspan>
+    </text>
+  </g>
+  <g>
+    <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x1="240" y1="220" x2="149.04" y2="256.384"/>
+    <polygon style="fill: #000000" points="142.076,259.17 149.504,250.813 149.04,256.384 153.218,260.098 "/>
+    <polygon style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="142.076,259.17 149.504,250.813 149.04,256.384 153.218,260.098 "/>
+  </g>
+  <g>
+    <rect style="fill: #ffffff" x="160" y="228.1" width="61.55" height="14.9"/>
+    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:sans-serif;font-style:normal;font-weight:normal" x="160" y="240">
+      <tspan x="160" y="240">Response</tspan>
+    </text>
+  </g>
+  <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:sans-serif;font-style:normal;font-weight:normal" x="80" y="140">
+    <tspan x="80" y="140">(12s, 0)</tspan>
+  </text>
+  <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:sans-serif;font-style:normal;font-weight:normal" x="280" y="180">
+    <tspan x="280" y="180">(12s, 1)</tspan>
+  </text>
+  <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:sans-serif;font-style:normal;font-weight:normal" x="80" y="100">
+    <tspan x="80" y="100">(10s, 0)</tspan>
+  </text>
+  <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:sans-serif;font-style:normal;font-weight:normal" x="300" y="100">
+    <tspan x="300" y="100"></tspan>
+  </text>
+  <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:sans-serif;font-style:normal;font-weight:normal" x="280" y="100">
+    <tspan x="280" y="100">(5s, 0)</tspan>
+  </text>
+  <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:sans-serif;font-style:normal;font-weight:normal" x="280" y="220">
+    <tspan x="280" y="220">(12s, 2)</tspan>
+  </text>
+  <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:sans-serif;font-style:normal;font-weight:normal" x="80" y="260">
+    <tspan x="80" y="260">(18s, 0)</tspan>
+  </text>
+  <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:sans-serif;font-style:normal;font-weight:normal" x="200" y="280">
+    <tspan x="200" y="280"></tspan>
+  </text>
+  <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:sans-serif;font-style:normal;font-weight:normal" x="340" y="100">
+    <tspan x="340" y="100">5s</tspan>
+  </text>
+  <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:sans-serif;font-style:normal;font-weight:normal" x="340" y="180">
+    <tspan x="340" y="180">9s</tspan>
+  </text>
+  <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:sans-serif;font-style:normal;font-weight:normal" x="340" y="220">
+    <tspan x="340" y="220">11s</tspan>
+  </text>
+  <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:sans-serif;font-style:normal;font-weight:normal" x="280" y="80">
+    <tspan x="280" y="80">Hybrid</tspan>
+  </text>
+  <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:sans-serif;font-style:normal;font-weight:normal" x="340" y="80">
+    <tspan x="340" y="80">Wall</tspan>
+  </text>
+</svg>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.0//EN" "http://www.w3.org/TR/2001/PR-SVG-20010719/DTD/svg10.dtd">
+<svg width="6cm" height="21cm" viewBox="192 68 117 415" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <g>
+    <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x1="200" y1="100" x2="200" y2="470.264"/>
+    <polygon style="fill: #000000" points="200,477.764 195,467.764 200,470.264 205,467.764 "/>
+    <polygon style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="200,477.764 195,467.764 200,470.264 205,467.764 "/>
+  </g>
+  <g>
+    <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x1="300" y1="100" x2="300" y2="470.264"/>
+    <polygon style="fill: #000000" points="300,477.764 295,467.764 300,470.264 305,467.764 "/>
+    <polygon style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="300,477.764 295,467.764 300,470.264 305,467.764 "/>
+  </g>
+  <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:sans-serif;font-style:normal;font-weight:normal" x="200" y="80">
+    <tspan x="200" y="80">A</tspan>
+  </text>
+  <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:sans-serif;font-style:normal;font-weight:normal" x="300" y="80">
+    <tspan x="300" y="80">B</tspan>
+  </text>
+  <g>
+    <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x1="200" y1="140" x2="290.96" y2="176.384"/>
+    <polygon style="fill: #000000" points="297.924,179.17 286.782,180.098 290.96,176.384 290.496,170.813 "/>
+    <polygon style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="297.924,179.17 286.782,180.098 290.96,176.384 290.496,170.813 "/>
+  </g>
+  <g>
+    <rect style="fill: #ffffff" x="220" y="148.1" width="52.05" height="14.9"/>
+    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:sans-serif;font-style:normal;font-weight:normal" x="220" y="160">
+      <tspan x="220" y="160">Request</tspan>
+    </text>
+  </g>
+  <g>
+    <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x1="300" y1="260" x2="209.04" y2="296.384"/>
+    <polygon style="fill: #000000" points="202.076,299.17 209.504,290.813 209.04,296.384 213.218,300.098 "/>
+    <polygon style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="202.076,299.17 209.504,290.813 209.04,296.384 213.218,300.098 "/>
+  </g>
+  <g>
+    <rect style="fill: #ffffff" x="220" y="268.1" width="61.55" height="14.9"/>
+    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:sans-serif;font-style:normal;font-weight:normal" x="220" y="280">
+      <tspan x="220" y="280">Response</tspan>
+    </text>
+  </g>
+</svg>
