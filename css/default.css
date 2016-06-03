@@ -9,6 +9,7 @@ body {
     color: #000;
     font-size: 12pt;
     font-family: Palatino, "Palatino Linotype", "Palatino LT STD", "Book Antiqua", Georgia, serif;
+    text-align: justify;
 }
 
 #header {
