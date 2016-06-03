@@ -2,6 +2,7 @@
 date: '2013-05-31'
 orig_url: http://www.lshift.net/blog/2013/05/31/page-objects-in-ruby
 title: Page objects in Ruby
+description: Your UI is a domain, too.
 ---
 <div class="content" html="http://www.w3.org/1999/xhtml">
 

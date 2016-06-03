@@ -2,6 +2,7 @@
 date: '2014-09-30'
 orig_url: http://www.lshift.net/blog/2014/09/30/defn-reloaded-main
 title: (defn reloaded/-main [] …)
+description: The code is dead, long live the code.
 ---
 
 I’ve been using [Stuart Sierra’s reloaded

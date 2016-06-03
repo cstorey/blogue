@@ -2,6 +2,7 @@
 date: '2013-01-13'
 orig_url: http://www.lshift.net/blog/2013/01/13/continuous-integration-for-github-pull-requests-with-teamcity
 title: Continuous Integration for Github Pull Requests with Teamcity
+description: Avoiding those embarassing accidents on master.
 ---
 <div class="content" html="http://www.w3.org/1999/xhtml">
 

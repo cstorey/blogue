@@ -2,6 +2,7 @@
 date: '2016-05-23'
 orig_url: http://www.lshift.net/blog/2016/05/23/its-all-happened-before/
 title: It's all happened before
+description: How a little counter can avoid calamitous causal confusion.
 ---
 
 Coming from an operations background, I've found that one of the best ways to understand a system's behaviour is to trace the messages between components. Now, most languages go have a log library, that will at minimum, allow developers to log when an event occurred with a description.

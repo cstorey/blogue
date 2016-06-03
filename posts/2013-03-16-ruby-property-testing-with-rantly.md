@@ -2,6 +2,7 @@
 date: '2013-03-16'
 orig_url: http://www.lshift.net/blog/2013/03/16/ruby-property-testing-with-rantly
 title: Ruby Property testing with Rantly
+description: More test cases than you could possibly want, for cheap.
 ---
 <div class="content" html="http://www.w3.org/1999/xhtml">
 

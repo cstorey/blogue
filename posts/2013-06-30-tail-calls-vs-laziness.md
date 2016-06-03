@@ -2,6 +2,7 @@
 date: '2013-06-30'
 orig_url: http://www.lshift.net/blog/2013/06/30/tail-calls-vs-laziness
 title: Tail calls in functional languages aren’t always a good fit.
+description: Avoiding the thunk explosion.
 ---
 <div class="content" html="http://www.w3.org/1999/xhtml">
 

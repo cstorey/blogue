@@ -2,6 +2,7 @@
 date: '2013-10-31'
 orig_url: http://www.lshift.net/blog/2013/10/31/tell-dont-ask-with-sinatra-handlers
 title: Tell don’t ask with Sinatra handlers
+description: Putting your actions in their place.
 ---
 <div class="content" html="http://www.w3.org/1999/xhtml">
 

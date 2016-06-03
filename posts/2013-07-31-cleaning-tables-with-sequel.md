@@ -2,6 +2,7 @@
 date: '2013-07-31'
 orig_url: http://www.lshift.net/blog/2013/07/31/cleaning-tables-with-sequel
 title: Emptying the depths of your database with Sequel.
+description: Cleaning up after yourself.
 ---
 <div class="content" html="http://www.w3.org/1999/xhtml">
 

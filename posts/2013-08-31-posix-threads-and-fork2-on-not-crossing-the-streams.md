@@ -2,6 +2,7 @@
 date: '2013-08-31'
 orig_url: http://www.lshift.net/blog/2013/08/31/posix-threads-and-fork2-on-not-crossing-the-streams
 title: 'POSIX Threads and fork(2): on not crossing the streams'
+description: New Jersey's revenge.
 ---
 <div class="content" html="http://www.w3.org/1999/xhtml">
 
