@@ -11,8 +11,8 @@ However, if we want to collate log events from different machines, say, one serv
 
 ![Lamport diagram with wall clock skew](../images/2016-05-23-hybrid-clocks/lamport-clock-skew.svg)
 
-------- ------- ---------------
 Process Time    Event
+------- ------- ---------------
 A       12s     Send Request
 B       9s      Receive Request
 B       11s     Send Response
@@ -29,8 +29,8 @@ We can see at this point, that the clock at process B is forced to catch up when
 
 With the extra information, we can now put our log into a coherent causal order:
 
-------- ------- ---------------
 Process Time    Event
+------- ------- ---------------
 A       12      Send Request
 B       13      Receive Request
 B       14      Send Response

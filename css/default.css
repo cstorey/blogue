@@ -68,6 +68,10 @@ code, kbd, pre, samp {
     font-size: 1em
 }
 
+th {
+  border-bottom: thin solid black;
+}
+
 .post-summaries dt {
 }
 .post-summaries dd {
