@@ -58,7 +58,8 @@ method of our handler.
 impl mio::Handler for MiChat {
     type Timeout = ();
     type Message = ();
-    fn ready(&mut self, event_loop: &mut mio::EventLoop<Self>, token: mio::Token, events: mio::EventSet) {
+    fn ready(&mut self, event_loop: &mut mio::EventLoop<Self>,
+	token: mio::Token, events: mio::EventSet) {
         info!("{:?}: {:?}", token, events);
         self.connections[token].handle_event(event_loop, events);
         if self.connections[token].is_closed() {
@@ -96,7 +97,8 @@ is mostly trivial:
 ```rust
 impl Listener {
 // ...
-    fn handle_event(&mut self, _event_loop: &mut mio::EventLoop<MiChat>, events: mio::EventSet) {
+    fn handle_event(&mut self, _event_loop: &mut mio::EventLoop<MiChat>,
+	events: mio::EventSet) {
         assert!(events.is_readable());
         self.sock_status.insert(events);
         info!("Listener::handle_event: {:?}; this time: {:?}; now: {:?}",
@@ -112,7 +114,8 @@ is remarkably similar:
 ```rust
 impl Connection {
 // ...
-    fn handle_event(&mut self, _event_loop: &mut mio::EventLoop<MiChat>, events: mio::EventSet) {
+    fn handle_event(&mut self, _event_loop: &mut mio::EventLoop<MiChat>,
+	events: mio::EventSet) {
         self.sock_status.insert(events);
         info!("Connection::handle_event: {:?}; this time: {:?}; now: {:?}",
                 self.socket.peer_addr(), events, self.sock_status);
@@ -180,18 +183,23 @@ impl Connection {
 
     fn process_buffer(&mut self, to_parent: &mut VecDeque<MiChatCommand>) {
         let mut prev = 0;
-        info!("{:?}: Read buffer: {:?}", self.socket.peer_addr(), self.read_buf);
+        info!("{:?}: Read buffer: {:?}",
+	    self.socket.peer_addr(), self.read_buf);
         for n in self.read_buf.iter().enumerate()
-                .filter_map(|(i, e)| if *e == '\n' as u8 { Some(i) } else { None } ) {
-            info!("{:?}: Pos: {:?}; chunk: {:?}", self.socket.peer_addr(), n, &self.read_buf[prev..n]);
-            let s = String::from_utf8_lossy(&self.read_buf[prev..n]).to_string();
+	    .filter_map(|(i, e)|
+	      if *e == '\n' as u8 { Some(i) } else { None } ) {
+            info!("{:?}: Pos: {:?}; chunk: {:?}",
+		self.socket.peer_addr(), n, &self.read_buf[prev..n]);
+            let s = String::from_utf8_lossy(&self.read_buf[prev..n])
+	      .to_string();
             let cmd = MiChatCommand::Broadcast(s);
             info!("Send! {:?}", cmd);
             to_parent.push_back(cmd);
             prev = n+1;
         }
         let remainder = self.read_buf[prev..].to_vec();
-        info!("{:?}: read Remainder: {}", self.socket.peer_addr(), remainder.len());
+        info!("{:?}: read Remainder: {}",
+	    self.socket.peer_addr(), remainder.len());
         self.read_buf = remainder;
     }
 ```
@@ -204,7 +212,8 @@ which will in turn enqueue the message on each connection for output.
 ```rust
 impl MiChat {
 // ...
-    fn process_action(&mut self, msg: MiChatCommand, event_loop: &mut mio::EventLoop<MiChat>) {
+    fn process_action(&mut self, msg: MiChatCommand,
+	event_loop: &mut mio::EventLoop<MiChat>) {
         trace!("{:p}; got {:?}", self, msg);
         match msg {
             MiChatCommand::Broadcast(s) => {
@@ -217,7 +226,8 @@ impl MiChat {
 
             MiChatCommand::NewConnection(socket) => {
                 let token = self.connections
-                    .insert_with(|token| EventHandler::Conn(Connection::new(socket, token)))
+                    .insert_with(|token|
+			EventHandler::Conn(Connection::new(socket, token)))
                     .expect("token insert");
                 &self.connections[token].register(event_loop, token);
             }
