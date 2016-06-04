@@ -1,5 +1,15 @@
+
+@font-face {
+  font-family: "FiraCode-Medium";
+  src: url("/fonts/firacode.otf") format("opentype"),
+    url("/fonts/firacode.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
 body {
   margin: 0px 1em 0px 1em;
+  text-rendering: optimizeLegibility;
 }
 
 .content {
@@ -64,7 +74,7 @@ h2 {
 }
 
 code, kbd, pre, samp {
-    font-family: Consolas,Menlo,"Liberation Mono",Courier,monospace;
+    font-family: "FiraCode-Medium", Menlo, Consolas, "Liberation Mono",Courier,monospace;
     font-size: 1em
 }
 
