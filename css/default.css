@@ -80,7 +80,10 @@ h2 {
 
 code, kbd, pre, samp {
     font-family: "FiraCode-Medium", Menlo, Consolas, "Liberation Mono",Courier,monospace;
-    font-size: 1em
+  white-space: pre-wrap;
+}
+pre {
+    font-size: 0.8em;
 }
 
 th {
