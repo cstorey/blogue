@@ -4,16 +4,12 @@ orig_url: http://www.lshift.net/blog/2013/09/28/precise-scheduling-with-rabbitmq
 title: Precise scheduling with RabbitMQ
 description: The things we'll do to avoid dependencies.
 ---
-<div class="content" html="http://www.w3.org/1999/xhtml">
-
 On a project recently, we needed to be able to process jobs
 asynchronously, but we also needed to be able to specify that they
 should be run at a certain point in the future. We also needed to be
 able to implement exponential backoff on failure. We initially tried to
 integrate [Sidekiq](http://sidekiq.org/), but unfortunately it turned
 out to not be a good fit for the way we structured the code base.
-
-<span id="more-1971"></span>
 
 Now, RabbitMQ is very [commonly](http://www.celeryproject.org/)
 [used](http://www.rabbitmq.com/tutorials/tutorial-two-python.html) as a
@@ -42,20 +38,24 @@ processed, and look for that on the receiving side. If we take a very
 simple example, where we publish via the default exchange to a queue
 named in the variable `a_queue_name`:
 
-    broker = Bunny.new(broker_address)
-    # ...
-    ch = broker.default_channel
+```ruby
+broker = Bunny.new(broker_address)
+# ...
+ch = broker.default_channel
 
-    headers = { perform_job_at: scheduled_job_time.to_f }
-    ch.default_exchange.publish(a_message, routing_key: a_queue_name, headers: headers)
+headers = { perform_job_at: scheduled_job_time.to_f }
+ch.default_exchange.publish(a_message, routing_key: a_queue_name, headers: headers)
+```
 
 And in our worker, we can pull it out like so:
 
-    work_queue = broker.default_channel.queue(a_queue_name)
-    work_queue.subscribe do |delivery_info, metadata, body|
-        scheduled_job_time = metadata.fetch(:headers, {}).fetch(:perform_job_at, Time.now)
-    # ... Process job.
-    end
+```ruby
+work_queue = broker.default_channel.queue(a_queue_name)
+work_queue.subscribe do |delivery_info, metadata, body|
+    scheduled_job_time = metadata.fetch(:headers, {}).fetch(:perform_job_at, Time.now)
+# ... Process job.
+end
+```
 
 However, this is of course, only half of the story. We know when we want
 to process the job, but we don’t yet have a method of delaying it. A
@@ -81,18 +81,21 @@ is due.
 So, you end up with a consumer implementation that looks roughly like
 this:
 
-    scheduler = SchedulingQueue.new
-    work_queue = broker.default_channel.queue(a_queue_name)
-    work_queue.subscribe do |delivery_info, metadata, job_data|
-        scheduled_job_time = metadata.fetch(:headers, {}).fetch(:perform_job_at, Time.now)
-        # Optionally decode the message body into a domain object
-        scheduler.add_job(perform_job_at, job_data)
-    end
+```ruby
+scheduler = SchedulingQueue.new
+work_queue = broker.default_channel.queue(a_queue_name)
+work_queue.subscribe do |delivery_info, metadata, job_data|
+    scheduled_job_time = metadata.fetch(:headers, {})
+			  .fetch(:perform_job_at, Time.now)
+    # Optionally decode the message body into a domain object
+    scheduler.add_job(perform_job_at, job_data)
+end
 
-    loop do
-        the_work_item = scheduler.pop
-        do_amazing_things_with(the_work_item)
-    end
+loop do
+    the_work_item = scheduler.pop
+    do_amazing_things_with(the_work_item)
+end
+```
 
 Now, as it stands, we don’t yet support backoff for failed jobs. That
 will require a few extra moving parts, which we’ll introduce another
@@ -107,5 +110,3 @@ six), and so performance isn’t a huge problem for us. In different
 circumstances we’d have maybe implemented a database-backed service
 which fed jobs into RabbitMQ when they become due, but in this case,
 would been too costly in terms of developer time.
-
-</div>

@@ -36,15 +36,17 @@ Now, the component library gives us one main way to achieve ordering,
 and that's by specifying inter-component dependencies, with the
 component/using function, eg:
 
-      (defn bootstrap [config]
-         (component/system-map
-           :db (database-pool (:db config))
-           :app (component/using
-               (my-lovely-application)
-               [:db])
-           :http (component/using
-               (make-http-server (:http config))
-               [:app])))
+```clojure
+(defn bootstrap [config]
+   (component/system-map
+     :db (database-pool (:db config))
+     :app (component/using
+         (my-lovely-application)
+         [:db])
+     :http (component/using
+         (make-http-server (:http config))
+         [:app])))
+```
 
 To summarize the behaviour of the component library, a `system-map`
 represents a hash-map that represents the topology of the system, and
@@ -81,22 +83,24 @@ the go-routine when it completes. So, we can stash a reference to this
 channel within the component state, and use that to determine when this
 component is fully done. For example:
 
-      (def consumer-loop [ingress-ch]
-         (go-loop []
-           (when-let [msg (<! ingress-ch)]
-         (do-something-exciting-with msg)
+```clojure
+(def consumer-loop [ingress-ch]
+   (go-loop []
+     (when-let [msg (<! ingress-ch)]
+       (do-something-exciting-with msg)
          (loop))))
 
-       (defrecord MyBatConsumer [ingress-ch proc-ch]
-         component/Lifecycle
-         (start [self]
-           (let [ingress-ch (chan)
-             p (consumer-loop ingress-ch)]
-         (assoc self :ingress-ch ingress-ch :proc-ch p)))
-         (stop [self]
-           (close! ingress-ch)
-           (<!! proc-ch)
-           (assoc self :ingress-ch nil :proc-ch nil)))
+(defrecord MyBatConsumer [ingress-ch proc-ch]
+  component/Lifecycle
+  (start [self]
+    (let [ingress-ch (chan)
+      p (consumer-loop ingress-ch)]
+  (assoc self :ingress-ch ingress-ch :proc-ch p)))
+  (stop [self]
+    (close! ingress-ch)
+    (<!! proc-ch)
+    (assoc self :ingress-ch nil :proc-ch nil)))
+```
 
 As you can see, we do a blocking wait on the channel returned by
 `consumer-loop` when we shut down. Granted, this is a proof of concept;

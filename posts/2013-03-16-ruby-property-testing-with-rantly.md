@@ -4,21 +4,17 @@ orig_url: http://www.lshift.net/blog/2013/03/16/ruby-property-testing-with-rantl
 title: Ruby Property testing with Rantly
 description: More test cases than you could possibly want, for cheap.
 ---
-<div class="content" html="http://www.w3.org/1999/xhtml">
-
 At LShift, we tend to be big fans of functional programming, and in
 particular I’ve found ideas from languages like Clojure and Haskell do
 influence how I use more mainstream languages such as Ruby.
 
 One technology that’s been useful to us on a current project is
-[<span>QuickCheck</span>](http://www.haskell.org/haskellwiki/Introduction_to_QuickCheck2)-alike
-for Ruby, [<span>Rantly</span>](https://github.com/hayeah/rantly).
+[QuickCheck](http://www.haskell.org/haskellwiki/Introduction_to_QuickCheck2)-alike
+for Ruby, [Rantly](https://github.com/hayeah/rantly).
 Briefly, rather than testing a module in your code by taking a set of
 (hopefully representative) examples of use and demonstrating that they
 produce the correct (usually pre-calculated) output, you can have the
 library generate input data and compare the results to a model.
-
-<span id="more-1567"></span>
 
 So a fairly simple (and useful) example would be checking message
 serialisation. One problem we’ve had to solve is encode commands and
@@ -37,18 +33,20 @@ checking two properties:
     put in.
 
 The example code is up on github, as
-[<span>cstorey/rantly-example</span>](https://github.com/cstorey/rantly-example).
+[cstorey/rantly-example](https://github.com/cstorey/rantly-example).
 Our first example is:
 
-         let (:message) { # 1
-             lambda { |r| DoSomething.new id: r.uuid, name: r.string } # 2
-         }
-         it "should be usefully representable as JSON" do
-             property_of(&message).check do |msg| # 3
-              json = msg.as_json
-              JSON.parse(JSON.unparse(json)).should == json # 4
-             end
-         end
+```ruby
+let (:message) { # 1
+   lambda { |r| DoSomething.new id: r.uuid, name: r.string } # 2
+}
+it "should be usefully representable as JSON" do
+   property_of(&message).check do |msg| # 3
+    json = msg.as_json
+    JSON.parse(JSON.unparse(json)).should == json # 4
+   end
+end
+```
 
 So, there’s a couple of things to note here
 
@@ -58,11 +56,11 @@ So, there’s a couple of things to note here
     does by default)
 2.  Rantly passes a context to the block as a parameter, and we use that
     to generate sub-elements of our input (in this case, we define the
-    <span>uuid</span> generator further up the file).
+    `uuid` generator further up the file).
 3.  Inside the test block, we pass our generator (declared as \#1.) to
-    <span>property\_of</span>, and then <span>check</span> repeatedly
+    `property_of`, and then `check` repeatedly
     calls the generator, and then passes that to our check block.
-4.  And finally within the <span>check</span> block, we can use ordinary
+4.  And finally within the `check` block, we can use ordinary
     rspec expectations, or even mocks if appropriate. Here, we are just
     testing for an identity
     ([Hamsterdam](https://github.com/atomicobject/hamsterdam), which
@@ -72,7 +70,7 @@ So, there’s a couple of things to note here
 So, you might well be thinking that these tests are trivial, and in a
 sense they are, but there is definitely value in them. For example, in
 the case of schema versioning, then you can define generators for
-different versions of the <span>DoSomething</span> message, and validate
+different versions of the `DoSomething` message, and validate
 that say, we can parse them into an object that is meaningful within our
 domain model, and that they do still accurately reflect the original
 intent of the sender.

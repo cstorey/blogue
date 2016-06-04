@@ -34,39 +34,41 @@ extract the values directly from the command line, or the environment
 (perhaps using the [environ](https://github.com/weavejester/environ)
 module).
 
-    (ns horse.main
-       (:require
-                 [clojure.tools.logging :as log]
-                 [clojure.java.io :as io]
-                 [clojure.edn :as edn]
-                 [com.stuartsierra.component :as component])
-       (:gen-class))
+```clojure
+(ns horse.main
+   (:require
+             [clojure.tools.logging :as log]
+             [clojure.java.io :as io]
+             [clojure.edn :as edn]
+             [com.stuartsierra.component :as component])
+   (:gen-class))
 
-     (defn add-shutdown-hook! [^Runnable f]
-       (.addShutdownHook (Runtime/getRuntime)
-         (Thread. f)))
+ (defn add-shutdown-hook! [^Runnable f]
+   (.addShutdownHook (Runtime/getRuntime)
+     (Thread. f)))
 
-     (defn logged-shutdown [system]
-       (log/info ::shutting-down)
-       (swap! system component/stop)
-       (log/info ::shutdown-done))
+ (defn logged-shutdown [system]
+   (log/info ::shutting-down)
+   (swap! system component/stop)
+   (log/info ::shutdown-done))
 
-     (defn run-forever []
-       (let [forever (java.util.concurrent.Semaphore. 0)]
-         (.acquire forever)))
+ (defn run-forever []
+   (let [forever (java.util.concurrent.Semaphore. 0)]
+     (.acquire forever)))
 
-     (defn make-system [{:keys [stuff] :as config}]
-       (component/system-map
-          ;; :thing (map->Thingy {:stuff stuff})
-        ))
+ (defn make-system [{:keys [stuff] :as config}]
+   (component/system-map
+      ;; :thing (map->Thingy {:stuff stuff})
+    ))
 
-     (defn -main [configfile & argv]
-       (log/info ::booting-from configfile)
-       (let [config (-> (io/reader configfile) slurp edn/read-string)
-             sys (atom (make-system config))]
-         (add-shutdown-hook! (partial logged-shutdown sys))
+ (defn -main [configfile & argv]
+   (log/info ::booting-from configfile)
+   (let [config (-> (io/reader configfile) slurp edn/read-string)
+         sys (atom (make-system config))]
+     (add-shutdown-hook! (partial logged-shutdown sys))
 
-         (log/info ::starting)
-         (swap! sys component/start)
-         (log/info ::running)
-         (run-forever)))
+     (log/info ::starting)
+     (swap! sys component/start)
+     (log/info ::running)
+     (run-forever)))
+```

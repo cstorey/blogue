@@ -41,60 +41,62 @@ Running [`mutant`](https://github.com/mbj/mutant) over the new
 `SRSRB::CardEditorProjection` class, we (eventually) see the following
 in the final report:
 
+<pre>
 <span style="color:#A00">!!! Mutant alive:
-rspec:SRSRB::CardEditorProjection\#card\_for:/Users/cez/projects/srs-rb/lib/srsrb/card\_editor\_projection.rb:60:235ac
-!!!</span>\
- <span style="color:#00A">@@ -1,4 +1,4 @@\
- </span> def card\_for(id)\
- <span style="color:#A00">– cards.get\[id\]\
- </span><span style="color:#0A0">+ cards.get\
- </span> end\
- Took: (4.74s)\
- <span style="color:#A00">!!! Mutant alive:
-rspec:SRSRB::CardEditorProjection\#card\_for:/Users/cez/projects/srs-rb/lib/srsrb/card\_editor\_projection.rb:60:81c99
-!!!</span>\
- <span style="color:#00A">@@ -1,4 +1,4 @@\
- </span> def card\_for(id)\
- <span style="color:#A00">– cards.get\[id\]\
- </span><span style="color:#0A0">+ cards\[id\]\
- </span> end\
- Took: (4.75s)\
- <span style="color:#A00">!!! Mutant alive:
-rspec:SRSRB::CardEditorProjection\#card\_for:/Users/cez/projects/srs-rb/lib/srsrb/card\_editor\_projection.rb:60:f83c4
-!!!</span>\
- <span style="color:#00A">@@ -1,4 +1,4 @@\
- </span> def card\_for(id)\
- <span style="color:#A00">– cards.get\[id\]\
- </span><span style="color:#0A0">+ id\
- </span> end\
- Took: (4.71s)\
- <span style="color:#A00">!!! Mutant alive:
-rspec:SRSRB::CardEditorProjection\#card\_for:/Users/cez/projects/srs-rb/lib/srsrb/card\_editor\_projection.rb:60:9e7ae
-!!!</span>\
- <span style="color:#00A">@@ -1,4 +1,4 @@\
- </span> def card\_for(id)\
- <span style="color:#A00">– cards.get\[id\]\
- </span><span style="color:#0A0">+ nil\
- </span> end\
- Took: (4.59s)\
- <span style="color:#A00">!!! Mutant alive:
-rspec:SRSRB::CardEditorProjection\#card\_for:/Users/cez/projects/srs-rb/lib/srsrb/card\_editor\_projection.rb:60:61efb
-!!!</span>\
- <span style="color:#00A">@@ -1,4 +1,4 @@\
- </span><span style="color:#A00">-def card\_for(id)\
- </span><span style="color:#0A0">+def card\_for(s8e207872a38234087817)\
- </span> cards.get\[id\]\
- end\
- Took: (4.76s)\
- <span style="color:#A00">!!! Mutant alive:
-rspec:SRSRB::CardEditorProjection\#card\_for:/Users/cez/projects/srs-rb/lib/srsrb/card\_editor\_projection.rb:60:12b0a
-!!!</span>\
- <span style="color:#00A">@@ -1,4 +1,4 @@\
- </span><span style="color:#A00">-def card\_for(id)\
- </span><span style="color:#0A0">+def card\_for\
- </span> cards.get\[id\]\
- end\
- Took: (4.64s)
+rspec:SRSRB::CardEditorProjection#card_for:/Users/cez/projects/srs-rb/lib/srsrb/card_editor_projection.rb:60:235ac
+!!!</span>
+ <span style="color:#00A">@@ -1,4 +1,4 @@
+ </span> def card_for(id)
+ <span style="color:#A00">– cards.get[id]
+ </span><span style="color:#0A0">+ cards.get
+ </span> end
+Took: (4.74s)
+<span style="color:#A00">!!! Mutant alive:
+rspec:SRSRB::CardEditorProjection#card_for:/Users/cez/projects/srs-rb/lib/srsrb/card_editor_projection.rb:60:81c99
+!!!</span>
+ <span style="color:#00A">@@ -1,4 +1,4 @@
+ </span> def card_for(id)
+ <span style="color:#A00">– cards.get[id]
+ </span><span style="color:#0A0">+ cards[id]
+ </span> end
+Took: (4.75s)
+<span style="color:#A00">!!! Mutant alive:
+rspec:SRSRB::CardEditorProjection#card_for:/Users/cez/projects/srs-rb/lib/srsrb/card_editor_projection.rb:60:f83c4
+!!!</span>
+ <span style="color:#00A">@@ -1,4 +1,4 @@
+ </span> def card_for(id)
+ <span style="color:#A00">– cards.get[id]
+ </span><span style="color:#0A0">+ id
+ </span> end
+Took: (4.71s)
+<span style="color:#A00">!!! Mutant alive:
+rspec:SRSRB::CardEditorProjection#card_for:/Users/cez/projects/srs-rb/lib/srsrb/card_editor_projection.rb:60:9e7ae
+!!!</span>
+ <span style="color:#00A">@@ -1,4 +1,4 @@
+ </span> def card_for(id)
+ <span style="color:#A00">– cards.get[id]
+ </span><span style="color:#0A0">+ nil
+ </span> end
+Took: (4.59s)
+<span style="color:#A00">!!! Mutant alive:
+rspec:SRSRB::CardEditorProjection#card_for:/Users/cez/projects/srs-rb/lib/srsrb/card_editor_projection.rb:60:61efb
+!!!</span>
+ <span style="color:#00A">@@ -1,4 +1,4 @@
+ </span><span style="color:#A00">-def card_for(id)
+ </span><span style="color:#0A0">+def card_for(s8e207872a38234087817)
+ </span> cards.get[id]
+ end
+Took: (4.76s)
+<span style="color:#A00">!!! Mutant alive:
+rspec:SRSRB::CardEditorProjection#card_for:/Users/cez/projects/srs-rb/lib/srsrb/card_editor_projection.rb:60:12b0a
+!!!</span>
+ <span style="color:#00A">@@ -1,4 +1,4 @@
+ </span><span style="color:#A00">-def card_for(id)
+ </span><span style="color:#0A0">+def card_for
+ </span> cards.get[id]
+ end
+Took: (4.64s)
+</pre>
 
 So, `mutant` has found that for all the ways it knows how to mutate the
 method `#card_for` (renaming parameters, deleting code, &c) the result

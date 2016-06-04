@@ -67,18 +67,20 @@ implement a buffering version of cat using core.async.
 The most complex part of the code is in the function
 `writeable-from-chan`, as below:
 
-    (defn writeable-from-chan [ch strm]
-      (let [drains (chan)]
-        (go
-          (loop [] ;; #1
-            (let [buf (<! ch) ;; #2
-              drain-cb (fn drain-cb [] (put! drains :token))] ;; #4
-              (if buf
-            (do 
-                (.write strm buf drain-cb) ;; #3
-                (<! drains) ;; #5
-                (recur))
-            (.end strm))))))) ;; #6
+```clojure
+(defn writeable-from-chan [ch strm]
+  (let [drains (chan)]
+    (go
+      (loop [] ;; #1
+	(let [buf (<! ch) ;; #2
+	  drain-cb (fn drain-cb [] (put! drains :token))] ;; #4
+	  (if buf
+	(do 
+	    (.write strm buf drain-cb) ;; #3
+	    (<! drains) ;; #5
+	    (recur))
+	(.end strm))))))) ;; #6
+```
 
 Essentially, this starts a loop (\#1) which takes input from the input
 channel (\#2) and writes (\#3) it to the output stream. At this point,

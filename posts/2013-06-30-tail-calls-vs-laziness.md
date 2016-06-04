@@ -4,8 +4,6 @@ orig_url: http://www.lshift.net/blog/2013/06/30/tail-calls-vs-laziness
 title: Tail calls in functional languages aren’t always a good fit.
 description: Avoiding the thunk explosion.
 ---
-<div class="content" html="http://www.w3.org/1999/xhtml">
-
 Recently I’ve started playing with Haskell a little more seriously, and
 I’ve been toying with the idea of using it to calculate approximated
 percentiles over streams of numerical data, as found in the
@@ -17,22 +15,22 @@ Reservoir](http://www.mathcs.emory.edu/~cheung/papers/StreamDB/RandomSampling/19
 But in the course of writing the code, I learnt a couple of things that
 seemed to be worth sharing.
 
-<span id="more-1803"></span>
-
 So, the first implementation of the reservoir sampling algorithm looked
 like this:…
 
-    sample :: R.RandomGen g => g -> Int -> [a] -> V.Vector a
-    sample r n l = go r vec0 (succ n) remainder where
-        vec0 = V.fromList beginning
-        (beginning, remainder) = splitAt n l
-        go _ sample _ [] = sample
-        go r sample i (x:xs) = sample ‘seq‘ go r'' updated (succ i) xs where 
-      updated | p < n = sample // upd
-          | otherwise = sample
-        upd = [(idx, x)]
-    (p, r') = rand0 where rand0 = R.randomR (0, i-1) r
-    (idx, r'') = rand1 where rand1 = R.randomR (0, n-1) r'
+```haskell
+sample :: R.RandomGen g => g -> Int -> [a] -> V.Vector a
+sample r n l = go r vec0 (succ n) remainder where
+    vec0 = V.fromList beginning
+    (beginning, remainder) = splitAt n l
+    go _ sample _ [] = sample
+    go r sample i (x:xs) = sample ‘seq‘ go r'' updated (succ i) xs where 
+  updated | p < n = sample // upd
+      | otherwise = sample
+    upd = [(idx, x)]
+(p, r') = rand0 where rand0 = R.randomR (0, i-1) r
+(idx, r'') = rand1 where rand1 = R.randomR (0, n-1) r'
+```
 
 When I’ve used functional languages in the past (e.g.: OCaml, or
 Clojure) they’ve generally used strict evaluation (i.e.: parameters to
@@ -87,5 +85,3 @@ overflowing the stack.
 
 Sadly, this code doesn’t seem very idiomatic; mostly because of the
 third reason above. However, I’d best leave that to another post…
-
-</div>
