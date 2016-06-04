@@ -52,7 +52,37 @@ existing RPC abstraction, we apply it directly on top of the socket
 interface provided by [mio](https://crates.io/crates/mio/). The bulk of
 our processing happens in the
 [`Handler#ready`](https://github.com/cstorey/mio-rules-example/blob/25be0cf04c66a526eb6008dfe587d56120d07e51/src/main.rs#L293-L313)
-method of our handler. So in the terminology of the paper, we have two
+method of our handler. 
+
+```rust
+impl mio::Handler for MiChat {
+    type Timeout = ();
+    type Message = ();
+    fn ready(&mut self, event_loop: &mut mio::EventLoop<Self>, token: mio::Token, events: mio::EventSet) {
+        info!("{:?}: {:?}", token, events);
+        self.connections[token].handle_event(event_loop, events);
+        if self.connections[token].is_closed() {
+            info!("Removing; {:?}", token);
+            self.connections.remove(token);
+        }
+
+        let mut parent_actions = VecDeque::new();
+        loop {
+            for conn in self.connections.iter_mut() {
+                conn.process_rules(event_loop, &mut parent_actions);
+            }
+            // Anything left to process?
+            if parent_actions.is_empty() { break; }
+
+            for action in parent_actions.drain(..) {
+                self.process_action(action, event_loop);
+            }
+        }
+    }
+}
+```
+
+So in the terminology of the paper, we have two
 tasks, namely listening for new connections, and handling established
 connections.
 
@@ -61,13 +91,60 @@ essentially socket readiness notifications, and the bulk of the actions
 include such exciting things as reading/writing from sockets. For
 example, the [event handler for the listening
 socket](https://github.com/cstorey/mio-rules-example/blob/25be0cf04c66a526eb6008dfe587d56120d07e51/src/main.rs#L222-L227)
-is mostly trivial, and that [for each
-connection](https://github.com/cstorey/mio-rules-example/blob/25be0cf04c66a526eb6008dfe587d56120d07e51/src/main.rs#L222-L227)
-is remarkably similar.
+is mostly trivial:
+
+```rust
+impl Listener {
+// ...
+    fn handle_event(&mut self, _event_loop: &mut mio::EventLoop<MiChat>, events: mio::EventSet) {
+        assert!(events.is_readable());
+        self.sock_status.insert(events);
+        info!("Listener::handle_event: {:?}; this time: {:?}; now: {:?}",
+                self.listener.local_addr(), events, self.sock_status);
+    }
+
+```
+
+And that [for each
+connection](https://github.com/cstorey/mio-rules-example/blob/25be0cf04c66a526eb6008dfe587d56120d07e51/src/main.rs#L94-L99)
+is remarkably similar:
+
+```rust
+impl Connection {
+// ...
+    fn handle_event(&mut self, _event_loop: &mut mio::EventLoop<MiChat>, events: mio::EventSet) {
+        self.sock_status.insert(events);
+        info!("Connection::handle_event: {:?}; this time: {:?}; now: {:?}",
+                self.socket.peer_addr(), events, self.sock_status);
+    }
+
+```
 
 Then the bulk of the activity happens in the
 [`Listener#process_rules`](https://github.com/cstorey/mio-rules-example/blob/25be0cf04c66a526eb6008dfe587d56120d07e51/src/main.rs#L229)
 method.
+
+```rust
+impl Listener {
+// ...
+    fn process_rules(&mut self, event_loop: &mut mio::EventLoop<MiChat>,
+            to_parent: &mut VecDeque<MiChatCommand>) {
+        info!("the listener socket is ready to accept a connection");
+        match self.listener.accept() {
+            Ok(Some(socket)) => {
+                let cmd = MiChatCommand::NewConnection(socket);
+                to_parent.push_back(cmd);
+            }
+            Ok(None) => {
+                info!("the listener socket wasn't actually ready");
+            }
+            Err(e) => {
+                info!("listener.accept() errored: {}", e);
+                event_loop.shutdown();
+            }
+        }
+    }
+```
 
 So, when our listening socket is readable (IE: has a client attempting
 to connect), we `accept(2)` the connection, and notify the service of
@@ -79,10 +156,74 @@ the socket, and invokes
 [`Connection#process_buffer`](https://github.com/cstorey/mio-rules-example/blob/25be0cf04c66a526eb6008dfe587d56120d07e51/src/main.rs#L122)
 to actually parse the input into “frames” (lines in this case).
 
+```rust
+impl Connection {
+// ...
+    fn process_rules(&mut self, event_loop: &mut mio::EventLoop<MiChat>,
+        to_parent: &mut VecDeque<MiChatCommand>) {
+        if self.sock_status.is_readable() {
+            self.read();
+            self.sock_status.remove(mio::EventSet::readable());
+        }
+
+        self.process_buffer(to_parent);
+
+        if self.sock_status.is_writable() {
+            self.write();
+            self.sock_status.remove(mio::EventSet::writable());
+        }
+
+        if !self.is_closed() {
+            self.reregister(event_loop)
+        }
+    }
+
+    fn process_buffer(&mut self, to_parent: &mut VecDeque<MiChatCommand>) {
+        let mut prev = 0;
+        info!("{:?}: Read buffer: {:?}", self.socket.peer_addr(), self.read_buf);
+        for n in self.read_buf.iter().enumerate()
+                .filter_map(|(i, e)| if *e == '\n' as u8 { Some(i) } else { None } ) {
+            info!("{:?}: Pos: {:?}; chunk: {:?}", self.socket.peer_addr(), n, &self.read_buf[prev..n]);
+            let s = String::from_utf8_lossy(&self.read_buf[prev..n]).to_string();
+            let cmd = MiChatCommand::Broadcast(s);
+            info!("Send! {:?}", cmd);
+            to_parent.push_back(cmd);
+            prev = n+1;
+        }
+        let remainder = self.read_buf[prev..].to_vec();
+        info!("{:?}: read Remainder: {}", self.socket.peer_addr(), remainder.len());
+        self.read_buf = remainder;
+    }
+```
+
 Whenever we see a full line of input from the client, we pass a
 `MiChatCommand::Broadcast`, we pass that
 to[`MiChat#process_action`](https://github.com/cstorey/mio-rules-example/blob/25be0cf04c66a526eb6008dfe587d56120d07e51/src/main.rs#L40),
 which will in turn enqueue the message on each connection for output.
+
+```rust
+impl MiChat {
+// ...
+    fn process_action(&mut self, msg: MiChatCommand, event_loop: &mut mio::EventLoop<MiChat>) {
+        trace!("{:p}; got {:?}", self, msg);
+        match msg {
+            MiChatCommand::Broadcast(s) => {
+                for c in self.connections.iter_mut() {
+                    if let &mut EventHandler::Conn(ref mut c) = c {
+                        c.enqueue(&s);
+                    }
+                }
+            },
+
+            MiChatCommand::NewConnection(socket) => {
+                let token = self.connections
+                    .insert_with(|token| EventHandler::Conn(Connection::new(socket, token)))
+                    .expect("token insert");
+                &self.connections[token].register(event_loop, token);
+            }
+        }
+  }
+```
 
 The rules processing in the `Handler#ready` implementation then halts
 once everything we are concerned about has quiesced; in this case, when
