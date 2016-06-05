@@ -2,6 +2,7 @@
 {-# LANGUAGE OverloadedStrings #-}
 import           Data.Monoid (mappend)
 import           Hakyll
+import Hakyll.Contrib.Hyphenation (hyphenateHtml, english_GB)
 
 
 --------------------------------------------------------------------------------
@@ -37,12 +38,14 @@ main = hakyll $ do
     match (fromList ["about.md"]) $ do
         route   $ setExtension "html"
         compile $ pandocCompiler
+            >>= hyphenateHtml english_GB
             >>= loadAndApplyTemplate "templates/default.html" defaultContext
             >>= relativizeUrls
 
     match "posts/*" $ do
         route $ setExtension "html"
         compile $ pandocCompiler
+            >>= hyphenateHtml english_GB
             >>= loadAndApplyTemplate "templates/post.html"    postCtx
             >>= loadAndApplyTemplate "templates/default.html" postCtx
             >>= relativizeUrls
