@@ -36,8 +36,11 @@ body.content {
     background: #ffe;
     color: #000;
     font-size: 12pt;
-    font-family: SourceSerifPro, Palatino, "Palatino Linotype", "Palatino LT STD", "Book Antiqua", Georgia, serif;
+    font-family: Palatino, "Palatino Linotype", "Palatino LT STD", "Book Antiqua", Georgia, serif;
     text-align: justify;
+}
+.serif-loaded .content {
+    font-family: SourceSerifPro, Palatino, "Palatino Linotype", "Palatino LT STD", "Book Antiqua", Georgia, serif;
 }
 
 #header {
@@ -96,13 +99,21 @@ h2 {
 
 .info, .subtitle, #footer {
     font-style: italic;
-    font-family: SourceSansPro;
+    font-family: sans;
+}
+
+.sans-loaded .info, .sans-loaded .subtitle, .sans-loaded #footer {
+    font-family: SourceSansPro, sans;
 }
 
 code, kbd, pre, samp {
-    font-family: "FiraCode", Menlo, Consolas, "Liberation Mono",Courier,monospace;
+  font-family: Menlo, Consolas, "Liberation Mono",Courier,monospace;
   white-space: pre-wrap;
 }
+.mono-loaded code, .mono-loaded kbd, .mono-loaded pre, .mono-loaded samp {
+  font-family: "FiraCode", Menlo, Consolas, "Liberation Mono",Courier,monospace;
+}
+
 pre {
     font-size: 0.8em;
 }
