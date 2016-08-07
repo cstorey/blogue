@@ -108,7 +108,7 @@ h2 {
 
 code, kbd, pre, samp {
   font-family: Menlo, Consolas, "Liberation Mono",Courier,monospace;
-  white-space: pre-wrap;
+  white-space: pre;
 }
 .mono-loaded code, .mono-loaded kbd, .mono-loaded pre, .mono-loaded samp {
   font-family: "FiraCode", Menlo, Consolas, "Liberation Mono",Courier,monospace;
