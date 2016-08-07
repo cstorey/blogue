@@ -99,11 +99,11 @@ h2 {
 
 .info, .subtitle, #footer {
     font-style: italic;
-    font-family: sans;
+    font-family: verdana, sans-serif;
 }
 
 .sans-loaded .info, .sans-loaded .subtitle, .sans-loaded #footer {
-    font-family: SourceSansPro, sans;
+    font-family: SourceSansPro, verdana, sans-serif;
 }
 
 code, kbd, pre, samp {
