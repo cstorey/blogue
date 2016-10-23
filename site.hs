@@ -2,8 +2,7 @@
 {-# LANGUAGE OverloadedStrings #-}
 import           Data.Monoid (mappend)
 import           Hakyll
-import Hakyll.Contrib.Hyphenation (hyphenateHtml, english_GB)
-
+import		 Hakyll.Contrib.Hyphenation (hyphenateHtml, english_GB)
 
 --------------------------------------------------------------------------------
 
@@ -32,8 +31,11 @@ main = hakyll $ do
         compile copyFileCompiler
 
     match "css/*" $ do
-        route   idRoute
-        compile compressCssCompiler
+        route   $ setExtension "css"
+        compile $ getResourceString >>=
+                  withItemBody (unixFilter "./node_modules/.bin/lessc" ["-"]) >>=
+                  return . fmap compressCss
+
 
     match (fromList ["about.md"]) $ do
         route   $ setExtension "html"

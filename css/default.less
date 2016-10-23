@@ -29,10 +29,34 @@ body {
   text-rendering: optimizeLegibility;
 }
 
-body.content {
-    margin: 0px auto 0px auto;
-    max-width: 40em;
-    padding: 0 1em ;
+@media screen and (min-width: 42em) {
+  #content {
+      margin: 0px auto 0px 0px;
+      max-width: 40em;
+      padding: 0 1em ;
+  }
+
+  #header #navigation {
+      text-align: justify;
+      width: 100%;
+  }
+}
+
+@media screen and (max-width: 42em) {
+  #content {
+      margin: 0px auto 0px auto;
+      max-width: 40em;
+      padding: 0 1em ;
+  }
+
+  #header #navigation {
+      text-align: justify;
+      width: 100%;
+  }
+}
+
+
+body {
     /* background: hsl(60,100%,97%);*/
     background: hsl(240,100%,97%);
     color: #000;
@@ -40,7 +64,7 @@ body.content {
     font-family: Palatino, "Palatino Linotype", "Palatino LT STD", "Book Antiqua", Georgia, serif;
     text-align: justify;
 }
-.serif-loaded .content {
+.serif-loaded {
     font-family: SourceSerifPro, Palatino, "Palatino Linotype", "Palatino LT STD", "Book Antiqua", Georgia, serif;
 }
 
@@ -58,10 +82,6 @@ body.content {
     text-decoration: none;
 }
 
-#header #navigation {
-    text-align: justify;
-    width: 100%;
-}
 
 #header #navigation a {
     color: black;
@@ -79,6 +99,7 @@ body.content {
     margin-top: 2em;
     padding: 0.75em 0px 0.75em 0px;
     text-align: right;
+  width:100%;
 }
 
 h1 {
