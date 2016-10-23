@@ -29,6 +29,7 @@ body {
   text-rendering: optimizeLegibility;
 }
 
+/* Anchor to the left on wider screens */
 @media screen and (min-width: 42em) {
   #content {
       margin: 0px auto 0px 0px;
@@ -42,6 +43,7 @@ body {
   }
 }
 
+/* Center on smaller screens */
 @media screen and (max-width: 42em) {
   #content {
       margin: 0px auto 0px auto;
@@ -52,6 +54,9 @@ body {
   #header #navigation {
       text-align: justify;
       width: 100%;
+  }
+  pre {
+    overflow-x:scroll;
   }
 }
 
@@ -128,10 +133,9 @@ h2 {
     font-family: SourceSansPro, verdana, sans-serif;
 }
 
-code, kbd, pre, samp {
+pre, samp, kbd {
   font-family: Menlo, Consolas, "Liberation Mono",Courier,monospace;
   white-space: pre;
-  overflow:scroll-x;
 }
 .mono-loaded code, .mono-loaded kbd, .mono-loaded pre, .mono-loaded samp {
   font-family: "FiraCode", Menlo, Consolas, "Liberation Mono",Courier,monospace;
