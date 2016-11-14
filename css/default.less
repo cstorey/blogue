@@ -31,7 +31,7 @@ body {
 
 /* Anchor to the left on wider screens */
 @media screen and (min-width: 42em) {
-  #content {
+  .content {
       margin: 0px auto 0px 0px;
       max-width: 40em;
       padding: 0 1em ;
@@ -45,7 +45,7 @@ body {
 
 /* Center on smaller screens */
 @media screen and (max-width: 42em) {
-  #content {
+  .content {
       margin: 0px auto 0px auto;
       max-width: 40em;
       padding: 0 1em ;
@@ -97,13 +97,29 @@ body {
     text-transform: uppercase;
 }
 
-#footer {
+#attribution {
+    --border-top: solid 2px black;
+    color: #555;
+    font-size: 0.8em;
+    padding: 0.75em 0px 0.75em 0px;
+    /* text-align: right;*/
+  width:100%;
+
+  p {
+    margin: 0px;
+  }
+}
+
+footer {
     border-top: solid 2px black;
     color: #555;
     font-size: 0.8em;
     margin-top: 2em;
+    padding: 0;
+}
+footer #attribution {
     padding: 0.75em 0px 0.75em 0px;
-    text-align: right;
+    --text-align: right;
   width:100%;
 }
 
