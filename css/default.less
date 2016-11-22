@@ -66,11 +66,13 @@ body {
     background: hsl(240,50%,92%);
     color: #000;
     font-size: 12pt;
-    font-family: Palatino, "Palatino Linotype", "Palatino LT STD", "Book Antiqua", Georgia, serif;
+    font-family: Georgia, serif;
     text-align: justify;
+    letter-spacing: 0.05px;
+    font-weight: 300;
 }
-.serif-loaded {
-    font-family: SourceSerifPro, Palatino, "Palatino Linotype", "Palatino LT STD", "Book Antiqua", Georgia, serif;
+.serif-loaded body {
+    font-family: SourceSerifPro, Georgia, serif;
 }
 
 #header {
@@ -143,10 +145,14 @@ h2 {
 .info, .subtitle, #footer {
     font-style: italic;
     font-family: verdana, sans-serif;
+    font-size: 0.8em;
+    letter-spacing: -0.55px;
+    font-weight: 300;
 }
 
 .sans-loaded .info, .sans-loaded .subtitle, .sans-loaded #footer {
     font-family: SourceSansPro, verdana, sans-serif;
+    font-size: 1em;
 }
 
 pre, samp, kbd {
