@@ -188,3 +188,26 @@ th {
 .post-summaries dd p {
   margin: 0em;
 }
+
+/* From tufte CSS: https://github.com/edwardtufte/tufte-css/blob/1f77d86595a3bf66a367c0c8d3ed8e4a9fdd222a/tufte.css#L146-L165 */
+/* Links: replicate underline that clears descenders */
+a:link, a:visited { color: inherit; }
+
+a:link { text-decoration: none;
+         background: -webkit-linear-gradient(@bg-colour, @bg-colour), -webkit-linear-gradient(@bg-colour, @bg-colour), -webkit-linear-gradient(#333, #333);
+         background: linear-gradient(@bg-colour, @bg-colour), linear-gradient(@bg-colour, @bg-colour), linear-gradient(#333, #333);
+         -webkit-background-size: 0.05em 1px, 0.05em 1px, 1px 1px;
+         -moz-background-size: 0.05em 1px, 0.05em 1px, 1px 1px;
+         background-size: 0.05em 1px, 0.05em 1px, 1px 1px;
+         background-repeat: no-repeat, no-repeat, repeat-x;
+         text-shadow: 0.03em 0 @bg-colour, -0.03em 0 @bg-colour, 0 0.03em @bg-colour, 0 -0.03em @bg-colour, 0.06em 0 @bg-colour, -0.06em 0 @bg-colour, 0.09em 0 @bg-colour, -0.09em 0 @bg-colour, 0.12em 0 @bg-colour, -0.12em 0 @bg-colour, 0.15em 0 @bg-colour, -0.15em 0 @bg-colour;
+         background-position: 0% 93%, 100% 93%, 0% 93%; }
+
+@media screen and (-webkit-min-device-pixel-ratio: 0) { a:link { background-position-y: 87%, 87%, 87%; } }
+
+a:link::selection { text-shadow: 0.03em 0 @lowlight-colour, -0.03em 0 @lowlight-colour, 0 0.03em @lowlight-colour, 0 -0.03em @lowlight-colour, 0.06em 0 @lowlight-colour, -0.06em 0 @lowlight-colour, 0.09em 0 @lowlight-colour, -0.09em 0 @lowlight-colour, 0.12em 0 @lowlight-colour, -0.12em 0 @lowlight-colour, 0.15em 0 @lowlight-colour, -0.15em 0 @lowlight-colour;
+                    background: @lowlight-colour; }
+
+a:link::-moz-selection { text-shadow: 0.03em 0 @lowlight-colour, -0.03em 0 @lowlight-colour, 0 0.03em @lowlight-colour, 0 -0.03em @lowlight-colour, 0.06em 0 @lowlight-colour, -0.06em 0 @lowlight-colour, 0.09em 0 @lowlight-colour, -0.09em 0 @lowlight-colour, 0.12em 0 @lowlight-colour, -0.12em 0 @lowlight-colour, 0.15em 0 @lowlight-colour, -0.15em 0 @lowlight-colour;
+                         background: @lowlight-colour; }
+
