@@ -37,7 +37,7 @@ body {
 /* Anchor to the left on wider screens */
 @media screen and (min-width: 42em) {
   .site {
-      margin: 0px auto 0px 0px;
+      margin: 0px auto 0px auto;
       max-width: 40em;
       padding: 0 1em ;
   }
