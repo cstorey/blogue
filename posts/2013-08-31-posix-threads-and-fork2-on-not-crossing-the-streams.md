@@ -1,7 +1,7 @@
 ---
 date: '2013-08-31'
 orig_url: http://www.lshift.net/blog/2013/08/31/posix-threads-and-fork2-on-not-crossing-the-streams
-title: 'POSIX Threads and fork(2): on not crossing the streams'
+title: POSIX Threads and fork(2): on not crossing the streams
 description: New Jersey's revenge.
 ---
 <div class="content" html="http://www.w3.org/1999/xhtml">
@@ -35,7 +35,7 @@ to run.
 Even weirder, when attached to the child with a debugger, and looked at
 the stack trace, it had hung inside of the name service switch
 subsystem, specifically
-[getpwnam\_r](http://linux.die.net/man/3/getpwnam_r). This function can
+[`getpwnam_r`](http://linux.die.net/man/3/getpwnam_r). This function can
 be used for mapping a username to a numeric user and group id, as
 `collectd` generally runs as `root`, and it’s generally unwise to run
 your plugins with super-powers intact.
@@ -53,7 +53,7 @@ protect its internal state. So, the thread running the exec plugin had
 forked whilst *another* thread was running with that mutex held, so when
 the mutex was unlocked in the parent, it never got unlocked in the child
 (because only the thread that calls
-[fork(2)](http://linux.die.net/man/3/fork) is copied to the child). So
+[`fork(2)`](http://linux.die.net/man/3/fork) is copied to the child). So
 when `collectd` tried to lookup the user id to switch to, it called into
 `getpwnam_r`, and hung.
 
