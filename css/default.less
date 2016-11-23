@@ -1,4 +1,9 @@
 
+@bg-colour: hsl(240,50%,92%);
+@text-colour: hsl(0, 0%, 0%);
+@lowlight-colour: #555;
+
+
 @font-face {
   font-family: "FiraCode";
   src: url("/fonts/firacode.otf") format("opentype"),
@@ -63,8 +68,8 @@ body {
 
 body {
     /* background: hsl(60,100%,97%);*/
-    background: hsl(240,50%,92%);
-    color: #000;
+    background: @bg-colour;
+    color: @text-colour;
     font-size: 12pt;
     font-family: Georgia, serif;
     text-align: justify;
@@ -82,16 +87,14 @@ body {
 }
 
 #logo a {
-    color: black;
+    color: @text-colour;
     float: left;
     font-size: 1.2em;
     font-weight: bold;
     text-decoration: none;
 }
-
-
 #header #navigation a {
-    color: black;
+    color: @text-colour;
     font-size: 1.2em;
     font-weight: bold;
     /* margin-left: 0.75em;*/
@@ -101,7 +104,7 @@ body {
 
 #attribution {
     --border-top: solid 2px black;
-    color: #555;
+    color: @lowlight-colour;
     font-size: 0.8em;
     padding: 0.75em 0px 0.75em 0px;
     /* text-align: right;*/
@@ -114,7 +117,7 @@ body {
 
 footer {
     border-top: solid 2px black;
-    color: #555;
+    color: @lowlight-colour;
     font-size: 0.8em;
     margin-top: 2em;
     padding: 0;
@@ -134,12 +137,12 @@ h2 {
 }
 
 .info {
-    color: #555;
+    color: @lowlight-colour;
     font-size: 0.8em;
 }
 
 .subtitle {
-    color: #000;
+    color: @text-colour;
 }
 
 .info, .subtitle, #footer {
