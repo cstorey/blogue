@@ -1,7 +1,7 @@
 
-@bg-colour: hsl(240,50%,92%);
-@text-colour: hsl(0, 0%, 0%);
-@lowlight-colour: #555;
+$bg-colour: hsl(240,50%,92%);
+$text-colour: hsl(0, 0%, 0%);
+$lowlight-colour: #555;
 
 
 @font-face {
@@ -36,13 +36,13 @@ body {
 
 /* Anchor to the left on wider screens */
 @media screen and (min-width: 42em) {
-  .content {
+  .site {
       margin: 0px auto 0px 0px;
       max-width: 40em;
       padding: 0 1em ;
   }
 
-  #header #navigation {
+  header #navigation {
       text-align: justify;
       width: 100%;
   }
@@ -50,13 +50,13 @@ body {
 
 /* Center on smaller screens */
 @media screen and (max-width: 42em) {
-  .content {
+  .site {
       margin: 0px auto 0px auto;
       max-width: 40em;
       padding: 0 1em ;
   }
 
-  #header #navigation {
+  header #navigation {
       text-align: justify;
       width: 100%;
   }
@@ -68,8 +68,8 @@ body {
 
 body {
     /* background: hsl(60,100%,97%);*/
-    background: @bg-colour;
-    color: @text-colour;
+    background: $bg-colour;
+    color: $text-colour;
     font-size: 12pt;
     font-family: Georgia, serif;
     text-align: justify;
@@ -80,21 +80,20 @@ body {
     font-family: SourceSerifPro, Georgia, serif;
 }
 
-#header {
+header {
     border-bottom: 2px solid black;
-    margin-bottom: 2em;
     padding: 2ex 0px 2ex 0px;
 }
 
 #logo a {
-    color: @text-colour;
+    color: $text-colour;
     float: left;
     font-size: 1.2em;
     font-weight: bold;
     text-decoration: none;
 }
-#header #navigation a {
-    color: @text-colour;
+header #navigation a {
+    color: $text-colour;
     font-size: 1.2em;
     font-weight: bold;
     /* margin-left: 0.75em;*/
@@ -104,7 +103,7 @@ body {
 
 #attribution {
     --border-top: solid 2px black;
-    color: @lowlight-colour;
+    color: $lowlight-colour;
     font-size: 0.8em;
     padding: 0.75em 0px 0.75em 0px;
     /* text-align: right;*/
@@ -115,9 +114,27 @@ body {
   }
 }
 
+html { height: 100% }
+.site {
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+}
+
+header {
+  flex: none;
+}
+.main-body {
+  flex: 1;
+}
+
+.site footer {
+  flex: none;
+}
+
 footer {
     border-top: solid 2px black;
-    color: @lowlight-colour;
+    color: $lowlight-colour;
     font-size: 0.8em;
     margin-top: 2em;
     padding: 0;
@@ -137,12 +154,12 @@ h2 {
 }
 
 .info {
-    color: @lowlight-colour;
+    color: $lowlight-colour;
     font-size: 0.8em;
 }
 
 .subtitle {
-    color: @text-colour;
+    color: $text-colour;
 }
 
 .info, .subtitle, #footer {
@@ -194,20 +211,21 @@ th {
 a:link, a:visited { color: inherit; }
 
 a:link { text-decoration: none;
-         background: -webkit-linear-gradient(@bg-colour, @bg-colour), -webkit-linear-gradient(@bg-colour, @bg-colour), -webkit-linear-gradient(#333, #333);
-         background: linear-gradient(@bg-colour, @bg-colour), linear-gradient(@bg-colour, @bg-colour), linear-gradient(#333, #333);
+         background: -webkit-linear-gradient($bg-colour, $bg-colour), -webkit-linear-gradient($bg-colour, $bg-colour), -webkit-linear-gradient(#333, #333);
+         background: linear-gradient($bg-colour, $bg-colour), linear-gradient($bg-colour, $bg-colour), linear-gradient(#333, #333);
          -webkit-background-size: 0.05em 1px, 0.05em 1px, 1px 1px;
          -moz-background-size: 0.05em 1px, 0.05em 1px, 1px 1px;
          background-size: 0.05em 1px, 0.05em 1px, 1px 1px;
          background-repeat: no-repeat, no-repeat, repeat-x;
-         text-shadow: 0.03em 0 @bg-colour, -0.03em 0 @bg-colour, 0 0.03em @bg-colour, 0 -0.03em @bg-colour, 0.06em 0 @bg-colour, -0.06em 0 @bg-colour, 0.09em 0 @bg-colour, -0.09em 0 @bg-colour, 0.12em 0 @bg-colour, -0.12em 0 @bg-colour, 0.15em 0 @bg-colour, -0.15em 0 @bg-colour;
+         text-shadow: 0.03em 0 $bg-colour, -0.03em 0 $bg-colour, 0 0.03em $bg-colour, 0 -0.03em $bg-colour, 0.06em 0 $bg-colour, -0.06em 0 $bg-colour, 0.09em 0 $bg-colour, -0.09em 0 $bg-colour, 0.12em 0 $bg-colour, -0.12em 0 $bg-colour, 0.15em 0 $bg-colour, -0.15em 0 $bg-colour;
          background-position: 0% 93%, 100% 93%, 0% 93%; }
 
 @media screen and (-webkit-min-device-pixel-ratio: 0) { a:link { background-position-y: 87%, 87%, 87%; } }
 
-a:link::selection { text-shadow: 0.03em 0 @lowlight-colour, -0.03em 0 @lowlight-colour, 0 0.03em @lowlight-colour, 0 -0.03em @lowlight-colour, 0.06em 0 @lowlight-colour, -0.06em 0 @lowlight-colour, 0.09em 0 @lowlight-colour, -0.09em 0 @lowlight-colour, 0.12em 0 @lowlight-colour, -0.12em 0 @lowlight-colour, 0.15em 0 @lowlight-colour, -0.15em 0 @lowlight-colour;
-                    background: @lowlight-colour; }
+a:link::selection { text-shadow: 0.03em 0 $lowlight-colour, -0.03em 0 $lowlight-colour, 0 0.03em $lowlight-colour, 0 -0.03em $lowlight-colour, 0.06em 0 $lowlight-colour, -0.06em 0 $lowlight-colour, 0.09em 0 $lowlight-colour, -0.09em 0 $lowlight-colour, 0.12em 0 $lowlight-colour, -0.12em 0 $lowlight-colour, 0.15em 0 $lowlight-colour, -0.15em 0 $lowlight-colour;
+                    background: $lowlight-colour; }
 
-a:link::-moz-selection { text-shadow: 0.03em 0 @lowlight-colour, -0.03em 0 @lowlight-colour, 0 0.03em @lowlight-colour, 0 -0.03em @lowlight-colour, 0.06em 0 @lowlight-colour, -0.06em 0 @lowlight-colour, 0.09em 0 @lowlight-colour, -0.09em 0 @lowlight-colour, 0.12em 0 @lowlight-colour, -0.12em 0 @lowlight-colour, 0.15em 0 @lowlight-colour, -0.15em 0 @lowlight-colour;
-                         background: @lowlight-colour; }
+a:link::-moz-selection { text-shadow: 0.03em 0 $lowlight-colour, -0.03em 0 $lowlight-colour, 0 0.03em $lowlight-colour, 0 -0.03em $lowlight-colour, 0.06em 0 $lowlight-colour, -0.06em 0 $lowlight-colour, 0.09em 0 $lowlight-colour, -0.09em 0 $lowlight-colour, 0.12em 0 $lowlight-colour, -0.12em 0 $lowlight-colour, 0.15em 0 $lowlight-colour, -0.15em 0 $lowlight-colour;
+                         background: $lowlight-colour; }
 
+/* end tufte */

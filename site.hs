@@ -3,6 +3,8 @@
 import           Data.Monoid (mappend)
 import           Hakyll
 import		 Hakyll.Contrib.Hyphenation (hyphenateHtml, english_GB)
+import		 Hakyll.Web.Sass (sassCompiler)
+
 
 --------------------------------------------------------------------------------
 
@@ -30,12 +32,14 @@ main = hakyll $ do
         route   idRoute
         compile copyFileCompiler
 
-    match "css/*" $ do
-        route   $ setExtension "css"
-        compile $ getResourceString >>=
-                  withItemBody (unixFilter "./node_modules/.bin/lessc" ["-"]) >>=
-                  return . fmap compressCss
+    match "css/*.css" $ do
+        route   idRoute
+        compile compressCssCompiler
 
+    match "css/*.scss" $ do
+	route $ setExtension "css"
+	let compressCssItem = fmap compressCss
+	compile (compressCssItem <$> sassCompiler)
 
     match (fromList ["about.md"]) $ do
         route   $ setExtension "html"

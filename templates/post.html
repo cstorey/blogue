@@ -1,10 +1,13 @@
-<header class="info">
-<p>Posted on $date$
+<aside class="info">
+<p class='byline'>Posted on $date$
     $if(author)$
         by $author$
+    $endif$.
+    $if(orig_url)$
+    Originally posted <a href="$orig_url$">here</a>.
     $endif$
-<p>
-</header>
+</p>
+</aside>
 
 <article>
 $body$

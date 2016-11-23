@@ -11,6 +11,7 @@ packages:
 extra-deps:
 - hakyll-contrib-hyphenation-0.1.0.3
 - hyphenation-0.4.2.1
+- hakyll-sass-0.2.2
 
 # Override default flag values for local packages and extra-deps
 flags: {}

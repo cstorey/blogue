@@ -17,7 +17,7 @@
             title="Post syndication feed" href="/atom.xml" />
 
     </head>
-    <body class="content">
+    <body class="site">
         <header id="header">
             <nav id="navigation">
                 <a href="/">Home</a>
@@ -25,15 +25,13 @@
                 <a href="/archive.html">Archive</a>
             </nav>
         </header>
-        <article>
+        <main class="main-body">
             <h1>$title$</h1>
             $if(description)$ <p class='subtitle'>$description$</p> $endif$
             $body$
-        </article>
+        </main>
         <footer>
-            $if(orig_url)$
-            <span id="attribution">Originally posted <a href="$orig_url$">here</a>.</p>
-            $endif$
+        &#xa0;
         </footer>
 
 <script type='text/javascript'>
