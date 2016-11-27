@@ -6,6 +6,7 @@ cabal-version:      >= 1.10
 executable site
   main-is:          site.hs
   build-depends:    base == 4.*
+                  , process == 1.2.*
                   , hakyll == 4.7.*
                   , hakyll-contrib-hyphenation == 0.1.0.*
                   , hakyll-sass == 0.2.*
