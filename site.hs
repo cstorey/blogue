@@ -21,6 +21,11 @@ myFeedConfiguration = FeedConfiguration
 
 main :: IO ()
 main = hakyll $ do
+
+    match "images/**/*.dot" $ do
+	route $ setExtension "svg"
+	compile $ getResourceString >>= withItemBody (unixFilter "dot" ["-Tsvg"])
+
     match "images/*" $ do
         route   idRoute
         compile copyFileCompiler
@@ -41,6 +46,7 @@ main = hakyll $ do
 	route $ setExtension "css"
 	let compressCssItem = fmap compressCss
 	compile (compressCssItem <$> sassCompiler)
+
 
     match (fromList ["about.md"]) $ do
         route   $ setExtension "html"

@@ -1,0 +1,44 @@
+digraph spacetime {
+    rankdir=TD
+    splines=line
+    // outputorder=nodesfirst
+    subgraph cluster_proc_nodes {
+        label="";
+        proc_a [label="A",group="a"];
+        proc_b [label="B",group="b"];
+    }
+
+  node_a_1[label="1", group="a"];
+  node_a_2[label="2", group="a", shape="point"];
+  node_a_3[label="3", group="a", shape="point"];
+  node_a_4[label="4", group="a"];
+  node_a_5[label="1", group="a"];
+  node_a_6[label="2", group="a", shape="point"];
+  node_a_7[label="3", group="a", shape="point"];
+  node_a_8[label="4", group="a"];
+
+  node_b_1[label="1", group="b", shape="point"];
+  node_b_2[label="2", group="b"];
+  node_b_3[label="3", group="b"];
+  node_b_4[label="4", group="b", shape="point"];
+  node_b_5[label="1", group="b", shape="point"];
+  node_b_6[label="2", group="b"];
+  node_b_7[label="3", group="b"];
+  node_b_8[label="4", group="b", shape="point"];
+
+  node_a_1 ->node_b_2[constraint=false, xlabel="A; seq: 0:1; ack: 0"];
+  node_b_3 ->node_a_4[constraint=false, xlabel="ACK(A); seq: 0:0; ack: 1"];
+  node_a_5 ->node_b_6[constraint=false, xlabel="B; seq: 1:2; ack: 0"];
+  node_b_7 ->node_a_8[constraint=false, xlabel="ACK(B); seq: 0:0; ack: 2"];
+
+    edge[weight=2, arrowhead=none, color=gray75, fillcolor=gray75];
+    proc_a 
+	-> node_a_1 -> node_a_2 -> node_a_3 -> node_a_4 
+	-> node_a_5 -> node_a_6 -> node_a_7 -> node_a_8 
+	;
+    edge[weight=2, arrowhead=none, color=gray75, fillcolor=gray75];
+    proc_b
+	 -> node_b_1 -> node_b_2 -> node_b_3 -> node_b_4
+	 -> node_b_5 -> node_b_6 -> node_b_7 -> node_b_8
+	 ;
+}
