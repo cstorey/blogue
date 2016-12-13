@@ -132,6 +132,10 @@ header {
   flex: none;
 }
 
+.figure img {
+  max-width: 100%;
+}
+
 footer {
     border-top: solid 2px black;
     color: $lowlight-colour;
