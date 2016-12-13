@@ -11,7 +11,7 @@ TCP, or the Transmission Control Protocol is the main transport protocols used o
 
 In normal operation, each packet that a computer sends will have two timestamp values attached, a value from the local clock, and an echo of the latest timestamp value seen from the remote side of the connection. 
 
-I track these timestamps, and measure the time between seeing a timestamp being seen as an outgoing value, and it then being echoed back by the remote side of the connection. My [quick hack](https://github.com/cstorey/tcpthing) will track these for each tcp flow, and track them using a histogram bucketed by latency, and then export those into [prometheus](https://prometheus.io/).
+I track these timestamps, and measure the time between seeing a timestamp being seen as an outgoing value, and it then being echoed back by the remote side of the connection. My quick hack will track these for each tcp flow, and track them using a histogram bucketed by latency, and then export those into [prometheus](https://prometheus.io/).
 
 However, my initial implementation contained rather unfortunate bug--and one that is specifically mentioned in the RFC linked above. So, for example, I'm running SSH to a machine hosted in Europe, and it's sending an update every 1 second. Graphing the results using grafana results in something like the following:
 
