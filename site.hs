@@ -4,6 +4,7 @@ import           Data.Monoid (mappend)
 import           Hakyll
 import		 Hakyll.Contrib.Hyphenation (hyphenateHtml, english_GB)
 import		 Hakyll.Web.Sass (sassCompiler)
+import		 System.Process (readProcess)
 
 
 --------------------------------------------------------------------------------
@@ -20,6 +21,11 @@ myFeedConfiguration = FeedConfiguration
 
 main :: IO ()
 main = hakyll $ do
+
+    match "images/**/*.dot" $ do
+	route $ setExtension "svg"
+	compile $ getResourceString >>= withItemBody (unixFilter "dot" ["-Tsvg"])
+
     match "images/*" $ do
         route   idRoute
         compile copyFileCompiler
@@ -41,11 +47,12 @@ main = hakyll $ do
 	let compressCssItem = fmap compressCss
 	compile (compressCssItem <$> sassCompiler)
 
+
     match (fromList ["about.md"]) $ do
         route   $ setExtension "html"
         compile $ pandocCompiler
             >>= hyphenateHtml english_GB
-            >>= loadAndApplyTemplate "templates/default.html" defaultContext
+            >>= loadAndApplyTemplate "templates/default.html" mainContext
             >>= relativizeUrls
 
     match "posts/*" $ do
@@ -63,7 +70,7 @@ main = hakyll $ do
             let archiveCtx =
                     listField "posts" postCtx (return posts) `mappend`
                     constField "title" "Archives"            `mappend`
-                    defaultContext
+                    mainContext
 
             makeItem ""
                 >>= loadAndApplyTemplate "templates/archive.html" archiveCtx
@@ -78,7 +85,7 @@ main = hakyll $ do
             let indexCtx =
                     listField "posts" postCtx (return posts) `mappend`
                     constField "title" "Home"                `mappend`
-                    defaultContext
+                    mainContext
 
             getResourceBody
                 >>= applyAsTemplate indexCtx
@@ -102,4 +109,13 @@ main = hakyll $ do
 postCtx :: Context String
 postCtx =
     dateField "date" "%B %e, %Y" `mappend`
+    mainContext
+
+mainContext :: Context String
+mainContext = 
+    (field "gitversion" $ \_ -> gitVersion) `mappend`
     defaultContext
+
+gitVersion :: Compiler String
+gitVersion = unsafeCompiler $ do
+  fmap (unwords . words) $ readProcess "git" ["describe"] ""
