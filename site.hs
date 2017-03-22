@@ -1,6 +1,6 @@
 --------------------------------------------------------------------------------
 {-# LANGUAGE OverloadedStrings #-}
-import           Data.Monoid (mappend)
+import           Data.Monoid ((<>))
 import           Hakyll
 import		 Hakyll.Contrib.Hyphenation (hyphenateHtml, english_GB)
 import		 Hakyll.Web.Sass (sassCompiler)
@@ -68,8 +68,8 @@ main = hakyll $ do
         compile $ do
             posts <- recentFirst =<< loadAll "posts/*"
             let archiveCtx =
-                    listField "posts" postCtx (return posts) `mappend`
-                    constField "title" "Archives"            `mappend`
+                    listField "posts" postCtx (return posts) <>
+                    constField "title" "Archives"            <>
                     mainContext
 
             makeItem ""
@@ -83,8 +83,8 @@ main = hakyll $ do
         compile $ do
             posts <- recentFirst =<< loadAll "posts/*"
             let indexCtx =
-                    listField "posts" postCtx (return posts) `mappend`
-                    constField "title" "Home"                `mappend`
+                    listField "posts" postCtx (return posts) <>
+                    constField "title" "Home"                <>
                     mainContext
 
             getResourceBody
@@ -97,7 +97,7 @@ main = hakyll $ do
     create ["atom.xml"] $ do
         route idRoute
         compile $ do
-            let feedCtx = postCtx `mappend`
+            let feedCtx = postCtx <>
                     constField "description" "This is the post description"
 
             posts <- fmap (take 10) . recentFirst =<< loadAll "posts/*"
@@ -108,12 +108,12 @@ main = hakyll $ do
 --------------------------------------------------------------------------------
 postCtx :: Context String
 postCtx =
-    dateField "date" "%B %e, %Y" `mappend`
+    dateField "date" "%B %e, %Y" <>
     mainContext
 
 mainContext :: Context String
 mainContext = 
-    (field "gitversion" $ \_ -> gitVersion) `mappend`
+    (field "gitversion" $ \_ -> gitVersion) <>
     defaultContext
 
 gitVersion :: Compiler String
