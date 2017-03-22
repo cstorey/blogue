@@ -2,7 +2,7 @@
 date: '2017-03-20'
 orig_url: https://tech.labs.oliverwyman.com/blog/2017/03/20/a-taste-of-cloudformation/
 title: A Taste Of Cloudformation.
-description: Coercing the cloud into your preferred shape.
+description: Carving with clouds.
 ---
 So, we’ve recently had cause to move one of our internal applications to
 the cloud; which has largely been an excuse for me to get some
