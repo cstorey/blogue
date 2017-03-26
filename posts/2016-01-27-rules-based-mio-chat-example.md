@@ -4,14 +4,12 @@ orig_url: http://www.lshift.net/blog/2016/01/27/rules-based-mio-chat-example
 title: Rules-based Network programming with Mio and Rust
 description: Making the non-deterministic, less so.
 ---
-<div class="content" html="http://www.w3.org/1999/xhtml">
-
 One thing that you notice after spending most of your time looking at
 the insides of a program, is that it’s very easy to get bogged down in
 implementation detail, and end up with rather an optimistic view of how
-well the world outside of your application works. This is an especially
-common theme in the distributed systems field, and Peter Deutsch’s
-infamous [Eight Fallacies of Distributed
+well the world outside of your application works.<!--more--> This is
+an especially common theme in the distributed systems field, and Peter
+Deutsch’s infamous [Eight Fallacies of Distributed
 Computing](https://blogs.oracle.com/jag/resource/Fallacies.html) are a
 good example of this.
 

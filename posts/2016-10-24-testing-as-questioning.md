@@ -4,9 +4,7 @@ title: Testing as question asking or Hypothesis Driven Development
 orig_url: http://www.lshift.net/blog/2016/10/24/testing-as-question-asking-or-hypothesis-driven-development/
 description: The praxis of What-who-where-when-why .
 ---
-So, my co-worker Ian asks the question “[Why bother testing](http://www.lshift.net/blog/2016/09/14/why-bother-testing/)?”.
-
-I that an under-asked question is how do we think about testing. I would wager, that a sizable majority of programmers (myself included) will usually learn one or two techniques for testing, and then graviated towards those same set of answers for most problems. As an example, just think of how many long-running WebDriver based test suites exist in how many projects, and consider what kind of habits lead to that kind of inertia.
+So, my co-worker Ian asks the question “[Why bother testing](http://www.lshift.net/blog/2016/09/14/why-bother-testing/)?”. I think that an under-asked question is how do we think about testing. <!--more--> I would wager, that a sizable majority of programmers (myself included) will usually learn one or two techniques for testing, and then graviated towards those same set of answers for most problems. As an example, just think of how many long-running WebDriver based test suites exist in how many projects, and consider what kind of habits lead to that kind of inertia.
 
 I’d suggest that a more interesting way to approach testing is as a means of asking questions–for one example, [Behavior Driven Development](https://lizkeogh.com/2007/04/16/why-behaviour-driven-development-is-not-an-evolution-of-test-driven-development/) was originally intended to be a way of framing about and discussing the value of a product and it’s features, allowing one to ask “Why is this feature valuable?”. Things like [Impact Mapping](https://www.impactmapping.org/) again, are designed to map out what goals stakeholders have, and what capabilities the software must provide to enable those.
 

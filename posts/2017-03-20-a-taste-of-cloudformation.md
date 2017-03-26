@@ -5,13 +5,12 @@ title: A Taste Of Cloudformation.
 description: Carving with clouds.
 ---
 So, we’ve recently had cause to move one of our internal applications to
-the cloud; which has largely been an excuse for me to get some
-experience in some relatively modern operations technologies. Amazon’s
-[CloudFormation](https://aws.amazon.com/cloudformation/) is designed so
-that you can declaratively specify the infrastructure resources (eg:
-virtual machines, load balancers, container configuration, &c) that your
-application needs, and apply changes relatively atomically.
-<!--more-->
+the cloud; which has largely been an excuse for me to get some experience
+in some relatively modern operations technologies. <!--more--> Amazon’s
+[CloudFormation](https://aws.amazon.com/cloudformation/) is designed so that
+you can declaratively specify the infrastructure resources (eg: virtual
+machines, load balancers, container configuration, &c) that your application
+needs, and apply changes relatively atomically.
 
 For someone who’s spent a goodly deal of their career dealing with
 physical machines that live in a datacenter (so-called

@@ -83,7 +83,7 @@ main = hakyll $ do
         compile $ do
             posts <- fmap (take 5) $ recentFirst =<< loadAll "posts/*"
             let archiveCtx =
-                    listField "posts" postCtx (return posts) <>
+                    listField "posts" indexCtx (return posts) <>
                     constField "title" "Home"            <>
                     mainContext
 
@@ -109,8 +109,12 @@ main = hakyll $ do
 postCtx :: Context String
 postCtx =
     dateField "date" "%B %e, %Y" <>
-    teaserField "teaser" "content" <>
     mainContext
+
+indexCtx :: Context String
+indexCtx =
+    teaserField "teaser" "content" <>
+    postCtx
 
 mainContext :: Context String
 mainContext = 

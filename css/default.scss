@@ -165,6 +165,11 @@ h2 {
 
 .subtitle {
     color: $text-colour;
+    padding-right: 1ex;
+    font-style: italic;
+}
+.teaser {
+  padding-bottom: 1em;
 }
 
 .info, .subtitle, #footer {
@@ -217,7 +222,6 @@ th {
 .post-summaries dd {
   margin-left: 0px;
   padding-left: 1em;
-  font-style: italic;
 }
 .post-summaries dd p {
   margin: 0em;
