@@ -77,19 +77,18 @@ main = hakyll $ do
                 >>= loadAndApplyTemplate "templates/default.html" archiveCtx
                 >>= relativizeUrls
 
-
-    match "index.html" $ do
+    create ["index.html"] $ do
         route idRoute
         compile $ do
-            posts <- recentFirst =<< loadAll "posts/*"
-            let indexCtx =
+            posts <- fmap (take 5) $ recentFirst =<< loadAll "posts/*"
+            let archiveCtx =
                     listField "posts" postCtx (return posts) <>
-                    constField "title" "Home"                <>
+                    constField "title" "Home"            <>
                     mainContext
 
-            getResourceBody
-                >>= applyAsTemplate indexCtx
-                >>= loadAndApplyTemplate "templates/default.html" indexCtx
+            makeItem ""
+                >>= loadAndApplyTemplate "templates/home.html" archiveCtx
+                >>= loadAndApplyTemplate "templates/default.html" archiveCtx
                 >>= relativizeUrls
 
     match "templates/*" $ compile templateCompiler
