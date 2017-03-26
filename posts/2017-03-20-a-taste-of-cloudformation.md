@@ -11,6 +11,7 @@ experience in some relatively modern operations technologies. Amazon’s
 that you can declaratively specify the infrastructure resources (eg:
 virtual machines, load balancers, container configuration, &c) that your
 application needs, and apply changes relatively atomically.
+<!--more-->
 
 For someone who’s spent a goodly deal of their career dealing with
 physical machines that live in a datacenter (so-called

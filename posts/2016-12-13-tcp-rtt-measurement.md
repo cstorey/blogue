@@ -4,6 +4,7 @@ description: There and back in quantifiable time.
 ---
 
 Recently, Google have published an article on [BRR](http://queue.acm.org/detail.cfm?id=3022184), an algorithm that explicitly measures the round-trip latency and bandwidth capacity of the link between two machines (be it in a datacenter, or a mobile phone) to avoid sending more traffic than is useful, causing queues to build up in the network that needlessly increase latency. So I thought I'd dig into some of the mechanisms in use, especially as they're also use in general performance monitoring.
+<!--more-->
 
 One of the ways to measure round-trip latency is described in [TCP Extensions for High Performance](https://tools.ietf.org/html/rfc7323#section-4) amongst other extensions to TCP.
 
