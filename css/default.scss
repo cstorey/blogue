@@ -3,12 +3,12 @@ $bg-colour: hsl(0,0%,100%);
 $light-bg: hsl(240,50%,97.5%);
 $text-colour: hsl(0, 0%, 0%);
 $lowlight-colour: #555;
-
+$serif-base-fonts: Georgia, serif;
+$sans-base-fonts: verdana, sans-serif;
 
 @font-face {
   font-family: "FiraCode";
-  src: url("/fonts/firacode.otf") format("opentype"),
-    url("/fonts/firacode.woff") format("woff");
+  src: url("/fonts/firacode.otf") format("opentype"), url("/fonts/firacode.woff") format("woff");
   font-weight: normal;
   font-style: normal;
 }
@@ -72,13 +72,20 @@ body {
     background: $bg-colour;
     color: $text-colour;
     font-size: 12pt;
-    font-family: Georgia, serif;
+    font-family: $sans-base-fonts;
     text-align: justify;
     letter-spacing: 0.05px;
     font-weight: 300;
 }
-.serif-loaded body {
-    font-family: SourceSerifPro, Georgia, serif;
+
+h1, h2, h3, h4, h5, h6, header {
+    font-family: $serif-base-fonts;
+}
+
+.serif-loaded h1, .serif-loaded h2, .serif-loaded h3,
+.serif-loaded h4, .serif-loaded h5, .serif-loaded h6,
+.serif-loaded header {
+    font-family: SourceSerifPro, $serif-base-fonts;
 }
 
 header {
@@ -174,14 +181,14 @@ h2 {
 
 .info, .subtitle, #footer {
     font-style: italic;
-    font-family: verdana, sans-serif;
+    font-family: $sans-base-fonts;
     font-size: 0.8em;
     letter-spacing: -0.55px;
     font-weight: 300;
 }
 
-.sans-loaded .info, .sans-loaded .subtitle, .sans-loaded #footer {
-    font-family: SourceSansPro, verdana, sans-serif;
+.sans-loaded .info, .sans-loaded .subtitle, .sans-loaded #footer, .sans-loaded body {
+    font-family: SourceSansPro, $sans-base-fonts;
     font-size: 1em;
 }
 
