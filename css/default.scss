@@ -30,7 +30,7 @@ $sans-base-fonts: verdana, sans-serif;
 @font-face {
   font-family: "SourceSansPro";
   src: url("/fonts/SourceSansPro-Regular.otf") format("opentype"),
-    url("/fonts/SourceSansPro-Regular.otf.woff") format("woff");
+    url("/fonts/SourceSansPro-Regular.woff") format("woff");
   font-weight: normal;
   font-style: normal;
 }
@@ -39,7 +39,7 @@ $sans-base-fonts: verdana, sans-serif;
 @font-face {
   font-family: "SourceSerifPro";
   src: url("/fonts/SourceSerifPro-Regular.otf") format("opentype"),
-    url("/fonts/SourceSerifPro-Regular.otf.woff") format("woff");
+    url("/fonts/SourceSerifPro-Regular.woff") format("woff");
   font-weight: normal;
   font-style: normal;
 }
