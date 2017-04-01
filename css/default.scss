@@ -5,6 +5,7 @@ $text-colour: hsl(0, 0%, 0%);
 $lowlight-colour: #555;
 $serif-base-fonts: Georgia, serif;
 $sans-base-fonts: verdana, sans-serif;
+$mono-base-fonts: Menlo, Consolas, "Liberation Mono",Courier,monospace;
 
 @font-face {
   font-family: "Iosevka";
@@ -201,9 +202,6 @@ h2 {
     font-size: 1em;
 }
 
-pre, samp, kbd {
-  font-family: Menlo, Consolas, "Liberation Mono",Courier,monospace;
-}
 pre {
   white-space: pre;
   padding: 1ex;
@@ -225,8 +223,12 @@ blockquote p + p{
   margin-top: 1em;
 }
 
+code, kbd, pre, samp {
+  font-family: $mono-base-fonts;
+}
+
 .mono-loaded code, .mono-loaded kbd, .mono-loaded pre, .mono-loaded samp {
-  font-family: "Iosevka", Menlo, Consolas, "Liberation Mono",Courier,monospace;
+  font-family: "Iosevka", $mono-base-fonts;
 }
 
 th {
