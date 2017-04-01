@@ -31,6 +31,13 @@ $mono-base-fonts: Menlo, Consolas, "Liberation Mono",Courier,monospace;
   font-style: normal;
 }
 
+@font-face {
+  font-family: "SourceSansPro";
+  src: url("/fonts/SourceSansPro-It.woff") format("woff"),
+       url("/fonts/SourceSansPro-It.otf") format("opentype");
+  font-weight: normal;
+  font-style: italic;
+}
 
 @font-face {
   font-family: "SourceSerifPro";
