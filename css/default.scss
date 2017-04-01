@@ -192,8 +192,13 @@ h2 {
     padding-right: 1ex;
     font-style: italic;
 }
-.teaser {
-  padding-bottom: 1em;
+
+.post .teaser {
+  margin-bottom: 1em;
+}
+
+.post:last-child .teaser {
+  margin-bottom: inherit;
 }
 
 .info, .subtitle, #footer {
