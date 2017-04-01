@@ -87,13 +87,13 @@ body {
     font-weight: 300;
 }
 
-h1, h2, h3, h4, h5, h6, header, th {
+h1, h2, h3, h4, h5, h6, header, th, dt {
     font-family: $serif-base-fonts;
 }
 
 .serif-loaded h1, .serif-loaded h2, .serif-loaded h3,
 .serif-loaded h4, .serif-loaded h5, .serif-loaded h6,
-.serif-loaded header, .serif-loaded th {
+.serif-loaded header, .serif-loaded th, .serif-loaded dt {
     font-family: SourceSerifPro, $serif-base-fonts;
 }
 
