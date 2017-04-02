@@ -8,7 +8,7 @@ description: Avoiding congestion and I/O stuffiness.
 
 When we’re designing systems that are designed to be robust against
 failure, it’s important to know how behaviour at your Integration points
-(a term borrowed from Michael Nygard’s book [Relase
+(a term borrowed from Michael Nygard’s book [Release
 It!](http://pragprog.com/book/mnee/release-it)) impacts the rest of the
 system. For example, if your database or a remote API is running slowly,
 then in Synchronous systems, because you (usually) have a limited number
