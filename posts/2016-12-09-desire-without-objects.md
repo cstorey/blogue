@@ -1,5 +1,5 @@
 ---
-date: '2016-01-13'
+date: '2016-12-09'
 title: Desire without objectification
 description: For those embarassing abstraction leaks.
 ---
