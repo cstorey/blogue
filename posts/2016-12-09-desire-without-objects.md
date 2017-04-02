@@ -3,9 +3,8 @@ date: '2016-12-09'
 title: Desire without objectification
 description: For those embarassing abstraction leaks.
 ---
-
-
 I've seen a few people link to the article [Why sexual desire is objectifying – and hence morally wrong](https://aeon.co/ideas/why-sexual-desire-is-objectifying-and-hence-morally-wrong), and whilst it seems like it's obviously bollocks, it seems worth talking about why.
+<!--more-->
 
 My problem with the article isn't that it addresses that something that's a concern, namely, the dehumanisation of people in the name of desire, but that the worldview seems skewed, albeit in an interestingly western way.
 
