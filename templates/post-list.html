@@ -4,7 +4,9 @@
             <a href="$url$" title="$description$">$title$</a>
         </dt>
         <dd class='post'>
+            $if(description)$
             <p><span class='subtitle'>$description$</span>ー$date$</p>
+            $endif$
             $if(teaser)$
             <aside class="teaser">
             $teaser$
