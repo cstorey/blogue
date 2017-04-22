@@ -19,20 +19,19 @@
         <meta name="x-revision" content="$gitversion$"/>
     </head>
     <body class="site">
-        <header id="header">
+        <header>
+            <h1>$title$</h1>
+        </header>
+        <main class="main-body">
+            $if(description)$ <p class='subtitle'>$description$</p> $endif$
+            $body$
+        </main>
+        <footer id="header">
             <nav id="navigation">
                 <a href="/">Home</a>
                 <a href="/about.html">About</a>
                 <a href="/archive.html">Archive</a>
             </nav>
-        </header>
-        <main class="main-body">
-            <h1>$title$</h1>
-            $if(description)$ <p class='subtitle'>$description$</p> $endif$
-            $body$
-        </main>
-        <footer>
-        &#xa0;
         </footer>
 
 <script type='text/javascript'>

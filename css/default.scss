@@ -149,8 +149,49 @@ html { height: 100% }
 header {
   flex: none;
 }
+
 .main-body {
   flex: 1;
+}
+.main-body {
+  margin: 2em 0 2em 0;
+}
+
+@media screen and (min-width: 42em) {
+  .site header {
+      margin: 0px auto 0px auto;
+      max-width: 40em;
+  }
+  .site footer {
+      margin: 0px auto 0px auto;
+      max-width: 40em;
+  }
+}
+
+/* Center on smaller screens */
+@media screen and (max-width: 42em) {
+  .site header {
+      margin: 0px auto 0px auto;
+      max-width: 40em;
+      padding: 0 1em ;
+  }
+  .site footer {
+      margin: 0px auto 0px auto;
+      max-width: 40em;
+      padding: 0 1em ;
+  }
+}
+
+.site header {
+  position: fixed; top: 0; left: 0; right: 0;
+  background: $bg-colour;
+  padding: 0;
+  flex: none;
+}
+
+.site header h1 {
+  padding: 0;
+  margin: 0.0 0 0.0 0 ;
 }
 
 .site footer {
@@ -162,11 +203,15 @@ header {
 }
 
 footer {
+    position: fixed; bottom: 0; left: 0; right: 0;
+    background: $bg-colour;
     border-top: solid 2px black;
     color: $lowlight-colour;
-    font-size: 0.8em;
     margin-top: 2em;
     padding: 0;
+}
+footer nav {
+    font-size: 1em;
 }
 footer #attribution {
     padding: 0.75em 0px 0.75em 0px;
