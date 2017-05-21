@@ -242,7 +242,6 @@ h2 {
 
 .info {
     color: $lowlight-colour;
-    font-size: 0.8rem;
 }
 
 .subtitle {
@@ -262,14 +261,11 @@ h2 {
 .info, .subtitle, #footer {
     font-style: italic;
     font-family: $sans-base-fonts;
-    font-size: 0.8rem;
-    letter-spacing: -0.55px;
     font-weight: 300;
 }
 
 .sans-loaded .info, .sans-loaded .subtitle, .sans-loaded #footer, .sans-loaded html {
     font-family: SourceSansPro, $sans-base-fonts;
-    font-size: 1rem;
 }
 
 pre {
