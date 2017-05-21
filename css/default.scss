@@ -48,16 +48,16 @@ $mono-base-fonts: Menlo, Consolas, "Liberation Mono",Courier,monospace;
 }
 
 body {
-  margin: 0px 1em 0px 1em;
+  margin: 0px 1rem 0px 1rem;
   text-rendering: optimizeLegibility;
 }
 
 /* Anchor to the left on wider screens */
-@media screen and (min-width: 42em) {
+@media screen and (min-width: 42rem) {
   .site {
       margin: 0px auto 0px auto;
-      max-width: 40em;
-      padding: 0 1em ;
+      max-width: 40rem;
+      padding: 0 1rem ;
   }
 
   header #navigation {
@@ -67,11 +67,11 @@ body {
 }
 
 /* Center on smaller screens */
-@media screen and (max-width: 42em) {
+@media screen and (max-width: 42rem) {
   .site {
       margin: 0px auto 0px auto;
-      max-width: 40em;
-      padding: 0 1em ;
+      max-width: 40rem;
+      padding: 0 1rem ;
   }
 
   header #navigation {
@@ -84,7 +84,7 @@ body {
 }
 
 
-body {
+html {
     /* background: hsl(60,100%,97%);*/
     background: $bg-colour;
     color: $text-colour;
@@ -113,15 +113,15 @@ header {
 #logo a {
     color: $text-colour;
     float: left;
-    font-size: 1.2em;
+    font-size: 1.2rem;
     font-weight: bold;
     text-decoration: none;
 }
 header #navigation a {
     color: $text-colour;
-    font-size: 1.2em;
+    font-size: 1.2rem;
     font-weight: bold;
-    /* margin-left: 0.75em;*/
+    /* margin-left: 0.75rem;*/
     text-decoration: none;
     text-transform: uppercase;
 }
@@ -129,8 +129,8 @@ header #navigation a {
 #attribution {
     --border-top: solid 2px black;
     color: $lowlight-colour;
-    font-size: 0.8em;
-    padding: 0.75em 0px 0.75em 0px;
+    font-size: 0.8rem;
+    padding: 0.75rem 0px 0.75rem 0px;
     /* text-align: right;*/
   width:100%;
 
@@ -154,31 +154,31 @@ header {
   flex: 1;
 }
 .main-body {
-  margin: 2em 0 2em 0;
+  margin: 2rem 0 2rem 0;
 }
 
-@media screen and (min-width: 42em) {
+@media screen and (min-width: 42rem) {
   .site header {
       margin: 0px auto 0px auto;
-      max-width: 40em;
+      max-width: 40rem;
   }
   .site footer {
       margin: 0px auto 0px auto;
-      max-width: 40em;
+      max-width: 40rem;
   }
 }
 
 /* Center on smaller screens */
-@media screen and (max-width: 42em) {
+@media screen and (max-width: 42rem) {
   .site header {
       margin: 0px auto 0px auto;
-      max-width: 40em;
-      padding: 0 1em ;
+      max-width: 40rem;
+      padding: 0 1rem ;
   }
   .site footer {
       margin: 0px auto 0px auto;
-      max-width: 40em;
-      padding: 0 1em ;
+      max-width: 40rem;
+      padding: 0 1rem ;
   }
 }
 
@@ -212,7 +212,7 @@ header {
 @media screen {
   .site footer {
     position: fixed; bottom: 0; left: 0; right: 0;
-    margin-top: 2em;
+    margin-top: 2rem;
     padding: 0;
   }
 }
@@ -224,25 +224,25 @@ footer {
     color: $lowlight-colour;
 }
 footer nav {
-    font-size: 1em;
+    font-size: 1rem;
 }
 footer #attribution {
-    padding: 0.75em 0px 0.75em 0px;
+    padding: 0.75rem 0px 0.75rem 0px;
     --text-align: right;
   width:100%;
 }
 
 h1 {
-    font-size: 1.5em;
+    font-size: 1.5rem;
 }
 
 h2 {
-    font-size: 1.25em;
+    font-size: 1.25rem;
 }
 
 .info {
     color: $lowlight-colour;
-    font-size: 0.8em;
+    font-size: 0.8rem;
 }
 
 .subtitle {
@@ -252,7 +252,7 @@ h2 {
 }
 
 .post .teaser {
-  margin-bottom: 1em;
+  margin-bottom: 1rem;
 }
 
 .post:last-child .teaser {
@@ -262,27 +262,27 @@ h2 {
 .info, .subtitle, #footer {
     font-style: italic;
     font-family: $sans-base-fonts;
-    font-size: 0.8em;
+    font-size: 0.8rem;
     letter-spacing: -0.55px;
     font-weight: 300;
 }
 
-.sans-loaded .info, .sans-loaded .subtitle, .sans-loaded #footer, .sans-loaded body {
+.sans-loaded .info, .sans-loaded .subtitle, .sans-loaded #footer, .sans-loaded html {
     font-family: SourceSansPro, $sans-base-fonts;
-    font-size: 1em;
+    font-size: 1rem;
 }
 
 pre {
   white-space: pre;
   padding: 1ex;
   background: $light-bg;
-  font-size: 0.8em;
+  font-size: 0.8rem;
 }
 
 blockquote {
   padding: 1ex;
   background: $light-bg;
-  font-size: 0.8em;
+  font-size: 0.8rem;
 }
 
 blockquote p{
@@ -290,7 +290,7 @@ blockquote p{
 }
 
 blockquote p + p{
-  margin-top: 1em;
+  margin-top: 1rem;
 }
 
 code, kbd, pre, samp {
@@ -309,10 +309,10 @@ th {
 }
 .post-summaries dd {
   margin-left: 0px;
-  padding-left: 1em;
+  padding-left: 1rem;
 }
 .post-summaries dd p {
-  margin: 0em;
+  margin: 0rem;
 }
 
 /* From tufte CSS: https://github.com/edwardtufte/tufte-css/blob/1f77d86595a3bf66a367c0c8d3ed8e4a9fdd222a/tufte.css#L146-L165 */
