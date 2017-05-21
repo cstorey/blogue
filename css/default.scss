@@ -182,11 +182,16 @@ header {
   }
 }
 
+@media screen {
+  .site header {
+    position: fixed; top: 0; left: 0; right: 0;
+    padding: 0;
+    flex: none;
+  }
+}
+
 .site header {
-  position: fixed; top: 0; left: 0; right: 0;
   background: $bg-colour;
-  padding: 0;
-  flex: none;
 }
 
 .site header h1 {
@@ -204,14 +209,19 @@ header {
 .figure img {
   max-width: 100%;
 }
+@media screen {
+  .site footer {
+    position: fixed; bottom: 0; left: 0; right: 0;
+    margin-top: 2em;
+    padding: 0;
+  }
+}
+
 
 footer {
-    position: fixed; bottom: 0; left: 0; right: 0;
     background: $bg-colour;
     border-top: solid 2px black;
     color: $lowlight-colour;
-    margin-top: 2em;
-    padding: 0;
 }
 footer nav {
     font-size: 1em;
