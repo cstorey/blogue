@@ -9,32 +9,32 @@ $mono-base-fonts: Menlo, Consolas, "Liberation Mono",Courier,monospace;
 
 @font-face {
   font-family: "Iosevka";
-  src: url("/fonts/Iosevka.woff") format("woff"),
-       url("/fonts/Iosevka.otf") format("opentype");
+  src: url("../fonts/Iosevka.woff") format("woff"),
+       url("../fonts/Iosevka.otf") format("opentype");
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
   font-family: "Iosevka";
-  src:  url("/fonts/Iosevka-Italic.woff") format("woff"),
-	url("/fonts/Iosevka-Italic.otf") format("opentype");
+  src:  url("../fonts/Iosevka-Italic.woff") format("woff"),
+	url("../fonts/Iosevka-Italic.otf") format("opentype");
   font-weight: normal;
   font-style: italic;
 }
 
 @font-face {
   font-family: "SourceSansPro";
-  src: url("/fonts/SourceSansPro-Regular.woff") format("woff"),
-       url("/fonts/SourceSansPro-Regular.otf") format("opentype");
+  src: url("../fonts/SourceSansPro-Regular.woff") format("woff"),
+       url("../fonts/SourceSansPro-Regular.otf") format("opentype");
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
   font-family: "SourceSansPro";
-  src: url("/fonts/SourceSansPro-It.woff") format("woff"),
-       url("/fonts/SourceSansPro-It.otf") format("opentype");
+  src: url("../fonts/SourceSansPro-It.woff") format("woff"),
+       url("../fonts/SourceSansPro-It.otf") format("opentype");
   font-weight: normal;
   font-style: italic;
 }
