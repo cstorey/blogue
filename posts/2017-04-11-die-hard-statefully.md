@@ -4,7 +4,7 @@ date: '2017-04-11'
 title: Die-hard Statefully
 description: Puzzling quickcheck
 ---
-After reading [Solving the Water Jug Problem from Die Hard 3 with TLA+ and Hypothesis](hypothesis.works/articles/how-not-to-die-hard-with-hypothesis/), I figured it'd be amusing to reproduce it in Rust as [diehard-rs](https://github.com/cstorey/diehard-rs), along with it's [quickcheck](https://docs.rs/quickcheck/0.4.2/quickcheck/) library.
+After reading [Solving the Water Jug Problem from Die Hard 3 with TLA+ and Hypothesis](http://hypothesis.works/articles/how-not-to-die-hard-with-hypothesis/), I figured it'd be amusing to reproduce it in Rust as [diehard-rs](https://github.com/cstorey/diehard-rs), along with it's [quickcheck](https://docs.rs/quickcheck/0.4.2/quickcheck/) library.
 <!--more-->
 
 The post above describes the problem quite well, so there's little need for me to reproduce it here.
