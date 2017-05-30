@@ -55,7 +55,7 @@ body {
 /* Anchor to the left on wider screens */
 @media screen and (min-width: 42rem) {
   .site {
-      margin: 0px auto 0px auto;
+      margin: 0px auto;
       max-width: 40rem;
       padding: 0 1rem ;
   }
@@ -69,7 +69,7 @@ body {
 /* Center on smaller screens */
 @media screen and (max-width: 42rem) {
   .site {
-      margin: 0px auto 0px auto;
+      margin: 0px auto;
       max-width: 40rem;
       padding: 0 1rem ;
   }
@@ -159,11 +159,11 @@ header {
 
 @media screen and (min-width: 42rem) {
   .site header {
-      margin: 0px auto 0px auto;
+      margin: 0px auto;
       max-width: 40rem;
   }
   .site footer {
-      margin: 0px auto 0px auto;
+      margin: 0px auto;
       max-width: 40rem;
   }
 }
@@ -171,12 +171,12 @@ header {
 /* Center on smaller screens */
 @media screen and (max-width: 42rem) {
   .site header {
-      margin: 0px auto 0px auto;
+      margin: 0px 1rem;
       max-width: 40rem;
       padding: 0 1rem ;
   }
   .site footer {
-      margin: 0px auto 0px auto;
+      margin: 0px 1rem;
       max-width: 40rem;
       padding: 0 1rem ;
   }
