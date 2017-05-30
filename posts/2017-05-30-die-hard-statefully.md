@@ -1,5 +1,5 @@
 ---
-date: '2017-04-11'
+date: '2017-05-30'
 # orig_url:
 title: Die-hard Statefully
 description: Puzzling quickcheck
