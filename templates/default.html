@@ -37,9 +37,10 @@
 <script type='text/javascript'>
 /* <![[CDATA[ */
 
-function preloadFont(fontdesc, klass) {
-    document.fonts.load(fontdesc).then(function(val) {
-        console.log("font", fontdesc, val);
+function preloadFont(fontdescs, klass) {
+    var ps = fontdescs.map(function(f) { return document.fonts.load(f); });
+    Promise.all(ps).then(function(vals) {
+        console.log("loaded font", fontdescs, vals);
         var docElt = document.documentElement;
         docElt.className += ' ' + klass;
     }).catch(function(e) {
@@ -47,9 +48,9 @@ function preloadFont(fontdesc, klass) {
     });
 }
 
-preloadFont('1em SourceSerifPro', 'serif-loaded')
-preloadFont('1em SourceSansPro', 'sans-loaded'),
-preloadFont('1em Iosevka', 'mono-loaded')
+preloadFont(['normal 1em SourceSansPro', 'italic 1em SourceSansPro'], 'sans-loaded');
+preloadFont(['normal 1em Iosevka', 'italic 1em Iosevka'], 'mono-loaded');
+preloadFont(['1em SourceSerifPro'], 'serif-loaded');
 
 /* ]]> */
 </script>
