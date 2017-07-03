@@ -52,6 +52,7 @@ main = hakyll $ do
         route   $ setExtension "html"
         compile $ pandocCompiler
             >>= hyphenateHtml english_GB
+            >>= loadAndApplyTemplate "templates/page.html"    postCtx
             >>= loadAndApplyTemplate "templates/default.html" mainContext
             >>= relativizeUrls
 
