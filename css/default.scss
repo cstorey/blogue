@@ -2,6 +2,8 @@
 $bg-colour: hsl(0,0%,100%);
 $light-bg: hsl(240,50%,97.5%);
 $text-colour: hsl(0, 0%, 0%);
+$text-width: 35rem;
+$text-breakpoint: ($text-width + 2);
 $lowlight-colour: #555;
 $serif-base-fonts: Georgia, serif;
 $sans-base-fonts: verdana, sans-serif;
@@ -53,10 +55,10 @@ body {
 }
 
 /* Anchor to the left on wider screens */
-@media screen and (min-width: 42rem) {
+@media screen and (min-width: $text-breakpoint) {
   .site {
       margin: 0px auto;
-      max-width: 40rem;
+      max-width: $text-width;
       padding: 0 1rem ;
   }
 
@@ -67,10 +69,10 @@ body {
 }
 
 /* Center on smaller screens */
-@media screen and (max-width: 42rem) {
+@media screen and (max-width: $text-breakpoint) {
   .site {
       margin: 0px auto;
-      max-width: 40rem;
+      max-width: $text-width;
       padding: 0 1rem ;
   }
 
@@ -165,27 +167,27 @@ header {
   margin: 2rem 0 2rem 0;
 }
 
-@media screen and (min-width: 42rem) {
+@media screen and (min-width: $text-breakpoint) {
   .site header {
       margin: 0px auto;
-      max-width: 40rem;
+      max-width: $text-width;
   }
   .site footer {
       margin: 0px auto;
-      max-width: 40rem;
+      max-width: $text-width;
   }
 }
 
 /* Center on smaller screens */
-@media screen and (max-width: 42rem) {
+@media screen and (max-width: $text-breakpoint) {
   .site header {
       margin: 0px 1rem;
-      max-width: 40rem;
+      max-width: $text-width;
       padding: 0 1rem ;
   }
   .site footer {
       margin: 0px 1rem;
-      max-width: 40rem;
+      max-width: $text-width;
       padding: 0 1rem ;
   }
 }
