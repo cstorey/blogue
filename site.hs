@@ -2,9 +2,9 @@
 {-# LANGUAGE OverloadedStrings #-}
 import           Data.Monoid ((<>))
 import           Hakyll
-import		 Hakyll.Contrib.Hyphenation (hyphenateHtml, english_GB)
-import		 Hakyll.Web.Sass (sassCompiler)
-import		 System.Process (readProcess)
+import           Hakyll.Contrib.Hyphenation (hyphenateHtml, english_GB)
+import           Hakyll.Web.Sass (sassCompiler)
+import           System.Process (readProcess)
 
 
 --------------------------------------------------------------------------------
@@ -23,8 +23,8 @@ main :: IO ()
 main = hakyll $ do
 
     match "images/**/*.dot" $ do
-	route $ setExtension "svg"
-	compile $ getResourceString >>= withItemBody (unixFilter "dot" ["-Tsvg"])
+        route $ setExtension "svg"
+        compile $ getResourceString >>= withItemBody (unixFilter "dot" ["-Tsvg"])
 
     match "images/*" $ do
         route   idRoute
@@ -43,9 +43,9 @@ main = hakyll $ do
         compile compressCssCompiler
 
     match "css/*.scss" $ do
-	route $ setExtension "css"
-	let compressCssItem = fmap compressCss
-	compile (compressCssItem <$> sassCompiler)
+        route $ setExtension "css"
+        let compressCssItem = fmap compressCss
+        compile (compressCssItem <$> sassCompiler)
 
 
     match (fromList ["about.md"]) $ do
@@ -60,7 +60,7 @@ main = hakyll $ do
         route $ setExtension "html"
         compile $ pandocCompiler
             >>= hyphenateHtml english_GB
-	    >>= saveSnapshot "content"
+            >>= saveSnapshot "content"
             >>= loadAndApplyTemplate "templates/post.html"    postCtx
             >>= loadAndApplyTemplate "templates/default.html" postCtx
             >>= relativizeUrls
@@ -76,6 +76,7 @@ main = hakyll $ do
 
             makeItem ""
                 >>= loadAndApplyTemplate "templates/archive.html" archiveCtx
+                >>= loadAndApplyTemplate "templates/page.html"    postCtx
                 >>= loadAndApplyTemplate "templates/default.html" archiveCtx
                 >>= relativizeUrls
 
