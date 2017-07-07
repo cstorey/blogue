@@ -3,10 +3,7 @@ $bg-colour: hsl(0,0%,100%);
 $light-bg: hsl(240,50%,97.5%);
 $text-colour: hsl(0, 0%, 0%);
 $text-width: 35rem;
-$text-breakpoint: $text-width + 2;
-$grid-width: 45rem;
-$grid-breakpoint: $grid-width + 2;
-$max-width: 64rem;
+$text-breakpoint: ($text-width + 2);
 $lowlight-colour: #555;
 $serif-base-fonts: Georgia, serif;
 $sans-base-fonts: verdana, sans-serif;
@@ -113,7 +110,6 @@ h1, h2, h3, h4, h5, h6, header, th, dt {
 header {
     h1 {
       border-bottom: 2px solid black;
-      width: 100%;
     }
     padding: 2ex 0px 2ex 0px;
 
@@ -172,31 +168,27 @@ header {
 }
 
 @media screen and (min-width: $text-breakpoint) {
-  .site {
-    header {
-	margin: 0px auto;
-	max-width: $text-width;
-    }
-    footer {
-	margin: 0px auto;
-	max-width: $text-width;
-    }
+  .site header {
+      margin: 0px auto;
+      max-width: $text-width;
+  }
+  .site footer {
+      margin: 0px auto;
+      max-width: $text-width;
   }
 }
 
 /* Center on smaller screens */
 @media screen and (max-width: $text-breakpoint) {
-  .site {
-    header {
-	margin: 0px 1rem;
-	padding: 0 1rem ;
-	max-width: $text-width;
-    }
-    footer {
-	margin: 0px 1rem;
-	padding: 0 1rem ;
-	max-width: $text-width;
-    }
+  .site header {
+      margin: 0px 1rem;
+      max-width: $text-width;
+      padding: 0 1rem ;
+  }
+  .site footer {
+      margin: 0px 1rem;
+      max-width: $text-width;
+      padding: 0 1rem ;
   }
 }
 
@@ -325,64 +317,15 @@ th {
   border-bottom: thin solid black;
 }
 
-.post-summaries {
-  dt {
-    font-size: 1.1em;
-  }
-  dd {
-    margin-left: 0px;
-    padding-left: 1rem;
-  }
-
-    h3 {
-	font-size: 1.1em;
-	font-weight: inherit;
-    }
-  p, h3 {
-    margin: 0rem;
-  }
-
+.post-summaries dt {
+  font-size: 1.1em;
 }
-
-@media screen and (min-width: $grid-breakpoint) {
-  .site {
-      margin: 0px auto;
-      max-width: $max-width;
-      padding: 0 1rem ;
-
-      header {
-	  max-width: $max-width;
-	  padding: 0 1rem ;
-      }
-      footer {
-	  max-width: $max-width;
-	  padding: 0 1rem ;
-      }
-  }
-
-
-  .post-summaries {
-      display: grid; 
-      grid-template-columns: 1fr 2fr; 
-      grid-auto-rows: auto; 
-      max-width: $max-width;
-
-    dt {
-      text-align: right;
-      
-      h3 {
-	font-size: inherit;
-      }
-    }
-    dd {
-      margin-left: 0px;
-      padding-left: 1rem;
-    }
-
-    .subtitle {
-      display: block;
-    }
-  }
+.post-summaries dd {
+  margin-left: 0px;
+  padding-left: 1rem;
+}
+.post-summaries dd p {
+  margin: 0rem;
 }
 
 a:link, a:visited { color: inherit; }
