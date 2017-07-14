@@ -282,7 +282,7 @@ h2 {
     font-weight: 300;
 }
 
-.sans-loaded .info, .sans-loaded .subtitle, .sans-loaded #footer, .sans-loaded html {
+.sans-loaded .info, .sans-loaded .subtitle, .sans-loaded #footer, html.sans-loaded {
     font-family: SourceSansPro, $sans-base-fonts;
 }
 
