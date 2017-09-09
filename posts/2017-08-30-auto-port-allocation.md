@@ -1,6 +1,6 @@
 ---
 date: '2017-08-30'
-orig_url: null
+orig_url: https://tech.labs.oliverwyman.com/blog/2017/08/31/automagical-port-allocation-for-tests/
 title: 'Automatic port allocation'
 description: "For when you just can't decide..."
 ---

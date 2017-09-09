@@ -1,6 +1,6 @@
 ---
 date: '2017-06-30'
-# orig_url:
+orig_url: https://tech.labs.oliverwyman.com/blog/2017/06/25/adding-flexibility-to-build-processes/
 title: Adding flexibility to build processes
 description: Knowing where to break the chain
 ---
