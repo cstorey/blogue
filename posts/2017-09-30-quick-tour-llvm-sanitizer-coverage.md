@@ -1,6 +1,6 @@
 ---
 date: '2017-09-30'
-orig_url: null
+orig_url: https://tech.labs.oliverwyman.com/blog/2017/10/04/a-quick-tour-of-llvms-sanitizer-coverage/
 title: "A quick tour of LLVM's Sanitizer coverage implementation"
 description: "Inside the grey box"
 ---
