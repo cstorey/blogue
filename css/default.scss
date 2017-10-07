@@ -109,8 +109,10 @@ h1, h2, h3, h4, h5, h6, header, th, dt, a {
 }
 
 header {
+    z-index: 10;
     h1 {
       border-bottom: 2px solid black;
+      background: $bg-colour;
     }
     padding: 2ex 0px 2ex 0px;
 
@@ -214,6 +216,7 @@ header {
 }
 
 .site footer {
+  z-index: 10;
   flex: none;
   background: $bg-colour;
   color: $lowlight-colour;
