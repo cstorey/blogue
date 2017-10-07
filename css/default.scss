@@ -7,8 +7,8 @@ $text-colour: hsl(0, 0%, 0%);
 $text-width: 35rem;
 $text-breakpoint: ($text-width + 2);
 $lowlight-colour: #555;
-$serif-base-fonts: Georgia, serif;
 $sans-base-fonts: verdana, sans-serif;
+$title-base-fonts: $sans-base-fonts;
 $mono-base-fonts: Menlo, Consolas, "Liberation Mono",Courier,monospace;
 
 @font-face {
@@ -44,9 +44,9 @@ $mono-base-fonts: Menlo, Consolas, "Liberation Mono",Courier,monospace;
 }
 
 @font-face {
-  font-family: "SourceSerifPro";
-  src: url("/fonts/SourceSerifPro-Regular.woff") format("woff"),
-       url("/fonts/SourceSerifPro-Regular.otf") format("opentype");
+  font-family: "GidoleRegular";
+  src: url("../fonts/Gidole-Regular.woff") format("woff"),
+       url("../fonts/Gidole-Regular.ttf") format("truetype");
   font-weight: normal;
   font-style: normal;
 }
@@ -99,14 +99,13 @@ html {
     font-weight: 300;
 }
 
-h1, h2, h3, h4, h5, h6, header, th, dt {
-    font-family: $serif-base-fonts;
+h1, h2, h3, h4, h5, h6, header, th, dt, a {
+    font-family: $title-base-fonts;
 }
-
-.serif-loaded h1, .serif-loaded h2, .serif-loaded h3,
-.serif-loaded h4, .serif-loaded h5, .serif-loaded h6,
-.serif-loaded header, .serif-loaded th, .serif-loaded dt {
-    font-family: SourceSerifPro, $serif-base-fonts;
+.title-loaded {
+  h1, h2, h3, h4, h5, h6, header, th, dt, a {
+    font-family: GidoleRegular, $title-base-fonts;
+  }
 }
 
 header {
