@@ -204,7 +204,7 @@ impl Connection {
 
 Whenever we see a full line of input from the client, we pass a
 `MiChatCommand::Broadcast`, we pass that
-to[`MiChat#process_action`](https://github.com/cstorey/mio-rules-example/blob/25be0cf04c66a526eb6008dfe587d56120d07e51/src/main.rs#L40),
+to [`MiChat#process_action`](https://github.com/cstorey/mio-rules-example/blob/25be0cf04c66a526eb6008dfe587d56120d07e51/src/main.rs#L40),
 which will in turn enqueue the message on each connection for output.
 
 ```rust
