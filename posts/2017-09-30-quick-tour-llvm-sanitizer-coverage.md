@@ -5,9 +5,8 @@ title: "A quick tour of LLVM's Sanitizer coverage implementation"
 description: "Inside the grey box"
 ---
 
-After reading about [hypothesis](https://github.com/HypothesisWorks/hypothesis-python)'s new coverage features, I've recently become interested in how guided fuzzing (as implemented by [American Fuzzy Lop](http://lcamtuf.coredump.cx/afl/) or LLVM's [libFuzzer](http://llvm.org/docs/LibFuzzer.html) works internally with Rust and LLVM. The first step is to understand how coverage works.
+After reading about [hypothesis](https://github.com/HypothesisWorks/hypothesis-python)'s new coverage features, I've recently become interested in how guided fuzzing (as implemented by [American Fuzzy Lop](http://lcamtuf.coredump.cx/afl/) or LLVM's [libFuzzer](http://llvm.org/docs/LibFuzzer.html) works internally with Rust and LLVM. The first step is to understand how coverage works.  <!--more-->
 
-<!--more-->
 Clang's [Sanitizer Coverage](http://clang.llvm.org/docs/SanitizerCoverage.html) documentation explains the functionality very well, so I'll not repeat too much of that.
 
 First of all, I started off by looking at the Rust Fuzz project's set of [targets](https://github.com/rust-fuzz/targets). The [run-fuzzer.sh](https://github.com/rust-fuzz/targets/blob/a12ab636b54ce3e5cf19cbae38dc2913ad52dd43/run-fuzzer.sh) driver script tells cargo to pass several extra flags to the compiler. The flag `-C passes=sancov` instructs the compiler to also run the `sancov` compiler pass, which annotates the generated code to add calls into the coverage runtime, and `-C llvm-args=-sanitizer-coverage-level=3` instructs LLVM to record [edge coverage](http://clang.llvm.org/docs/SanitizerCoverage.html#edge-coverage) so that we can tell what paths of code executed (e.g.: differentiating between branches of an if/else expression). The additional `-Z sanitizer=address` also tells the compiler to link in the sanitizer support runtime, which includes the routines to record and save coverage.

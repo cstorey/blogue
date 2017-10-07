@@ -5,7 +5,7 @@ title: 'Automatic port allocation'
 description: "For when you just can't decide..."
 ---
 
-It's quite common to want to test a network service from the outside, as if it was being accessed from a client. Quite often, people will pick a "well-known" port to use,<!--more--> eg: port `8080` or `8888` for a HTTP service. But that means that if you leave a stray service process lying around, you'll need to hunt it down before you can re-test.
+It's quite common to want to test a network service from the outside, as if it was being accessed from a client. Quite often, people will pick a "well-known" port to use, eg: port `8080` or `8888` for a HTTP service. But that means that if you leave a stray service process lying around, you'll need to hunt it down before you can re-test.<!--more-->
 
 Another common approach is to iterate through a randomized set of ports until you find one you can `bind(2)` to with a listening socket; then closing it, then passing that discovered port number to your service. Unfortunately, this approach tends to be somewhat racy, as another service might be allocated that address between the time of check and the time of use.
 
