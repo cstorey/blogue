@@ -1,7 +1,7 @@
 @import "normalize.scss";
 @import "syntax.scss";
 
-$bg-colour: hsl(0,0%,100%);
+$bg-colour: hsla(0,0%,100%, 100%);
 $light-bg: hsl(240,50%,97.5%);
 $text-colour: hsl(0, 0%, 0%);
 $text-width: 35rem;
@@ -117,7 +117,7 @@ header {
     .fade-spacer {
       height:1em;
       margin-bottom: -1em;
-      background: linear-gradient(to bottom, $bg-colour, hsla(0, 0, 0, 0));
+      background: linear-gradient(to bottom, $bg-colour, rgba(255,255,255,0));
       pointer-events: none;
     }
 }
@@ -221,7 +221,7 @@ header {
   .fade-spacer {
     height:1em;
     margin-top: -1em;
-    background: linear-gradient(to top, $bg-colour, hsla(0, 0, 0, 0));
+    background: linear-gradient(to top, $bg-colour, rgba(255, 255, 255, 0));
     pointer-events: none;
   }
   nav {
