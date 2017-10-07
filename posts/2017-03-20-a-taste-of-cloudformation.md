@@ -14,7 +14,7 @@ needs, and apply changes relatively atomically.
 
 For someone who’s spent a goodly deal of their career dealing with
 physical machines that live in a datacenter (so-called
-‘[Pets](https://blog.engineyard.com/2014/pets-vs-cattle)‘), this is
+‘[Pets](https://blog.engineyard.com/2014/pets-vs-cattle)’), this is
 something of a revelation. For a start, because everything is specified
 in terms of textual configuration (usually JSON, but we’ll get to that);
 it can be checked into version control. This might not seem like a big
