@@ -54,19 +54,6 @@ main = do
         route   idRoute
         compile copyFileCompiler
 
-    match "fonts/*" $ do
-        route   idRoute
-        compile copyFileCompiler
-
-    match "css/*.css" $ do
-        route   idRoute
-        compile compressCssCompiler
-
-    match "css/*.scss" $ do
-        route $ setExtension "css"
-        let compressCssItem = fmap compressCss
-        compile (compressCssItem <$> sassCompiler)
-
     match (fromGlob $ bundlePrefix ++ "*") $ do
         route   idRoute
         compile copyFileCompiler
