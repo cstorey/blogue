@@ -1,11 +1,14 @@
 --------------------------------------------------------------------------------
 {-# LANGUAGE OverloadedStrings #-}
 import           Data.Monoid ((<>))
+import qualified Data.Map as M
 import           Hakyll
+import           Data.Aeson
 import           Hakyll.Contrib.Hyphenation (hyphenateHtml, english_GB)
 import           Hakyll.Web.Sass (sassCompiler)
 import           System.Process (readProcess)
-
+import qualified Data.ByteString.Lazy as B
+import           System.IO.Unsafe (unsafePerformIO)
 
 --------------------------------------------------------------------------------
 
@@ -18,10 +21,27 @@ myFeedConfiguration = FeedConfiguration
     , feedRoot        = "http://ceri.storey.name"
     }
 
+bundlePrefix = "out/"
+
+mapUrl :: M.Map String String -> String -> String
+mapUrl m k = res
+  where
+   addPrefix k = "/" ++ bundlePrefix ++ k
+   valp = M.lookup k m
+   res = maybe k addPrefix $ valp
+
+updateFromManifest :: M.Map String String -> Item String -> Compiler (Item String)
+updateFromManifest manifest item = do
+    route <- getRoute $ itemIdentifier item
+    return $ case route of
+        Nothing -> item
+        Just r  -> fmap (withUrls $ mapUrl manifest) item
 
 main :: IO ()
-main = hakyll $ do
-
+main = do
+  manifestData <- B.readFile $ bundlePrefix ++ "manifest.json"
+  let manifest = (maybe M.empty id $ decode manifestData) :: M.Map String String
+  hakyll $ do
     match "images/**/*.dot" $ do
         route $ setExtension "svg"
         compile $ getResourceString >>= withItemBody (unixFilter "dot" ["-Tsvg"])
@@ -47,6 +67,9 @@ main = hakyll $ do
         let compressCssItem = fmap compressCss
         compile (compressCssItem <$> sassCompiler)
 
+    match (fromGlob $ bundlePrefix ++ "*") $ do
+        route   idRoute
+        compile copyFileCompiler
 
     match (fromList ["about.md"]) $ do
         route   $ setExtension "html"
@@ -54,6 +77,7 @@ main = hakyll $ do
             >>= hyphenateHtml english_GB
             >>= loadAndApplyTemplate "templates/page.html"    postCtx
             >>= loadAndApplyTemplate "templates/default.html" mainContext
+            >>= updateFromManifest manifest
             >>= relativizeUrls
 
     match "posts/*" $ do
@@ -63,6 +87,7 @@ main = hakyll $ do
             >>= saveSnapshot "content"
             >>= loadAndApplyTemplate "templates/post.html"    postCtx
             >>= loadAndApplyTemplate "templates/default.html" postCtx
+            >>= updateFromManifest manifest
             >>= relativizeUrls
 
     create ["archive.html"] $ do
@@ -78,6 +103,7 @@ main = hakyll $ do
                 >>= loadAndApplyTemplate "templates/archive.html" archiveCtx
                 >>= loadAndApplyTemplate "templates/page.html"    postCtx
                 >>= loadAndApplyTemplate "templates/default.html" archiveCtx
+                >>= updateFromManifest manifest
                 >>= relativizeUrls
 
     create ["index.html"] $ do
@@ -92,6 +118,7 @@ main = hakyll $ do
             makeItem ""
                 >>= loadAndApplyTemplate "templates/home.html" archiveCtx
                 >>= loadAndApplyTemplate "templates/default.html" archiveCtx
+		>>= updateFromManifest manifest
                 >>= relativizeUrls
 
     match "templates/*" $ compile templateCompiler
