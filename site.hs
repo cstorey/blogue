@@ -133,10 +133,4 @@ indexCtx =
     postCtx
 
 mainContext :: Context String
-mainContext = 
-    (field "gitversion" $ \_ -> gitVersion) <>
-    defaultContext
-
-gitVersion :: Compiler String
-gitVersion = unsafeCompiler $ do
-  fmap (unwords . words) $ readProcess "git" ["describe"] ""
+mainContext = defaultContext
