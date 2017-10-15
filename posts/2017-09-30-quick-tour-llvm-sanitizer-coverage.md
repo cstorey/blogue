@@ -29,7 +29,7 @@ fn main() {
 
 If we compile this with `RUSTFLAGS=' -C passes=sancov -C llvm-args=-sanitizer-coverage-level=3 -Z sanitizer=address' cargo run` and then look at the resulting disassembled code, using `objdump -CS target/debug/covtest` ^[this assumes the GNU BinUtils suite; commonly used on Linux. Other systems will likely have similar tools.], then we see an additional set of lines like:
 
-```rust
+```
 10465:       48 8d 05 24 86 34 00    lea    0x348624(%rip),%rax
 1046c:       48 05 d4 03 00 00       add    $0x3d4,%rax
 10472:       48 89 c7                mov    %rax,%rdi
