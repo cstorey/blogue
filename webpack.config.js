@@ -8,7 +8,7 @@ const common_chunk = 'common';
 
 const plugins = [
     new ExtractTextPlugin({
-      filename: '[name].[chunkhash].css'
+      filename: '[name].[chunkhash].[contenthash].css'
     }),
     new ManifestPlugin(),
 ];
