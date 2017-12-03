@@ -5,7 +5,7 @@
 $bg-colour: hsla(0,0%,100%, 100%);
 $light-bg: hsl(240,50%,97.5%);
 $text-colour: hsl(0, 0%, 0%);
-$text-width: 35rem;
+$text-width: 40rem;
 $text-breakpoint: ($text-width + 2);
 $lowlight-colour: #555;
 $sans-base-fonts: verdana, sans-serif;
@@ -334,6 +334,7 @@ blockquote p + p{
 
 code, kbd, pre, samp {
   font-family: $mono-base-fonts;
+  overflow: wrap;
 }
 
 .mono-loaded code, .mono-loaded kbd, .mono-loaded pre, .mono-loaded samp {

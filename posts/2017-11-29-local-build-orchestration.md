@@ -139,8 +139,9 @@ deploy: deploy-dependencies deploy-application
 # application as environment variables.
 repl: deploy-dependencies
 	ip=$$(minikube ip) && \
-	pg_port=$$(kubectl --context=minikube -n localdev get svc/pg-core -o go-template='{{range .spec.ports}}{{if .nodePort}}{{.nodePort}}{{"\n"}}{{end}}{{end}}') && \
-
+	pg_port=$$(kubectl --context=minikube -n localdev get svc/pg-core -o \
+	  go-template='{{range .spec.ports}}{{if .nodePort}}{{.nodePort}}{{"\n"}}{{end}}{{end}}'
+	) && \
 	POSTGRES=jdbc://$${ip}:$${pg_port}/my-db ./lein repl
 ```
 
