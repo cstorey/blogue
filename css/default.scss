@@ -334,7 +334,7 @@ blockquote p + p{
 
 code, kbd, pre, samp {
   font-family: $mono-base-fonts;
-  overflow: wrap;
+  white-space: pre-wrap;
 }
 
 .mono-loaded code, .mono-loaded kbd, .mono-loaded pre, .mono-loaded samp {
