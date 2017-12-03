@@ -2,10 +2,10 @@
 date: '2017-10-23'
 orig_url: null
 title: "Local build orchestration with make(1)"
-description: ''
+description: 'Orchestrating the orchestrators'
 ---
 
-Over the past few weeks I've been focusing mostly on build and deployment tooling around docker and Kubernetes. One particular downside of the current system, is our applications have a fair number of service dependencies. Up until now, we've taken to running everything inside docker using [`docker-compose`](https://docs.docker.com/compose/), but this feels to me more like a way to sweep complexities and technical problems under the rug, so to speak.<!--more-->
+Over the past few weeks I've been focusing mostly on build and deployment tooling around docker and Kubernetes. One particular downside of the current system, is our applications have a fair number of service dependencies.<!--more--> Up until now, we've taken to running everything inside docker using [`docker-compose`](https://docs.docker.com/compose/), but this feels to me more like a way to sweep complexities and technical problems under the rug, so to speak.
 
 While there is some value in keeping all of your automation hacks in one place, it can make life difficult for anyone who doesn't use precisely that workflow (eg: developers who need to be able to use live-reloading, for one), or people who need ready access to debugging tools such as `strace(1)` and the like.
 

@@ -6,9 +6,8 @@ description: 'Supposing that my code works...'
 ---
 
 
-Over the past few weeks, I've been inspired to create a new property testing library for rust, very much inspired by the work in [hypothesis](http://hypothesis.works/). 
+Over the past few weeks, I've been inspired to create a new property testing library for rust, very much inspired by the work in [hypothesis](http://hypothesis.works/). <!--more-->
 
-<!--more-->
 Why use suppositions over say, [quickcheck](https://github.com/BurntSushi/quickcheck)? For one, this takes inspiration from [hypothesis](http://hypothesis.works) and [theft](https://github.com/silentbicycle/theft). While it's still in it's early days, the generator system (inspired by [hypothesis' generators](http://hypothesis.works/articles/compositional-shrinking/) means that you don't need a seperate shrinking mechanism for each datatype.
 
 To give an example, I ported my previous [die-hard puzzle](https://tech.labs.oliverwyman.com/blog/2017/05/30/die-hard-statefully/) to this library, and while it's [fairly similar](https://github.com/cstorey/suppositions/blob/fe9883a8577ae15dc831941e932ef98c480df4d6/examples/die-hard.rs), there are a few changes:
