@@ -1,4 +1,5 @@
 #!/bin/bash
+find posts -type l -exec rm -vf {} \+
 set -e -o pipefail
 stack setup
 npm install
