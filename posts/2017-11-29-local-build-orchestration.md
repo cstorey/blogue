@@ -19,7 +19,7 @@ So, the makefile below ensures when you run `make repl` it'll:
 
  * build any images required for dependencies (elided here, but identical to that for the application image),
  * publish them,
- * re-configure kubenetes
+ * re-configure kubernetes
  * Start a leiningen repl configured with addresses of the exposed services.
 
 We run the repl on the host workstation directly, because whilst it's possible to export a host directory into minikube and use it within a kubenetes container; it's not nearly as simple and requires some degree of indirection.
