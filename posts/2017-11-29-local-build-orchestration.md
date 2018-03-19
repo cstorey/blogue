@@ -1,6 +1,6 @@
 ---
 date: '2017-11-29'
-orig_url: null
+orig_url: "https://tech.labs.oliverwyman.com/blog/2017/12/07/making-the-dockers-work/"
 title: "Local build orchestration with make(1)"
 description: 'Orchestrating the orchestrators'
 ---

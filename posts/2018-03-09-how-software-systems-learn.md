@@ -1,6 +1,6 @@
 ---
 date: '2018-03-09'
-orig_url: null
+orig_url: "https://tech.labs.oliverwyman.com/blog/2018/03/14/how-software-systems-learn/"
 title: "How software systems learn"
 description: 'Homely systems'
 ---
