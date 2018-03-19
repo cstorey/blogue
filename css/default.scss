@@ -122,11 +122,11 @@ html {
     font-weight: 300;
 }
 
-h1, h2, h3, h4, h5, h6, header, th, dt, a {
+h1, h2, h3, h4, h5, h6, header, th, dt, a:link {
     font-family: $title-base-fonts;
 }
 .title-loaded {
-  h1, h2, h3, h4, h5, h6, header, th, dt, a {
+  h1, h2, h3, h4, h5, h6, header, th, dt, a:link {
     font-family: GidoleRegular, $title-base-fonts;
   }
 }
