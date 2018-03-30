@@ -8,6 +8,7 @@ import           Hakyll.Contrib.Hyphenation (hyphenateHtml, english_GB)
 import           System.Process (readProcess)
 import qualified Data.ByteString.Lazy as B
 import           System.IO.Unsafe (unsafePerformIO)
+import qualified Text.Pandoc.SideNote as SideNote
 
 --------------------------------------------------------------------------------
 
@@ -59,7 +60,7 @@ main = do
 
     match (fromList ["about.md"]) $ do
         route   $ setExtension "html"
-        compile $ pandocCompiler
+        compile $ pandocCompilerWithSideNotes
             >>= hyphenateHtml english_GB
             >>= loadAndApplyTemplate "templates/page.html"    postCtx
             >>= loadAndApplyTemplate "templates/default.html" mainContext
@@ -68,7 +69,7 @@ main = do
 
     match "posts/*" $ do
         route $ setExtension "html"
-        compile $ pandocCompiler
+        compile $ pandocCompilerWithSideNotes
             >>= hyphenateHtml english_GB
             >>= saveSnapshot "content"
             >>= loadAndApplyTemplate "templates/post.html"    postCtx
@@ -104,7 +105,7 @@ main = do
             makeItem ""
                 >>= loadAndApplyTemplate "templates/home.html" archiveCtx
                 >>= loadAndApplyTemplate "templates/default.html" archiveCtx
-		>>= updateFromManifest manifest
+                >>= updateFromManifest manifest
                 >>= relativizeUrls
 
     match "templates/*" $ compile templateCompiler
@@ -133,3 +134,6 @@ indexCtx =
 
 mainContext :: Context String
 mainContext = defaultContext
+
+pandocCompilerWithSideNotes :: Compiler (Item String)
+pandocCompilerWithSideNotes = pandocCompilerWithTransform defaultHakyllReaderOptions defaultHakyllWriterOptions SideNote.usingSideNotes

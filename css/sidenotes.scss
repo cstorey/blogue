@@ -4,26 +4,29 @@ body {
 .sidenote, .marginnote { float: right;
                          clear: right;
                          margin-right: -21rem;
-                         max-width: 20rem;
+                         width: ($text-width / 2);
                          margin-top: 0;
                          margin-bottom: 0;
                          vertical-align: baseline;
                          position: relative;
 }
 
-.sidenote-number { counter-increment: sidenote-counter; }
+.sidenote-number {
+  counter-increment: sidenote-counter;
+}
 
-.sidenote-number:after, .sidenote:before { content: counter(sidenote-counter) " ";
+.sidenote-number:after, .sidenote:before { content: "(" counter(sidenote-counter) ")";
                                            position: relative;
                                            vertical-align: baseline; }
 
-.sidenote-number:after { content: counter(sidenote-counter);
-                         font-size: 1rem;
-                         top: -0.5rem;
-                         left: 0.1rem; }
+.sidenote-number:after {
+                         font-size: 0.75em;
+                         top: -0.5em;
+                         left: 0.1em; }
 
 .sidenote:before { content: counter(sidenote-counter) " ";
-                   top: -0.5rem; }
+                   top: -0.5rem;
+		   font-size: 0.75em; }
 
 blockquote .sidenote, blockquote .marginnote { margin-right: -82%;
                                                min-width: 59%;
@@ -36,7 +39,7 @@ label.sidenote-number { display: inline; }
 
 label.margin-toggle:not(.sidenote-number) { display: none; }
 
-@media (max-width: 760px) {
+@media screen and (max-width: $sidenote-breakpoint) {
      label.margin-toggle:not(.sidenote-number) {
          display: inline;
     }
@@ -48,7 +51,8 @@ label.margin-toggle:not(.sidenote-number) { display: none; }
          float: left;
          left: 1rem;
          clear: both;
-         width: 95%;
+	 width: $text-width - 2;
+	 max-width: none;
          margin: 1rem 2.5% 0rem 2.5%;
          vertical-align: baseline;
          position: relative;
