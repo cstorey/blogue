@@ -49,11 +49,11 @@ label.margin-toggle:not(.sidenote-number) { display: none; }
      .margin-toggle:checked + .sidenote, .margin-toggle:checked + .marginnote {
          display: block;
          float: left;
-         left: 1rem;
          clear: both;
-	 width: $text-width - 2;
+	 width: $text-width - 2 /* ??? */;
 	 max-width: none;
-         margin: 1rem 2.5% 0rem 2.5%;
+         margin: 1rem 0rem 0rem 0rem;
+         padding: 0 1rem 0rem 1rem;
          vertical-align: baseline;
          position: relative;
     }
