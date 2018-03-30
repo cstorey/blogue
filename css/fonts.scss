@@ -1,0 +1,67 @@
+$sans-base-fonts: verdana, sans-serif;
+$title-base-fonts: $sans-base-fonts;
+$mono-base-fonts: Menlo, Consolas, "Liberation Mono",Courier,monospace;
+$mono-enh-fonts: "Iosevka", $mono-base-fonts
+
+@font-face {
+  font-family: "Iosevka";
+  src: url("../fonts/iosevka.woff2") format("woff2"),
+       url("../fonts/iosevka.woff") format("woff"),
+       url("../fonts/iosevka.otf") format("opentype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Iosevka";
+  src:  url("../fonts/iosevka-italic.woff2") format("woff2"),
+	url("../fonts/iosevka-italic.woff") format("woff"),
+	url("../fonts/iosevka-italic.otf") format("opentype");
+  font-weight: normal;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "Iosevka";
+  src: url("../fonts/iosevka-bold.woff2") format("woff2"),
+       url("../fonts/iosevka-bold.woff") format("woff"),
+       url("../fonts/iosevka-bold.otf") format("opentype");
+  font-weight: bold;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Iosevka";
+  src:  url("../fonts/iosevka-bolditalic.woff2") format("woff2"),
+	url("../fonts/iosevka-bolditalic.woff") format("woff"),
+	url("../fonts/iosevka-bolditalic.otf") format("opentype");
+  font-weight: bold;
+  font-style: italic;
+}
+@font-face {
+  font-family: "SourceSansPro";
+  src: url("../fonts/SourceSansPro-Regular.woff2") format("woff2"),
+       url("../fonts/SourceSansPro-Regular.woff") format("woff"),
+       url("../fonts/SourceSansPro-Regular.otf") format("opentype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "SourceSansPro";
+  src: url("../fonts/SourceSansPro-It.woff2") format("woff2"),
+       url("../fonts/SourceSansPro-It.woff") format("woff"),
+       url("../fonts/SourceSansPro-It.otf") format("opentype");
+  font-weight: normal;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "GidoleRegular";
+  src: url("../fonts/Gidole-Regular.woff2") format("woff2"),
+       url("../fonts/Gidole-Regular.woff") format("woff"),
+       url("../fonts/Gidole-Regular.otf") format("opentype");
+  font-weight: normal;
+  font-style: normal;
+}
+
