@@ -27,7 +27,7 @@ fn main() {
 }
 ```
 
-If we compile this with `RUSTFLAGS=' -C passes=sancov -C llvm-args=-sanitizer-coverage-level=3 -Z sanitizer=address' cargo run` and then look at the resulting disassembled code, using `objdump -CS target/debug/covtest` ^[this assumes the GNU BinUtils suite; commonly used on Linux. Other systems will likely have similar tools.], then we see an additional set of lines like:
+If we compile this with `RUSTFLAGS=' -C passes=sancov -C llvm-args=-sanitizer-coverage-level=3 -Z sanitizer=address' cargo run` and then look at the resulting disassembled code, using `objdump -CS target/debug/covtest` ^[This assumes the GNU BinUtils suite; commonly used on Linux. Other systems will likely have similar tools.], then we see an additional set of lines like:
 
 ```
 10465:       48 8d 05 24 86 34 00    lea    0x348624(%rip),%rax
@@ -36,7 +36,7 @@ If we compile this with `RUSTFLAGS=' -C passes=sancov -C llvm-args=-sanitizer-co
 10475:       e8 56 68 0e 00          callq  f6cd0 <__sanitizer_cov>
 ```
 
-Granted, I'm not great at reading assembly, but this looks to lookup the current program counter^[i.e.: the instruction that was running at the time], massages it a little to create a guard address, and passes that as the first argument to the [`__sanitizer_cov` function](https://github.com/llvm-project/llvm-project-20170507/blob/c0c70fd0d42d0344aa7c45c8edd2a823745275b0/compiler-rt/lib/sanitizer_common/sanitizer_coverage_libcdep.cc#L935-L938).
+Granted, I'm not great at reading assembly, but this looks to lookup the current program counter^[I.E.: The instruction that was running at the time], massages it a little to create a guard address, and passes that as the first argument to the [`__sanitizer_cov` function](https://github.com/llvm-project/llvm-project-20170507/blob/c0c70fd0d42d0344aa7c45c8edd2a823745275b0/compiler-rt/lib/sanitizer_common/sanitizer_coverage_libcdep.cc#L935-L938).
 
 This looks up the caller's current program counter, then passes that into [`CoverageData::Add`](https://github.com/llvm-project/llvm-project-20170507/blob/c0c70fd0d42d0344aa7c45c8edd2a823745275b0/compiler-rt/lib/sanitizer_common/sanitizer_coverage_libcdep.cc#L407-L422), which checks uses the guard to check if that point has already been recorded. If not, it'll record the program counter for later storage.
 
