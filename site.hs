@@ -5,7 +5,6 @@ import qualified Data.Map as M
 import           Hakyll
 import           Data.Aeson
 import           Hakyll.Contrib.Hyphenation (hyphenateHtml, english_GB)
-import           Hakyll.Web.Sass (sassCompiler)
 import           System.Process (readProcess)
 import qualified Data.ByteString.Lazy as B
 import           System.IO.Unsafe (unsafePerformIO)
