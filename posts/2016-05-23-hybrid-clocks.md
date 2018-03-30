@@ -9,7 +9,7 @@ Coming from an operations background, I've found that one of the best ways to un
 
 However, if we want to collate log events from different machines, say, one service calling out to another, then clock drift can make it appear that the request was processed by the receiver before the caller requested it, as in the following diagram:
 
-![Lamport diagram with wall clock skew](../images/2016-05-23-hybrid-clocks/lamport-clock-skew.svg)
+![Lamport diagram with wall clock skew](../images/2016-05-23-hybrid-clocks/clock-skew.svg)
 
 Process Time    Event
 ------- ------- ---------------
