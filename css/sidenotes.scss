@@ -35,7 +35,10 @@ blockquote .sidenote, blockquote .marginnote { margin-right: -82%;
 
 input.margin-toggle { display: none; }
 
-label.sidenote-number { display: inline; }
+label.sidenote-number {
+    display: inline;
+    cursor: pointer;
+ }
 
 label.margin-toggle:not(.sidenote-number) { display: none; }
 
@@ -56,14 +59,5 @@ label.margin-toggle:not(.sidenote-number) { display: none; }
          padding: 0 1rem 0rem 1rem;
          vertical-align: baseline;
          position: relative;
-    }
-     label {
-         cursor: pointer;
-    }
-     div.table-wrapper, table {
-         width: 85%;
-    }
-     img {
-         width: 100%;
     }
 }
