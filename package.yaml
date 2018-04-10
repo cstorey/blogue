@@ -10,7 +10,6 @@ dependencies:
 - aeson >=1.0.2.1
 - bytestring >=0.10.8.1
 - containers >=0.5.7.1
-- pandoc-sidenote >= 0.19.0.0
 executables:
   site:
     main: site.hs
