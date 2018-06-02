@@ -1,8 +1,8 @@
 ---
 date: '2018-05-31'
-orig_url: null
+orig_url: "https://tech.labs.oliverwyman.com/blog/2018/06/01/solving-zelda-puzzles-satisfactorily/"
 title: "Solving Zelda Puzzles Satisfactorily"
-description: '...'
+description: 'The other kind of laziness'
 ---
 
 In the game Breath of the Wild, there's a puzzle which involves a set of fans and turbines in a 4x5 grid, and you must position the fans in order ensure all of the turbines are spinning. Unfortunately, I've never really had much patience for solving this kind of logic puzzle the old fashioned way, so given that computers are good at this sort of thing, I thought I'd try that.<!--more--> 
@@ -13,20 +13,7 @@ Happily, this kind of problem can be given to a [Satisfiability solver](https://
 
 So, we know that in our problem, each fan can only ever be facing in one direction at once. 
 
-```
- 0  1  2  3  4 X/Y
-┌──┬──┬──┬──┬──┐
-│F │  │  │F │  │ 0
-├──┼──┼──┼──┼──┤
-│  │  │F │  │  │ 1
-├──┼──┼──┼──┼──┤
-│  │  │  │F │  │ 2
-├──┼──┼──┼──┼──┤
-│F │  │  │  │F │ 3
-└──┴──┴──┴──┴──┘
-F: Fan position
-Un-labled positions are Turbines
-```
+![Puzzle layout](/images/2018-05-31-solving-zelda-puzzles-satisfactorily/Puzzle Layout.svg)
 
 So that leaves us with two problems: Ensuring that each fan only blows in a single direction, and ensuring that all turbines are propelled by some fan.
 
@@ -34,11 +21,8 @@ We know that all of the turbines on the line from the fan in the direction of ai
 
 So, given that we know the grid size and fan locations ahead of time, we can notate this problem:
 
-```
-┌──┬──┐
-│F▶│  │
-└──┴──┘
-```
+
+![two cell layout](/images/2018-05-31-solving-zelda-puzzles-satisfactorily/two-cells-layout.svg)
 as follows:
 ```
 Fan(0, 0, E) => Turbine(1, 0)
@@ -47,11 +31,7 @@ Fan(0, 0, E) => Turbine(1, 0)
 ie: A fan at `0, 0` will propel the turbine at `1, 0`.
 Now, in a setup with two fans, say another one at `(3, 0)`:
 
-```
-┌──┬──┬──┬──┐
-│F▶│  │F◀│  │
-└──┴──┴──┴──┘
-```
+![four cell layout](/images/2018-05-31-solving-zelda-puzzles-satisfactorily/four-cells-layout.svg)
 
 
 Can be expressed as:
