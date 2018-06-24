@@ -25,7 +25,6 @@ body {
   }
 
   header #navigation {
-      text-align: justify;
       width: 100%;
   }
 }
@@ -39,7 +38,6 @@ body {
   }
 
   header #navigation {
-      text-align: justify;
       width: 100%;
   }
   pre {
@@ -54,9 +52,10 @@ html {
     color: $text-colour;
     font-size: 12pt;
     font-family: $sans-base-fonts;
-    text-align: justify;
     letter-spacing: 0.05px;
     font-weight: 300;
+    text-align: justify;
+    hyphens: auto;
 }
 
 h1, h2, h3, h4, h5, h6, header, th, dt, a:link {
@@ -195,7 +194,6 @@ header {
 
 footer #attribution {
     padding: 0.75rem 0px 0.75rem 0px;
-    --text-align: right;
   width:100%;
 }
 .figure img {

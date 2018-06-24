@@ -4,7 +4,6 @@ import           Data.Monoid ((<>))
 import qualified Data.Map as M
 import           Hakyll
 import           Data.Aeson
-import           Hakyll.Contrib.Hyphenation (hyphenateHtml, english_GB)
 import           System.Process (readProcess)
 import qualified Data.ByteString.Lazy as B
 import           System.IO.Unsafe (unsafePerformIO)
@@ -60,7 +59,6 @@ main = do
     match (fromList ["about.md"]) $ do
         route   $ setExtension "html"
         compile $ pandocCompiler
-            >>= hyphenateHtml english_GB
             >>= loadAndApplyTemplate "templates/page.html"    postCtx
             >>= loadAndApplyTemplate "templates/default.html" mainContext
             >>= updateFromManifest manifest
@@ -69,7 +67,6 @@ main = do
     match "posts/*" $ do
         route $ setExtension "html"
         compile $ pandocCompiler
-            >>= hyphenateHtml english_GB
             >>= saveSnapshot "content"
             >>= loadAndApplyTemplate "templates/post.html"    postCtx
             >>= loadAndApplyTemplate "templates/default.html" postCtx
