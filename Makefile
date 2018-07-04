@@ -41,3 +41,6 @@ $(STACK_BUILD): package.yaml stack.yaml site.hs $(wildcard src/*.hs)
 
 site-build: $(SETUP) $(NPM_INSTALL) $(STACK_BUILD) $(NPM_BUILD)
 	stack exec -- site build
+
+serve: $(STACK_BUILD)
+	stack exec -- site server --host 0.0.0.0
