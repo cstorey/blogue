@@ -6,6 +6,7 @@
 SETUP=.done.setup
 NPM_INSTALL=.done.npm-install
 
+STACK_BUILD = .done.stack-build
 NPM_BUILD = out/manifest.json
 
 all: site-build
