@@ -51,7 +51,7 @@ html {
     background: $bg-colour;
     color: $text-colour;
     font-size: 12pt;
-    font-family: $sans-base-fonts;
+    font-family: $sans-enh-fonts;
     letter-spacing: 0.05px;
     font-weight: 300;
     text-align: justify;
@@ -59,7 +59,7 @@ html {
 }
 
 h1, h2, h3, h4, h5, h6, header, th, dt, a:link {
-    font-family: $title-base-fonts;
+    font-family: $title-enh-fonts;
 }
 .title-loaded {
   h1, h2, h3, h4, h5, h6, header, th, dt, a:link {
@@ -238,7 +238,7 @@ h2 {
 
 .info, .subtitle, #footer {
     font-style: italic;
-    font-family: $sans-base-fonts;
+    font-family: $sans-enh-fonts;
     font-weight: 300;
 }
 
@@ -268,7 +268,7 @@ blockquote p + p{
 }
 
 code, kbd, pre, samp {
-  font-family: $mono-base-fonts;
+  font-family: $mono-enh-fonts;
   white-space: pre-wrap;
 }
 

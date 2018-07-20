@@ -32,26 +32,5 @@
                 <a href="/archive.html">Archive</a>
             </nav>
         </footer>
-
-<script type='text/javascript'>
-/* <![[CDATA[ */
-
-function preloadFont(fontdescs, klass) {
-    var ps = fontdescs.map(function(f) { return document.fonts.load(f); });
-    Promise.all(ps).then(function(vals) {
-        console.log("loaded font", fontdescs, vals);
-        var docElt = document.documentElement;
-        docElt.className += ' ' + klass;
-    }).catch(function(e) {
-        console.log("loading font:", fontdesc, e);
-    });
-}
-
-preloadFont(['normal 1em SourceSansPro', 'italic 1em SourceSansPro'], 'sans-loaded');
-preloadFont(['normal 1em GidoleRegular'], 'title-loaded');
-preloadFont(['normal 1em Iosevka', 'italic 1em Iosevka', 'bold 1em Iosevka'], 'mono-loaded');
-
-/* ]]> */
-</script>
     </body>
 </html>
