@@ -54,7 +54,7 @@ Fan(0, 0, E) ∨ Fan(2, 0, E)
 ...
 ```
 
-And so on. as you can tell, this can get quite tedious to do by hand. Happily, we can make the computer do the boring bits for us. I've used the library [pycryptosat](https://pypi.org/project/pycryptosat/) to do this. I'm not going to include snippets here, since the code I wrote is hardly exemplary, but can be found [in a gist](https://gist.github.com/cstorey-owl/d98f24cc17ef0fdaeacb977976cc8789).
+And so on. as you can tell, this can get quite tedious to do by hand. Happily, we can make the computer do the boring bits for us. I've used the library [pycryptosat](https://pypi.org/project/pycryptosat/) to do this. I'm not going to include snippets here, since the code I wrote is hardly exemplary, but can be found [in a gist](https://gist.github.com/cstorey/05e94f825362defd5a04a1699322ca5e).
 
 The other part of the problem is making sure that each fan only points in a single direction. We can say that a solution is invalid iff a fan is pointing, say, North and East at once. The python that does this is as follows:
 
