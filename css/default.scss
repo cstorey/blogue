@@ -129,166 +129,157 @@ header {
   padding: 2rem 0 2rem 0;
 }
 
-@media screen and (min-width: $text-breakpoint) {
-  .site header {
-      margin: 0px auto;
-      max-width: $text-width;
-  }
-  .site footer {
-      margin: 0px auto;
-      max-width: $text-width;
-  }
-}
+.site {
+  header {
+    background: $bg-colour;
 
-/* Center on smaller screens */
-@media screen and (max-width: $text-breakpoint) {
-  .site header {
-      margin: 0px 1rem;
+    @media screen {
+      position: fixed; top: 0; left: 0; right: 0;
+      padding: 0;
+      flex: none;
       max-width: $text-width;
-      padding: 0 1rem ;
-  }
-  .site footer {
-      margin: 0px 1rem;
       max-width: $text-width;
-      padding: 0 1rem ;
-  }
-}
 
-@media screen {
-  .site header {
-    position: fixed; top: 0; left: 0; right: 0;
-    padding: 0;
+      @media (max-width: $text-breakpoint) {
+	margin: 0px 1rem;
+	padding: 0 1rem ;
+      }
+      @media (min-width: $text-breakpoint) {
+	margin: 0px auto;
+      }
+    }
+
+    h1 {
+      padding: 0;
+      margin: 0.0 0 0.0 0 ;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      overflow: hidden;
+    }
+  }
+
+  footer {
+    z-index: 10;
     flex: none;
-  }
-}
-
-.site header {
-  background: $bg-colour;
-}
-
-.site header h1 {
-  padding: 0;
-  margin: 0.0 0 0.0 0 ;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  overflow: hidden;
-}
-
-.site footer {
-  z-index: 10;
-  flex: none;
-  background: $bg-colour;
-  color: $lowlight-colour;
-
-  .fade-spacer {
-    height:1em;
-    margin-top: -1em;
-    background: linear-gradient(to top, $bg-colour, rgba(255, 255, 255, 0));
-    pointer-events: none;
-  }
-  nav {
-    border-top: solid 2px black;
-    font-size: 1rem;
-  }
-}
-
-footer #attribution {
-    padding: 0.75rem 0px 0.75rem 0px;
-  width:100%;
-}
-.figure img {
-  max-width: 100%;
-}
-@media screen {
-  .site footer {
-    position: fixed; bottom: 0; left: 0; right: 0;
-    margin-top: 2rem;
-    padding: 0;
-  }
-}
-
-
-
-
-h1 {
-    font-size: 1.5rem;
-}
-
-h2 {
-    font-size: 1.25rem;
-}
-
-.info {
+    background: $bg-colour;
     color: $lowlight-colour;
-}
+    max-width: $text-width;
 
-.subtitle {
-    color: $text-colour;
-    padding-right: 1ex;
-    font-style: italic;
-}
+    @media screen {
+      position: fixed; bottom: 0; left: 0; right: 0;
+      margin-top: 2rem;
+      padding: 0;
+      @media (min-width: $text-breakpoint) {
+	margin: 0px auto;
+      }
+      @media (max-width: $text-breakpoint) {
+	margin: 0px 1rem;
+	padding: 0 1rem ;
+      }
+    }
 
-.post .teaser {
-  margin-bottom: 1rem;
-}
+    .fade-spacer {
+      height:1em;
+      margin-top: -1em;
+      background: linear-gradient(to top, $bg-colour, rgba(255, 255, 255, 0));
+      pointer-events: none;
+    }
+    nav {
+      border-top: solid 2px black;
+      font-size: 1rem;
+    }
 
-.post:last-child .teaser {
-  margin-bottom: inherit;
-}
+    #attribution {
+	padding: 0.75rem 0px 0.75rem 0px;
+      width:100%;
+    }
 
-.info, .subtitle, #footer {
-    font-style: italic;
-    font-family: $sans-enh-fonts;
-    font-weight: 300;
-}
+  }
 
-.sans-loaded .info, .sans-loaded .subtitle, .sans-loaded #footer, html.sans-loaded {
-    font-family: $sans-enh-fonts;
-}
+  .figure img {
+    max-width: 100%;
+  }
 
-pre {
-  white-space: pre;
-  padding: 1ex;
-  background: $light-bg;
-  font-size: 0.8rem;
-}
+  h1 {
+      font-size: 1.5rem;
+  }
 
-blockquote {
-  padding: 1ex;
-  background: $light-bg;
-  font-size: 0.8rem;
-}
+  h2 {
+      font-size: 1.25rem;
+  }
 
-blockquote p{
-  margin: 0;
-}
+  .info {
+      color: $lowlight-colour;
+  }
 
-blockquote p + p{
-  margin-top: 1rem;
-}
+  .subtitle {
+      color: $text-colour;
+      padding-right: 1ex;
+      font-style: italic;
+  }
 
-code, kbd, pre, samp {
-  font-family: $mono-enh-fonts;
-  white-space: pre-wrap;
-}
+  .post .teaser {
+    margin-bottom: 1rem;
+  }
 
-.mono-loaded code, .mono-loaded kbd, .mono-loaded pre, .mono-loaded samp {
-  font-family: $mono-enh-fonts;
-}
+  .post:last-child .teaser {
+    margin-bottom: inherit;
+  }
 
-th {
-  border-bottom: thin solid black;
-}
+  .info, .subtitle, #footer {
+      font-style: italic;
+      font-family: $sans-enh-fonts;
+      font-weight: 300;
+  }
 
-.post-summaries dt {
-  font-size: 1.1em;
-}
-.post-summaries dd {
-  margin-left: 0px;
-  padding-left: 1rem;
-}
-.post-summaries dd p {
-  margin: 0rem;
-}
+  .sans-loaded .info, .sans-loaded .subtitle, .sans-loaded #footer, html.sans-loaded {
+      font-family: $sans-enh-fonts;
+  }
 
-a:link, a:visited { color: inherit; }
+  pre {
+    white-space: pre;
+    padding: 1ex;
+    background: $light-bg;
+    font-size: 0.8rem;
+  }
+
+  blockquote {
+    padding: 1ex;
+    background: $light-bg;
+    font-size: 0.8rem;
+  }
+
+  blockquote p{
+    margin: 0;
+  }
+
+  blockquote p + p{
+    margin-top: 1rem;
+  }
+
+  code, kbd, pre, samp {
+    font-family: $mono-enh-fonts;
+    white-space: pre-wrap;
+  }
+
+  .mono-loaded code, .mono-loaded kbd, .mono-loaded pre, .mono-loaded samp {
+    font-family: $mono-enh-fonts;
+  }
+
+  th {
+    border-bottom: thin solid black;
+  }
+
+  .post-summaries dt {
+    font-size: 1.1em;
+  }
+  .post-summaries dd {
+    margin-left: 0px;
+    padding-left: 1rem;
+  }
+  .post-summaries dd p {
+    margin: 0rem;
+  }
+
+  a:link, a:visited { color: inherit; }
+}
