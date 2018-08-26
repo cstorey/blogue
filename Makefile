@@ -40,8 +40,10 @@ $(STACK_BUILD): package.yaml stack.yaml site.hs $(wildcard src/*.hs)
 	stack build 
 	touch $@
 
-site-build: $(SETUP) $(NPM_INSTALL) $(STACK_BUILD) $(NPM_BUILD)
+site-build: $(SETUP) $(NPM_INSTALL) $(STACK_BUILD) $(NPM_BUILD) out/manifest.json posts/*.md
 	stack exec -- site build
+site-rebuild: $(SETUP) $(NPM_INSTALL) $(STACK_BUILD) $(NPM_BUILD) out/manifest.json posts/*.md
+	stack exec -- site rebuild
 
 serve: $(STACK_BUILD)
 	stack exec -- site server --host 0.0.0.0
