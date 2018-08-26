@@ -4,10 +4,10 @@
 .PHONY: nodrafts rebuild clean clean-wp clean-site site-build site-rebuild prettier
 
 SETUP=.done.setup
-YARN_INSTALL=.done.npm-install
+YARN_INSTALL= .done.npm-install
 
 STACK_BUILD = .done.stack-build
-YARN_BUILD = out/manifest.json
+YARN_BUILD = .done.yarn-build
 
 all: site-build
 
@@ -32,7 +32,7 @@ $(YARN_INSTALL): package.json
 	yarn install
 	touch $@
 
-$(YARN_BUILD): $(YARN_INSTALL) $(wildcard css/*)
+$(YARN_BUILD): $(YARN_INSTALL) webpack.config.js postcss.config.js $(wildcard css/*)
 	yarn run build
 	touch $@
 
@@ -40,9 +40,9 @@ $(STACK_BUILD): package.yaml stack.yaml site.hs $(wildcard src/*.hs)
 	stack build 
 	touch $@
 
-site-build: $(SETUP) $(YARN_INSTALL) $(STACK_BUILD) $(YARN_BUILD) out/manifest.json posts/*.md
+site-build: $(SETUP) $(YARN_INSTALL) $(STACK_BUILD) $(YARN_BUILD) posts/*.md
 	stack exec -- site build
-site-rebuild: $(SETUP) $(YARN_INSTALL) $(STACK_BUILD) $(YARN_BUILD) out/manifest.json posts/*.md
+site-rebuild: $(SETUP) $(YARN_INSTALL) $(STACK_BUILD) $(YARN_BUILD) posts/*.md
 	stack exec -- site rebuild
 
 watchexec-%:

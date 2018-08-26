@@ -19,8 +19,8 @@ $mono-enh-fonts: "Iosevka", $mono-base-fonts;
 @font-face {
   font-family: "Iosevka";
   src:  url("../fonts/iosevka-italic.woff2") format("woff2"),
-	url("../fonts/iosevka-italic.woff") format("woff"),
-	url("../fonts/iosevka-italic.otf") format("opentype");
+        url("../fonts/iosevka-italic.woff") format("woff"),
+        url("../fonts/iosevka-italic.otf") format("opentype");
   font-weight: normal;
   font-style: italic;
 }
@@ -37,8 +37,8 @@ $mono-enh-fonts: "Iosevka", $mono-base-fonts;
 @font-face {
   font-family: "Iosevka";
   src:  url("../fonts/iosevka-bolditalic.woff2") format("woff2"),
-	url("../fonts/iosevka-bolditalic.woff") format("woff"),
-	url("../fonts/iosevka-bolditalic.otf") format("opentype");
+        url("../fonts/iosevka-bolditalic.woff") format("woff"),
+        url("../fonts/iosevka-bolditalic.otf") format("opentype");
   font-weight: bold;
   font-style: italic;
 }
