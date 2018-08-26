@@ -1,11 +1,13 @@
-$sans-base-fonts: verdana, sans-serif;
-$sans-enh-fonts: SourceSansPro, $sans-base-fonts;
+:root {
+--sans-base-fonts: verdana, sans-serif;
+--sans-enh-fonts: SourceSansPro, var(--sans-base-fonts);
 
-$title-base-fonts: $sans-base-fonts;
-$title-enh-fonts: GidoleRegular, $title-base-fonts;
+--title-base-fonts: var(--sans-base-fonts);
+--title-enh-fonts: GidoleRegular, var(--title-base-fonts);
 
-$mono-base-fonts: Menlo, Consolas, "Liberation Mono",Courier,monospace;
-$mono-enh-fonts: "Iosevka", $mono-base-fonts;
+--mono-base-fonts: Menlo, Consolas, "Liberation Mono",Courier,monospace;
+--mono-enh-fonts: "Iosevka", var(--mono-base-fonts);
+}
 
 @font-face {
   font-family: "Iosevka";
