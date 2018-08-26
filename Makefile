@@ -4,16 +4,16 @@
 .PHONY: nodrafts rebuild clean clean-wp clean-site site-build site-rebuild
 
 SETUP=.done.setup
-NPM_INSTALL=.done.npm-install
+YARN_INSTALL=.done.npm-install
 
 STACK_BUILD = .done.stack-build
-NPM_BUILD = out/manifest.json
+YARN_BUILD = out/manifest.json
 
 all: site-build
 
 clean: clean-wp clean-flags clean-site
 clean-flags:
-	rm -f $(SETUP) $(NPM_INSTALL)
+	rm -f $(SETUP) $(YARN_INSTALL)
 
 clean-wp:
 	rm -rf out
@@ -28,21 +28,21 @@ $(SETUP):
 	stack setup
 	touch $@
 
-$(NPM_INSTALL): package.json
-	npm install
+$(YARN_INSTALL): package.json
+	yarn install
 	touch $@
 
-$(NPM_BUILD): $(NPM_INSTALL) $(wildcard css/*)
-	npm run build
+$(YARN_BUILD): $(YARN_INSTALL) $(wildcard css/*)
+	yarn run build
 	touch $@
 
 $(STACK_BUILD): package.yaml stack.yaml site.hs $(wildcard src/*.hs)
 	stack build 
 	touch $@
 
-site-build: $(SETUP) $(NPM_INSTALL) $(STACK_BUILD) $(NPM_BUILD) out/manifest.json posts/*.md
+site-build: $(SETUP) $(YARN_INSTALL) $(STACK_BUILD) $(YARN_BUILD) out/manifest.json posts/*.md
 	stack exec -- site build
-site-rebuild: $(SETUP) $(NPM_INSTALL) $(STACK_BUILD) $(NPM_BUILD) out/manifest.json posts/*.md
+site-rebuild: $(SETUP) $(YARN_INSTALL) $(STACK_BUILD) $(YARN_BUILD) out/manifest.json posts/*.md
 	stack exec -- site rebuild
 
 watchexec-%:
