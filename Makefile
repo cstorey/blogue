@@ -1,7 +1,7 @@
 # 
 
 
-.PHONY: nodrafts rebuild clean clean-wp clean-site site-build site-rebuild
+.PHONY: nodrafts rebuild clean clean-wp clean-site site-build site-rebuild prettier
 
 SETUP=.done.setup
 YARN_INSTALL=.done.npm-install
@@ -50,3 +50,7 @@ watchexec-%:
 
 serve: $(STACK_BUILD)
 	stack exec -- site server --host 0.0.0.0
+
+
+prettier:
+	yarn run prettier
