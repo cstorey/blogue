@@ -1,14 +1,14 @@
-@import "normalize.scss";
+@import "normalize.css";
 @import "pygments.css";
 
-@import "fonts.scss";
+@import "fonts.css";
 /* @import "monochrome.css"; */
 
 $bg-colour: hsla(0,0%,100%, 100%);
 $light-bg: hsl(240,50%,97.5%);
 $text-colour: hsl(0, 0%, 0%);
 $text-width: 40rem;
-$text-breakpoint: ($text-width + 2);
+$text-breakpoint: calc($text-width + 2rem);
 $lowlight-colour: #555;
 
 body {
@@ -148,7 +148,7 @@ html { height: 100% }
     }
 
     #attribution {
-	padding: 0.75rem 0px 0.75rem 0px;
+        padding: 0.75rem 0px 0.75rem 0px;
       width:100%;
     }
 
