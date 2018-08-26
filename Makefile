@@ -45,5 +45,8 @@ site-build: $(SETUP) $(NPM_INSTALL) $(STACK_BUILD) $(NPM_BUILD) out/manifest.jso
 site-rebuild: $(SETUP) $(NPM_INSTALL) $(STACK_BUILD) $(NPM_BUILD) out/manifest.json posts/*.md
 	stack exec -- site rebuild
 
+watchexec-%:
+	watchexec -- $(MAKE) $*
+
 serve: $(STACK_BUILD)
 	stack exec -- site server --host 0.0.0.0
