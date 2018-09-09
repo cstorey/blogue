@@ -1,8 +1,8 @@
 ---
 date: '2018-09-07'
 orig_url: null
-title: "Streaming Histograms"
-description: 'Witty subheading'
+title: "Streaming Approximate Histograms"
+description: 'Self Driving Buckets'
 ---
 
 This week, one of my co-workers gave a short talk on monitoring with prometheus. So, naturally, my thoughts ended up towards how to compute histograms over streaming data.<!--more-->
