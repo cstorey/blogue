@@ -18,7 +18,7 @@ PYTHON = $(PY_VENV)/bin/python
 
 all: site-build
 
-clean: clean-wp clean-flags clean-site
+clean: clean-wp clean-flags clean-site clean-gen
 clean-flags:
 	rm -f $(SETUP) $(YARN_INSTALL)
 
@@ -27,6 +27,8 @@ clean-wp:
 
 clean-site:
 	rm -rf _site _cache
+clean-gen:
+	rm -rf $(PY_SVGS)
 
 nodrafts: 
 	find posts -type l -exec rm -vf {} \+
