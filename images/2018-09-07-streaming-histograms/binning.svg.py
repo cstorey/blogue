@@ -15,12 +15,17 @@ axes_offset = 64
 chart_height=height-2* axes_offset
 chart_width=width-2* axes_offset
 
-pix=chart_width*1/4
 basey=chart_height
+p0x=chart_width*1/8
+m0y=chart_height*2.5/4
+p1x=chart_width*2/8
+m1y=chart_height*3.5/4
+p2x=p1x + chart_width/8
+pix=chart_width*5/8
 miy=chart_height*3/4
-pbx=chart_width*2/4
+pbx=chart_width*6/8
 mby=chart_height*2/4
-pjx=chart_width*3/4
+pjx=chart_width*7/8
 mjy=chart_height*1/4
 bin_width = chart_width*1/8
 
@@ -69,6 +74,18 @@ y_labels = S.g(
 x_labels = S.g(
   dict(transform="translate({}, {})".format(0, chart_height)),
   S.text(
+    dict(y=str(axes_offset/4), x=str(p0x)),
+    "P0",
+  ),
+  S.text(
+    dict(y=str(axes_offset/4), x=str(p1x)),
+    "P1",
+  ),
+  S.text(
+    dict(y=str(axes_offset/4), x=str(p2x)),
+    "...",
+  ),
+  S.text(
     dict(y=str(axes_offset/4), x=str(pix)),
     "Pi",
   ),
@@ -84,6 +101,14 @@ x_labels = S.g(
 # Bins
 
 bins = S.g(
+  S.line(
+    dict(id="bin-0", stroke="black"),
+	 x1=str(p0x), y1=str(basey),
+	 x2=str(p0x), y2=str(m0y)),
+  S.line(
+    dict(id="bin-1", stroke="black"),
+	 x1=str(p1x), y1=str(basey),
+	 x2=str(p1x), y2=str(m1y)),
   S.line(
     dict(id="bin-i", stroke="black"),
 	 x1=str(pix), y1=str(basey),
