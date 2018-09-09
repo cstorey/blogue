@@ -20,7 +20,7 @@ all: site-build
 
 clean: clean-wp clean-flags clean-site clean-gen
 clean-flags:
-	rm -f $(SETUP) $(YARN_INSTALL)
+	rm -f $(wildcard .done.*)
 
 clean-wp:
 	rm -rf out
@@ -45,7 +45,11 @@ $(YARN_BUILD): $(YARN_INSTALL) webpack.config.js postcss.config.js $(wildcard cs
 	yarn run build
 	touch $@
 
-$(STACK_BUILD): package.yaml stack.yaml site.hs $(wildcard src/*.hs)
+# Assert that the file was created by the $(YARN_BUILD) rule.
+out/manifest.json: $(YARN_BUILD)
+	test -f $@
+
+$(STACK_BUILD): $(SETUP) package.yaml stack.yaml site.hs $(wildcard src/*.hs)
 	stack build 
 	touch $@
 
@@ -61,7 +65,7 @@ $(PY_SVGS): %.svg : %.svg.py $(PY_SETUP)
 	$(PYTHON) $< > "$$tmp" && \
 	mv -v "$$tmp" $@
 
-site-build site-rebuild: site-%: $(SETUP) $(YARN_INSTALL) $(STACK_BUILD) $(YARN_BUILD) out/manifest.json posts/*.md $(PY_SVGS)
+site-build site-rebuild: site-%: $(STACK_BUILD) $(YARN_BUILD) posts/*.md $(PY_SVGS)
 	stack exec -- site $*
 
 watchexec-%:
