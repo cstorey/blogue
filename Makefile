@@ -8,6 +8,13 @@ YARN_INSTALL= .done.npm-install
 
 STACK_BUILD = .done.stack-build
 YARN_BUILD = .done.yarn-build
+PY_SETUP = .done.py-setup
+
+PY_SVG_GEN = $(wildcard images/*/*.svg.py)
+PY_SVGS = $(patsubst %.svg.py,%.svg,$(PY_SVG_GEN))
+
+PY_VENV = ./.venv
+PYTHON = $(PY_VENV)/bin/python
 
 all: site-build
 
@@ -40,9 +47,19 @@ $(STACK_BUILD): package.yaml stack.yaml site.hs $(wildcard src/*.hs)
 	stack build 
 	touch $@
 
-site-build: $(SETUP) $(YARN_INSTALL) $(STACK_BUILD) $(YARN_BUILD) posts/*.md
+$(PYTHON):
+	virtualenv -p python2 $(PY_VENV)
+
+$(PY_SETUP): $(PYTHON) requirements.txt
+	$(PY_VENV)/bin/pip install -r requirements.txt
+	touch $@
+
+$(PY_SVGS): %.svg : %.svg.py $(PY_SETUP)
+	$(PYTHON) $< > /tmp/make-$$$$ && mv -v /tmp/make-$$$$ $@
+
+site-build: $(SETUP) $(YARN_INSTALL) $(STACK_BUILD) $(YARN_BUILD) out/manifest.json posts/*.md $(PY_SVGS)
 	stack exec -- site build
-site-rebuild: $(SETUP) $(YARN_INSTALL) $(STACK_BUILD) $(YARN_BUILD) posts/*.md
+site-rebuild: $(SETUP) $(YARN_INSTALL) $(STACK_BUILD) $(YARN_BUILD) out/manifest.json posts/*.md $(PY_SVGS)
 	stack exec -- site rebuild
 
 watchexec-%:
@@ -54,3 +71,4 @@ serve: $(STACK_BUILD)
 
 prettier:
 	yarn run prettier
+
