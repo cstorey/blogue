@@ -15,6 +15,15 @@ axes_offset = 64
 chart_height=height-2* axes_offset
 chart_width=width-2* axes_offset
 
+pix=chart_width*1/4
+basey=chart_height
+miy=chart_height*3/4
+pbx=chart_width*2/4
+mby=chart_height*2/4
+pjx=chart_width*3/4
+mjy=chart_height*1/4
+bin_width = chart_width*1/8
+
 svg = S.svg(dict(width=str(width), height=str(height)))
 
 svg.append(
@@ -34,77 +43,79 @@ svg.append(
   )
 )
 
-# Main chart area
-svg.append(
-  S.g(
-    dict(transform="translate({}, {})".format(axes_offset, axes_offset)),
-    # Axes
-    S.path(
-      d="M 0,0 L 0,{height} L {width},{height}".format(height=chart_height, width=chart_width),
-      stroke="black", fill="none"),
-    # Y labels
-    S.g(
-      dict(transform="translate({}, {})".format(-axes_offset, 0)),
-      S.text(
-	dict(x=str(axes_offset/4), y=str(chart_height*1/4)),
-	"Mi+1",
-      ),
-      S.text(
-	dict(x=str(axes_offset/4), y=str(chart_height*2/4)),
-	"Mb",
-      ),
-      S.text(
-	dict(x=str(axes_offset/4), y=str(chart_height*3/4)),
-	"Mi",
-      ),
-    ),
-    # X labels
-    S.g(
-      dict(transform="translate({}, {})".format(0, chart_height)),
-      S.text(
-	dict(y=str(axes_offset/4), x=str(chart_width*1/4)),
-	"Pi+1",
-      ),
-      S.text(
-	dict(y=str(axes_offset/4), x=str(chart_width*2/4)),
-	"Pb",
-      ),
-      S.text(
-	dict(y=str(axes_offset/4), x=str(chart_width*3/4)),
-	"Pi",
-      ),
-    ),
-    # Bins
-    S.g(
-      S.line(
-	dict(id="bin-i", stroke="black"),
-	     x1=str(chart_width*1/4), y1=str(chart_height),
-	     x2=str(chart_width*1/4), y2=str(chart_height*3/4)),
-      S.line(
-	dict(id="bin-i+1", stroke="black"),
-	     x1=str(chart_width*3/4), y1=str(chart_height),
-	     x2=str(chart_width*3/4), y2=str(chart_height*1/4)),
-      S.rect(
-	dict(id="rect-i", fill="hsla(96, 100%, 50%, 0.2)"),
-	     x=str(chart_width*1/8), width=str((chart_width*1/4)),
-	     y=str(chart_height*3/4), height=str(chart_height*1/4)),
-      S.rect(
-	dict(id="rect-i", fill="url(#diagonalHatch)"),
-	     x=str(chart_width*1/8), width=str((chart_width*1/8)),
-	     y=str(chart_height*3/4), height=str(chart_height*1/4)),
-      S.polygon(
-	dict(id="trapezoid-i-b", fill="hsla(248, 100%, 50%, 0.2)"),
-	points="{pix},{basey} {pix},{mix} {pbx},{mby} {pbx},{basey}".format(
-	  pix=chart_width*1/4,
-	  basey=chart_height,
-	  mix=chart_height*3/4,
-	  pbx=chart_width*2/4,
-	  mby=chart_height*2/4,
-	),
-      )
-    ),
+# Axes
+axes = S.path(
+    d="M 0,0 L 0,{height} L {width},{height}".format(
+      height=chart_height, width=chart_width),
+    stroke="black", fill="none")
+# Y labels
+y_labels = S.g(
+  dict(transform="translate({}, {})".format(-axes_offset, 0)),
+  S.text(
+    dict(x=str(axes_offset/4), y=str(miy)),
+    "Mi",
+  ),
+  S.text(
+    dict(x=str(axes_offset/4), y=str(mby)),
+    "Mb",
+  ),
+  S.text(
+    dict(x=str(axes_offset/4), y=str(mjy)),
+    "Mi+1",
   ),
 )
+
+# X labels
+x_labels = S.g(
+  dict(transform="translate({}, {})".format(0, chart_height)),
+  S.text(
+    dict(y=str(axes_offset/4), x=str(pix)),
+    "Pi",
+  ),
+  S.text(
+    dict(y=str(axes_offset/4), x=str(pbx)),
+    "Pb",
+  ),
+  S.text(
+    dict(y=str(axes_offset/4), x=str(pjx)),
+    "Pi+1",
+  ),
+)
+# Bins
+
+bins = S.g(
+  S.line(
+    dict(id="bin-i", stroke="black"),
+	 x1=str(pix), y1=str(basey),
+	 x2=str(pix), y2=str(miy)),
+  S.line(
+    dict(id="bin-i+1", stroke="black"),
+	 x1=str(pjx), y1=str(basey),
+	 x2=str(pjx), y2=str(mjy)),
+  S.rect(
+    dict(id="rect-i", fill="hsla(96, 100%, 50%, 0.2)"),
+	 x=str(pix-(bin_width/2)), width=str(bin_width),
+	 y=str(miy), height=str(chart_height-miy)),
+  S.rect(
+    dict(id="rect-i", fill="url(#diagonalHatch)"),
+	 x=str(pix-(bin_width/2)), width=str(bin_width/2),
+	 y=str(miy), height=str(chart_height-miy)),
+  S.polygon(
+    dict(id="trapezoid-i-b", fill="hsla(248, 100%, 50%, 0.2)"),
+    points="{pix},{basey} {pix},{miy} {pbx},{mby} {pbx},{basey}".format(
+      pix=pix, basey=basey,miy=miy,pbx=pbx,mby=mby,
+    ),
+  )
+)
+# Main chart area
+chart_area = S.g(
+  dict(transform="translate({}, {})".format(axes_offset, axes_offset)),
+  axes,
+  y_labels,
+  x_labels,
+  bins,
+)
+svg.append(chart_area)
 
 #images = []
 #for x in xrange(4):
