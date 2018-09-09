@@ -27,7 +27,6 @@ We find a new center for the new bucket, by taking an average of the old bucket 
 
 ... TODO: How do we get <= buckets from centroids
 
-![...](/images/2018-09-07-streaming-histograms/trapezoid.svg)
 ![...](/images/2018-09-07-streaming-histograms/binning.svg)
 
 
