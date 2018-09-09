@@ -91,7 +91,7 @@ x_labels = S.g(
   ),
   S.text(
     dict(y=str(axes_offset/4), x=str(pbx)),
-    "Pb",
+    "b",
   ),
   S.text(
     dict(y=str(axes_offset/4), x=str(pjx)),
