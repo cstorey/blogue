@@ -57,7 +57,9 @@ $(PY_SETUP): $(PYTHON) requirements.txt
 	touch $@
 
 $(PY_SVGS): %.svg : %.svg.py $(PY_SETUP)
-	$(PYTHON) $< > /tmp/make-$$$$ && mv -v /tmp/make-$$$$ $@
+	tmp=$$(mktemp) && \
+	$(PYTHON) $< > "$$tmp" && \
+	mv -v "$$tmp" $@
 
 site-build site-rebuild: site-%: $(SETUP) $(YARN_INSTALL) $(STACK_BUILD) $(YARN_BUILD) out/manifest.json posts/*.md $(PY_SVGS)
 	stack exec -- site $*
