@@ -1,5 +1,6 @@
 @import "normalize.css";
 @import "pygments.css";
+@import "katex/dist/katex.css";
 
 @import "fonts.css";
 /* @import "monochrome.css"; */

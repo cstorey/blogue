@@ -15,7 +15,6 @@ const plugins = [
 module.exports = {
   entry: [
     path.resolve(__dirname, "css/default.css"),
-    path.resolve(__dirname, "js/default.js"),
   ],
   optimization: {
     minimizer: [
