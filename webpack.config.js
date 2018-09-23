@@ -1,12 +1,13 @@
 const path = require("path");
 const webpack = require("webpack");
 const ManifestPlugin = require("webpack-manifest-plugin");
-const ExtractTextPlugin = require("extract-text-webpack-plugin");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+
 
 const common_chunk = "common";
 
 const plugins = [
-  new ExtractTextPlugin({
+  new MiniCssExtractPlugin({
     filename: "[name].[chunkhash].[contenthash].css"
   }),
   new ManifestPlugin()
@@ -21,12 +22,11 @@ module.exports = {
     rules: [
       {
         test: /\.css$/,
-        use: ExtractTextPlugin.extract({
-          use: [
+        use: [
+          MiniCssExtractPlugin.loader,
             { loader: "css-loader", options: { importLoaders: 0 } },
             "postcss-loader"
           ]
-        })
       },
       {
         test: /\.woff2?$|\.ttf$|\.otf$|\.svg$/,
