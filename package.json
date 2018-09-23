@@ -28,6 +28,7 @@
     "webpack-manifest-plugin": "^1.3.2"
   },
   "dependencies": {
+    "katex": "^0.10.0-rc.1",
     "postcss-loader": "^3.0.0",
     "prettier": "^1.14.2",
     "prettify": "^0.1.7"

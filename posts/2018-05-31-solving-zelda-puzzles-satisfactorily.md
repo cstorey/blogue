@@ -24,9 +24,8 @@ So, given that we know the grid size and fan locations ahead of time, we can not
 
 ![two cell layout](/images/2018-05-31-solving-zelda-puzzles-satisfactorily/two-cells-layout.svg)
 as follows:
-```
-Fan(0, 0, E) => Turbine(1, 0)
-```
+
+$$ Fan(0, 0, E) \vdash Turbine(1, 0) $$
 
 ie: A fan at `0, 0` will propel the turbine at `1, 0`.
 Now, in a setup with two fans, say another one at `(3, 0)`:
@@ -36,11 +35,9 @@ Now, in a setup with two fans, say another one at `(3, 0)`:
 
 Can be expressed as:
 
-```
-Fan(0, 0, E) => Turbine(1, 0) & Turbine(3, 0)
-Fan(2, 0, E) => Turbine(3, 0)
-Fan(2, 0, W) => Turbine(1, 0)
-```
+$$ Fan(0, 0, E) \vdash Turbine(1, 0) \land Turbine(3, 0) $$
+$$ Fan(2, 0, E) \vdash Turbine(3, 0) $$
+$$ Fan(2, 0, W) \vdash Turbine(1, 0) $$
 
 (the ordering of the turbines here doesn't particularly matter; it's mostly included for convenience).
 

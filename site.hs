@@ -7,6 +7,8 @@ import           Data.Aeson
 import           System.Process (readProcess)
 import qualified Data.ByteString.Lazy as B
 import           System.IO.Unsafe (unsafePerformIO)
+import qualified Data.Set as S
+import           Text.Pandoc.Options
 
 --------------------------------------------------------------------------------
 
@@ -58,7 +60,7 @@ main = do
 
     match (fromList ["about.md"]) $ do
         route   $ setExtension "html"
-        compile $ pandocCompiler
+        compile $ thePandocCompiler
             >>= loadAndApplyTemplate "templates/page.html"    postCtx
             >>= loadAndApplyTemplate "templates/default.html" mainContext
             >>= updateFromManifest manifest
@@ -66,7 +68,7 @@ main = do
 
     match "posts/*" $ do
         route $ setExtension "html"
-        compile $ pandocCompiler
+        compile $ thePandocCompiler
             >>= saveSnapshot "content"
             >>= loadAndApplyTemplate "templates/post.html"    postCtx
             >>= loadAndApplyTemplate "templates/default.html" postCtx
@@ -116,6 +118,19 @@ main = do
             renderAtom myFeedConfiguration feedCtx posts
 
 
+thePandocCompiler = pandocCompilerWith readerOptions writerOptions
+    where
+        mathExtensions = extensionsFromList [
+                          Ext_tex_math_dollars,
+                          Ext_tex_math_double_backslash,
+                          Ext_latex_macros]
+        defaultExtensions = writerExtensions defaultHakyllWriterOptions
+        newExtensions = defaultExtensions `mappend` mathExtensions
+        writerOptions = defaultHakyllWriterOptions {
+                          writerExtensions = newExtensions
+                          , writerHTMLMathMethod =  KaTeX  "https://nonexistent.example/"
+                        }
+        readerOptions = defaultHakyllReaderOptions { readerExtensions = newExtensions }
 
 --------------------------------------------------------------------------------
 postCtx :: Context String
