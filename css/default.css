@@ -157,8 +157,15 @@ html { height: 100% }
 
   }
 
-  .figure img {
-    max-width: 100%;
+  figure {
+    margin: 1em 40px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-direction: column;
+    img {
+      max-width: 100%;
+    }
   }
 
   h1 {
