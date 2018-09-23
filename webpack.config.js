@@ -3,7 +3,6 @@ const webpack = require("webpack");
 const ManifestPlugin = require("webpack-manifest-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
-const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
 
 const plugins = [
   new MiniCssExtractPlugin({
@@ -18,11 +17,6 @@ module.exports = {
   ],
   optimization: {
     minimizer: [
-      new UglifyJsPlugin({
-        cache: true,
-        parallel: true,
-        sourceMap: true // set to true if you want JS source maps
-      }),
       new OptimizeCSSAssetsPlugin({})
     ]
   },
@@ -49,8 +43,6 @@ module.exports = {
   output: {
     path: path.join(__dirname, "out"),
     filename: "[name].[chunkhash].js",
-    libraryTarget: 'var',
-    library: 'EntryPoint'
   },
   plugins: plugins
 };
