@@ -23,7 +23,6 @@ So, given that we know the grid size and fan locations ahead of time, we can not
 
 
 ![two cell layout](/images/2018-05-31-solving-zelda-puzzles-satisfactorily/two-cells-layout.svg)
-as follows:
 
 $$ Fan(0, 0, E) \vdash Turbine(1, 0) $$
 
@@ -32,24 +31,27 @@ Now, in a setup with two fans, say another one at `(3, 0)`:
 
 ![four cell layout](/images/2018-05-31-solving-zelda-puzzles-satisfactorily/four-cells-layout.svg)
 
-
 Can be expressed as:
 
-$$ Fan(0, 0, E) \vdash Turbine(1, 0) \land Turbine(3, 0) $$
-$$ Fan(2, 0, E) \vdash Turbine(3, 0) $$
-$$ Fan(2, 0, W) \vdash Turbine(1, 0) $$
+$$
+\begin{aligned}
+    Fan(0, 0, E) &\vdash Turbine(1, 0) \land Turbine(3, 0) \\
+    Fan(2, 0, E) &\vdash Turbine(3, 0) \\
+    Fan(2, 0, W) &\vdash Turbine(1, 0) \\
+\end{aligned}
+$$
 
 (the ordering of the turbines here doesn't particularly matter; it's mostly included for convenience).
 
 Now, this is fine, but there's one small hitch; our solver will only accept input in Conjunective Normal Form (CNF for short). so, we can say that "(A ∨ ¬B) ∧ (A ∨ B)", for example. However, because we know that all of the turbines have to be spinning, we don't need to explicitly denote them in the description we pass to the solver (ie: we don't need to create variables for them), we can simply assert the conditions that make them up. In this case, this would be a union of the fans that blowing over that given position.
 
-```
-# Turbine(1, 0)
-Fan(0, 0, E) ∨ Fan(2, 0, W)
-# Turbine(3, 0)
-Fan(0, 0, E) ∨ Fan(2, 0, E)
-...
-```
+$$
+\begin{aligned}
+Fan(0, 0, E) &\lor Fan(2, 0, W) \\
+Fan(0, 0, E) &\lor Fan(2, 0, E) \\
+&\dots
+\end{aligned}
+$$
 
 And so on. as you can tell, this can get quite tedious to do by hand. Happily, we can make the computer do the boring bits for us. I've used the library [pycryptosat](https://pypi.org/project/pycryptosat/) to do this. I'm not going to include snippets here, since the code I wrote is hardly exemplary, but can be found [in a gist](https://gist.github.com/cstorey/05e94f825362defd5a04a1699322ca5e).
 
