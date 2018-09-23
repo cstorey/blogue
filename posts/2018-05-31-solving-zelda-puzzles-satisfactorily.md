@@ -5,13 +5,13 @@ title: "Solving Zelda Puzzles Satisfactorily"
 description: 'The other kind of laziness'
 ---
 
-In the game Breath of the Wild, there's a puzzle which involves a set of fans and turbines in a 4x5 grid, and you must position the fans in order ensure all of the turbines are spinning. Unfortunately, I've never really had much patience for solving this kind of logic puzzle the old fashioned way, so given that computers are good at this sort of thing, I thought I'd try that.<!--more--> 
+In the game Breath of the Wild, there's a puzzle which involves a set of fans and turbines in a 4x5 grid, and you must position the fans in order ensure all of the turbines are spinning. Unfortunately, I've never really had much patience for solving this kind of logic puzzle the old fashioned way, so given that computers are good at this sort of thing, I thought I'd try that.<!--more-->
 
 Now, we can express this problem as a boolean algebra problem. Given that we have some set of variables and some constraints (ie: the fan positions and directions), how do we ensure all of these variables are set to true?
 
 Happily, this kind of problem can be given to a [Satisfiability solver](https://en.wikipedia.org/wiki/Boolean_satisfiability_problem) to solve. The only remaining question is ... how do we teach it to solve the problem?
 
-So, we know that in our problem, each fan can only ever be facing in one direction at once. 
+So, we know that in our problem, each fan can only ever be facing in one direction at once.
 
 ![Puzzle layout](/images/2018-05-31-solving-zelda-puzzles-satisfactorily/Puzzle Layout.svg)
 
@@ -62,8 +62,8 @@ class Fan(object):
         fvar = next_free_var(solver)
 	# North, East, South and West are just offsets into our list of variables.
         self.nesw = range(fvar, fvar+4)
-        
-	# Then for each pair of directions, assert that they cannot both be set. 
+
+	# Then for each pair of directions, assert that they cannot both be set.
 	# We assert that ¬(d0 ∧ d1); which via De-Morgan's laws, can be written as:
 	# (¬d0 ∨ ¬d1).
 	# This commutes, so (¬d0 ∨ ¬d1) is the same as (¬d1 ∨ ¬d0), and we can avoid
