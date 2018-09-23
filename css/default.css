@@ -168,6 +168,11 @@ html { height: 100% }
     }
   }
 
+  .katex {
+    font-size: 1em;
+    line-height: 1;
+  }
+
   h1 {
       font-size: 1.5rem;
   }
