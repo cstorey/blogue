@@ -13,7 +13,10 @@ const plugins = [
 ];
 
 module.exports = {
-  entry: path.resolve(__dirname, "css/default.css"),
+  entry: [
+    path.resolve(__dirname, "css/default.css"),
+    path.resolve(__dirname, "js/default.js"),
+  ],
   module: {
     rules: [
       {
@@ -37,7 +40,9 @@ module.exports = {
   },
   output: {
     path: path.join(__dirname, "out"),
-    filename: "[name].[chunkhash].js"
+    filename: "[name].[chunkhash].js",
+    libraryTarget: 'var',
+    library: 'EntryPoint'
   },
   plugins: plugins
 };

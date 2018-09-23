@@ -1,4 +1,4 @@
-# 
+#
 
 
 .PHONY: nodrafts rebuild clean clean-wp clean-site site-build site-rebuild prettier
@@ -30,7 +30,7 @@ clean-site:
 clean-gen:
 	rm -rf $(PY_SVGS)
 
-nodrafts: 
+nodrafts:
 	find posts -type l -exec rm -vf {} \+
 
 $(SETUP):
@@ -41,7 +41,7 @@ $(YARN_INSTALL): package.json
 	yarn install
 	touch $@
 
-$(YARN_BUILD): $(YARN_INSTALL) webpack.config.js postcss.config.js $(wildcard css/*)
+$(YARN_BUILD): $(YARN_INSTALL) webpack.config.js postcss.config.js $(wildcard css/*) $(wildcard js/*)
 	yarn run build
 	touch $@
 
@@ -50,7 +50,7 @@ out/manifest.json: $(YARN_BUILD)
 	test -f $@
 
 $(STACK_BUILD): $(SETUP) package.yaml stack.yaml site.hs $(wildcard src/*.hs)
-	stack build 
+	stack build
 	touch $@
 
 $(PYTHON):
