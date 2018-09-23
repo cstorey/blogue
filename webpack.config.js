@@ -2,9 +2,8 @@ const path = require("path");
 const webpack = require("webpack");
 const ManifestPlugin = require("webpack-manifest-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-
-
-const common_chunk = "common";
+const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
+const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
 
 const plugins = [
   new MiniCssExtractPlugin({
@@ -18,6 +17,16 @@ module.exports = {
     path.resolve(__dirname, "css/default.css"),
     path.resolve(__dirname, "js/default.js"),
   ],
+  optimization: {
+    minimizer: [
+      new UglifyJsPlugin({
+        cache: true,
+        parallel: true,
+        sourceMap: true // set to true if you want JS source maps
+      }),
+      new OptimizeCSSAssetsPlugin({})
+    ]
+  },
   module: {
     rules: [
       {
