@@ -43,7 +43,7 @@ $$
 
 (the ordering of the turbines here doesn't particularly matter; it's mostly included for convenience).
 
-Now, this is fine, but there's one small hitch; our solver will only accept input in Conjunective Normal Form (CNF for short). so, we can say that "(A ∨ ¬B) ∧ (A ∨ B)", for example. However, because we know that all of the turbines have to be spinning, we don't need to explicitly denote them in the description we pass to the solver (ie: we don't need to create variables for them), we can simply assert the conditions that make them up. In this case, this would be a union of the fans that blowing over that given position.
+Now, this is fine, but there's one small hitch; our solver will only accept input in Conjunective Normal Form (CNF for short). so, we can say that $(A \lor \lnot B) \land (A \lor B)$, for example. However, because we know that all of the turbines have to be spinning, we don't need to explicitly denote them in the description we pass to the solver (ie: we don't need to create variables for them), we can simply assert the conditions that make them up. In this case, this would be a union of the fans that blowing over that given position.
 
 $$
 \begin{aligned}
