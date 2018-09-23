@@ -9,6 +9,8 @@ import qualified Data.ByteString.Lazy as B
 import           System.IO.Unsafe (unsafePerformIO)
 import qualified Data.Set as S
 import           Text.Pandoc.Options
+import           Text.Pandoc
+import qualified Data.Text as T
 
 --------------------------------------------------------------------------------
 
@@ -117,8 +119,21 @@ main = do
             posts <- fmap (take 10) . recentFirst =<< loadAll "posts/*"
             renderAtom myFeedConfiguration feedCtx posts
 
+-- https://stackoverflow.com/questions/29868096/how-to-use-pandoc-filter-within-hakyll
+transformer
+  :: String         -- e.g. "/absolute/path/filter.py"
+  -> ReaderOptions
+  -> WriterOptions
+  -> (Pandoc -> Compiler Pandoc)
+transformer script reader_opts writer_opts pandoc = do
+       let input_json = writeJSON writer_opts pandoc
+       output_json <- unixFilter script [] $ T.unpack input_json
+       return $
+          either (error.show) id $  -- this line needs to be uncommented atm.
+          readJSON reader_opts $ T.pack output_json
 
-thePandocCompiler = pandocCompilerWith readerOptions writerOptions
+
+thePandocCompiler = pandocCompilerWithTransformM readerOptions writerOptions katexFilter
     where
         mathExtensions = extensionsFromList [
                           Ext_tex_math_dollars,
@@ -131,6 +146,8 @@ thePandocCompiler = pandocCompilerWith readerOptions writerOptions
                           , writerHTMLMathMethod =  KaTeX  "https://nonexistent.example/"
                         }
         readerOptions = defaultHakyllReaderOptions { readerExtensions = newExtensions }
+        katexFilter = transformer "./pandoc-filter-katex.js" readerOptions writerOptions
+
 
 --------------------------------------------------------------------------------
 postCtx :: Context String
