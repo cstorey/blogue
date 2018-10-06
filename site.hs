@@ -68,53 +68,55 @@ main = do
         route   idRoute
         compile copyFileCompiler
 
-    match (fromList ["about.md"]) $ do
-        route   $ setExtension "html"
-        compile $ thePandocCompiler
-            >>= loadAndApplyTemplate "templates/page.html"    postCtx
-            >>= loadAndApplyTemplate "templates/default.html" mainContext
-            >>= updateFromManifest manifest
-            >>= relativizeUrls
+    manifestDep <- makePatternDependency "out/manifest.json"
+    rulesExtraDependencies [manifestDep] $ do
+      match (fromList ["about.md"]) $ do
+	  route   $ setExtension "html"
+	  compile $ thePandocCompiler
+	      >>= loadAndApplyTemplate "templates/page.html"    postCtx
+	      >>= loadAndApplyTemplate "templates/default.html" mainContext
+	      >>= updateFromManifest manifest
+	      >>= relativizeUrls
 
-    match "posts/*" $ do
-        route $ setExtension "html"
-        compile $ thePandocCompiler
-            >>= saveSnapshot "content"
-            >>= loadAndApplyTemplate "templates/post.html"    postCtx
-            >>= loadAndApplyTemplate "templates/default.html" postCtx
-            >>= updateFromManifest manifest
-            >>= relativizeUrls
+      match "posts/*" $ do
+	  route $ setExtension "html"
+	  compile $ thePandocCompiler
+	      >>= saveSnapshot "content"
+	      >>= loadAndApplyTemplate "templates/post.html"    postCtx
+	      >>= loadAndApplyTemplate "templates/default.html" postCtx
+	      >>= updateFromManifest manifest
+	      >>= relativizeUrls
 
-    create ["archive.html"] $ do
-        route idRoute
-        compile $ do
-            posts <- recentFirst =<< loadAll "posts/*"
-            let archiveCtx =
-                    listField "posts" postCtx (return posts) <>
-                    constField "title" "Archives"            <>
-                    mainContext
+      create ["archive.html"] $ do
+	  route idRoute
+	  compile $ do
+	      posts <- recentFirst =<< loadAll "posts/*"
+	      let archiveCtx =
+		      listField "posts" postCtx (return posts) <>
+		      constField "title" "Archives"            <>
+		      mainContext
 
-            makeItem ""
-                >>= loadAndApplyTemplate "templates/archive.html" archiveCtx
-                >>= loadAndApplyTemplate "templates/page.html"    postCtx
-                >>= loadAndApplyTemplate "templates/default.html" archiveCtx
-                >>= updateFromManifest manifest
-                >>= relativizeUrls
+	      makeItem ""
+		  >>= loadAndApplyTemplate "templates/archive.html" archiveCtx
+		  >>= loadAndApplyTemplate "templates/page.html"    postCtx
+		  >>= loadAndApplyTemplate "templates/default.html" archiveCtx
+		  >>= updateFromManifest manifest
+		  >>= relativizeUrls
 
-    create ["index.html"] $ do
-        route idRoute
-        compile $ do
-            posts <- fmap (take 5) $ recentFirst =<< loadAll "posts/*"
-            let archiveCtx =
-                    listField "posts" indexCtx (return posts) <>
-                    constField "title" "Home"            <>
-                    mainContext
+      create ["index.html"] $ do
+	  route idRoute
+	  compile $ do
+	      posts <- fmap (take 5) $ recentFirst =<< loadAll "posts/*"
+	      let archiveCtx =
+		      listField "posts" indexCtx (return posts) <>
+		      constField "title" "Home"            <>
+		      mainContext
 
-            makeItem ""
-                >>= loadAndApplyTemplate "templates/home.html" archiveCtx
-                >>= loadAndApplyTemplate "templates/default.html" archiveCtx
-		>>= updateFromManifest manifest
-                >>= relativizeUrls
+	      makeItem ""
+		  >>= loadAndApplyTemplate "templates/home.html" archiveCtx
+		  >>= loadAndApplyTemplate "templates/default.html" archiveCtx
+		  >>= updateFromManifest manifest
+		  >>= relativizeUrls
 
     match "templates/*" $ compile templateCompiler
 
