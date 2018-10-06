@@ -1,10 +1,13 @@
 @import "source-sans-pro/source-sans-pro.css";
+@import "source-serif-pro/source-serif-pro.css";
 @import "@typopro/web-gidole/TypoPRO-Gidole.css";
 @import "@typopro/web-iosevka/TypoPRO-Iosevka.css";
 
 :root {
---body-base-fonts: verdana, sans-serif;
---body-enh-fonts: "Source Sans Pro", var(--body-base-fonts);
+--meta-base-fonts: serif;
+--meta-enh-fonts: "Source Sans Pro", var(--meta-base-fonts);
+--body-base-fonts: serif;
+--body-enh-fonts: "Source Serif Pro", var(--body-base-fonts);
 
 --title-base-fonts: var(--body-base-fonts);
 --title-enh-fonts: TypoPRO Gidole, var(--title-base-fonts);
