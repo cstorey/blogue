@@ -39,8 +39,10 @@ mapUrl m k = res
    valp = M.lookup k m
    res = maybe k addPrefix $ valp
 
-updateFromManifest :: M.Map String String -> Item String -> Compiler (Item String)
-updateFromManifest manifest item = do
+updateFromManifest :: Item String -> Compiler (Item String)
+updateFromManifest item = do
+    manifestData <- unsafeCompiler $ B.readFile $ bundlePrefix ++ "manifest.json"
+    let manifest = (maybe M.empty id $ decode manifestData) :: M.Map String String
     route <- getRoute $ itemIdentifier item
     return $ case route of
         Nothing -> item
@@ -48,9 +50,7 @@ updateFromManifest manifest item = do
 
 main :: IO ()
 main = do
-  manifestData <- B.readFile $ bundlePrefix ++ "manifest.json"
   thePandocCompiler <- makePandocCompiler
-  let manifest = (maybe M.empty id $ decode manifestData) :: M.Map String String
   hakyll $ do
     match "images/**/*.dot" $ do
         route $ setExtension "svg"
@@ -75,7 +75,7 @@ main = do
 	  compile $ thePandocCompiler
 	      >>= loadAndApplyTemplate "templates/page.html"    postCtx
 	      >>= loadAndApplyTemplate "templates/default.html" mainContext
-	      >>= updateFromManifest manifest
+	      >>= updateFromManifest
 	      >>= relativizeUrls
 
       match "posts/*" $ do
@@ -84,7 +84,7 @@ main = do
 	      >>= saveSnapshot "content"
 	      >>= loadAndApplyTemplate "templates/post.html"    postCtx
 	      >>= loadAndApplyTemplate "templates/default.html" postCtx
-	      >>= updateFromManifest manifest
+	      >>= updateFromManifest
 	      >>= relativizeUrls
 
       create ["archive.html"] $ do
@@ -100,7 +100,7 @@ main = do
 		  >>= loadAndApplyTemplate "templates/archive.html" archiveCtx
 		  >>= loadAndApplyTemplate "templates/page.html"    postCtx
 		  >>= loadAndApplyTemplate "templates/default.html" archiveCtx
-		  >>= updateFromManifest manifest
+		  >>= updateFromManifest
 		  >>= relativizeUrls
 
       create ["index.html"] $ do
@@ -115,7 +115,7 @@ main = do
 	      makeItem ""
 		  >>= loadAndApplyTemplate "templates/home.html" archiveCtx
 		  >>= loadAndApplyTemplate "templates/default.html" archiveCtx
-		  >>= updateFromManifest manifest
+		  >>= updateFromManifest
 		  >>= relativizeUrls
 
     match "templates/*" $ compile templateCompiler
