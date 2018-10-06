@@ -1,6 +1,8 @@
+@import "../node_modules/source-sans-pro/source-sans-pro.css";
+
 :root {
 --body-base-fonts: verdana, sans-serif;
---body-enh-fonts: SourceSansPro, var(--body-base-fonts);
+--body-enh-fonts: "Source Sans Pro", var(--body-base-fonts);
 
 --title-base-fonts: var(--body-base-fonts);
 --title-enh-fonts: GidoleRegular, var(--title-base-fonts);
@@ -42,23 +44,6 @@
         url("../fonts/iosevka-bolditalic.woff") format("woff"),
         url("../fonts/iosevka-bolditalic.otf") format("opentype");
   font-weight: bold;
-  font-style: italic;
-}
-@font-face {
-  font-family: "SourceSansPro";
-  src: url("../node_modules/source-sans-pro/WOFF2/OTF/SourceSansPro-Regular.otf.woff2") format("woff2"),
-       url("../node_modules/source-sans-pro/WOFF/OTF/SourceSansPro-Regular.otf.woff") format("woff"),
-       url("../node_modules/source-sans-pro/OTF/SourceSansPro-Regular.otf") format("opentype");
-  font-weight: normal;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: "SourceSansPro";
-  src: url("../node_modules/source-sans-pro/WOFF2/OTF/SourceSansPro-It.otf.woff2") format("woff2"),
-       url("../node_modules/source-sans-pro/WOFF/OTF/SourceSansPro-It.otf.woff") format("woff"),
-       url("../node_modules/source-sans-pro/OTF/SourceSansPro-It.otf") format("opentype");
-  font-weight: normal;
   font-style: italic;
 }
 

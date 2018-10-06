@@ -31,7 +31,7 @@ module.exports = {
           ]
       },
       {
-        test: /\.woff2?$|\.ttf$|\.otf$|\.svg$/,
+        test: /\.woff2?$|\.ttf$|\.otf$|\.svg$|\.eot$/,
         use: [
           {
             loader: "file-loader"
