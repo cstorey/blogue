@@ -1,11 +1,12 @@
 @import "source-sans-pro/source-sans-pro.css";
+@import "typeface-gidole/index.css";
 
 :root {
 --body-base-fonts: verdana, sans-serif;
 --body-enh-fonts: "Source Sans Pro", var(--body-base-fonts);
 
 --title-base-fonts: var(--body-base-fonts);
---title-enh-fonts: GidoleRegular, var(--title-base-fonts);
+--title-enh-fonts: Gidole, var(--title-base-fonts);
 
 --mono-base-fonts: Menlo, Consolas, "Liberation Mono",Courier,monospace;
 --mono-enh-fonts: "Iosevka", var(--mono-base-fonts);
@@ -46,13 +47,3 @@
   font-weight: bold;
   font-style: italic;
 }
-
-@font-face {
-  font-family: "GidoleRegular";
-  src: url("../fonts/Gidole-Regular.woff2") format("woff2"),
-       url("../fonts/Gidole-Regular.woff") format("woff"),
-       url("../fonts/Gidole-Regular.otf") format("opentype");
-  font-weight: normal;
-  font-style: normal;
-}
-
