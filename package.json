@@ -32,11 +32,11 @@
     "webpack-manifest-plugin": "^2.0.4"
   },
   "dependencies": {
+    "@typopro/web-gidole": "^3.7.5",
     "katex": "^0.10.0-rc.1",
     "postcss-loader": "^3.0.0",
     "prettier": "^1.14.2",
     "prettify": "^0.1.7",
-    "source-sans-pro": "^2.20.2",
-    "typeface-gidole": "^0.0.44"
+    "source-sans-pro": "^2.20.2"
   }
 }
