@@ -10,6 +10,7 @@ import           System.IO.Unsafe (unsafePerformIO)
 import qualified Data.Set as S
 import           Text.Pandoc.Options
 import           Text.Pandoc
+import           Text.Pandoc.Walk (walkM)
 import qualified Data.Text as T
 
 --------------------------------------------------------------------------------
@@ -121,17 +122,18 @@ main = do
 
 -- https://stackoverflow.com/questions/29868096/how-to-use-pandoc-filter-within-hakyll
 transformer
-  :: String         -- e.g. "/absolute/path/filter.py"
-  -> ReaderOptions
+  :: ReaderOptions
   -> WriterOptions
   -> (Pandoc -> Compiler Pandoc)
-transformer script reader_opts writer_opts pandoc = do
-       let input_json = writeJSON writer_opts pandoc
-       output_json <- unixFilter script [] $ T.unpack input_json
-       return $
-          either (error.show) id $  -- this line needs to be uncommented atm.
-          readJSON reader_opts $ T.pack output_json
-
+transformer reader_opts writer_opts pandoc = walkM katexify pandoc
+  where
+    katexify :: Inline -> Compiler Inline
+    katexify (Math mode body) = do
+      markup <- unixFilter "./node_modules/.bin/katex" (opts mode) $ body
+      return $ RawInline (Format "html") markup
+    katexify other = return other
+    opts DisplayMath = ["-d"]
+    opts InlineMath = []
 
 thePandocCompiler = pandocCompilerWithTransformM readerOptions writerOptions katexFilter
     where
@@ -146,7 +148,7 @@ thePandocCompiler = pandocCompilerWithTransformM readerOptions writerOptions kat
                           , writerHTMLMathMethod =  KaTeX  "https://nonexistent.example/"
                         }
         readerOptions = defaultHakyllReaderOptions { readerExtensions = newExtensions }
-        katexFilter = transformer "./pandoc-filter-katex.js" readerOptions writerOptions
+        katexFilter = transformer readerOptions writerOptions
 
 
 --------------------------------------------------------------------------------
