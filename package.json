@@ -33,6 +33,7 @@
   },
   "dependencies": {
     "@typopro/web-gidole": "^3.7.5",
+    "@typopro/web-iosevka": "^3.7.5",
     "katex": "^0.10.0-rc.1",
     "postcss-loader": "^3.0.0",
     "prettier": "^1.14.2",
