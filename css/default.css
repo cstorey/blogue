@@ -55,7 +55,7 @@ html {
     background: var(--bg-colour);
     color: var(--text-colour);
     font-size: 12pt;
-    font-family: var(--sans-enh-fonts);
+    font-family: var(--body-enh-fonts);
     letter-spacing: 0.05px;
     font-weight: 300;
     text-align: justify;
@@ -202,12 +202,12 @@ html { height: 100% }
 
   .info, .subtitle, #footer {
       font-style: italic;
-      font-family: var(--sans-enh-fonts);
+      font-family: var(--body-enh-fonts);
       font-weight: 300;
   }
 
   .sans-loaded .info, .sans-loaded .subtitle, .sans-loaded #footer, html.sans-loaded {
-      font-family: var(--sans-enh-fonts);
+      font-family: var(--body-enh-fonts);
   }
 
   pre {
