@@ -3,6 +3,7 @@
 import           Data.Monoid ((<>))
 import qualified Data.Map as M
 import           Hakyll
+import           Hakyll.Core.Compiler
 import           Data.Aeson
 import           System.Process (readProcess)
 import qualified Data.ByteString.Lazy as B
@@ -12,6 +13,7 @@ import           Text.Pandoc.Options
 import           Text.Pandoc
 import           Text.Pandoc.Walk (walkM)
 import qualified Data.Text as T
+import qualified Data.Cache.LRU.IO as LRU
 
 --------------------------------------------------------------------------------
 
@@ -43,6 +45,7 @@ updateFromManifest manifest item = do
 main :: IO ()
 main = do
   manifestData <- B.readFile $ bundlePrefix ++ "manifest.json"
+  thePandocCompiler <- makePandocCompiler
   let manifest = (maybe M.empty id $ decode manifestData) :: M.Map String String
   hakyll $ do
     match "images/**/*.dot" $ do
@@ -122,20 +125,29 @@ main = do
 
 -- https://stackoverflow.com/questions/29868096/how-to-use-pandoc-filter-within-hakyll
 transformer
-  :: ReaderOptions
+  :: LRU.AtomicLRU Inline String
+  -> ReaderOptions
   -> WriterOptions
   -> (Pandoc -> Compiler Pandoc)
-transformer reader_opts writer_opts pandoc = walkM katexify pandoc
+transformer cache reader_opts writer_opts pandoc = walkM katexify pandoc
   where
     katexify :: Inline -> Compiler Inline
-    katexify (Math mode body) = do
-      markup <- unixFilter "./node_modules/.bin/katex" (opts mode) $ body
+    katexify chunk@(Math mode body) = do
+      cachedp <- unsafeCompiler $ LRU.lookup chunk cache
+      markup <- case cachedp of
+		  Just markup -> return markup
+		  Nothing -> do
+		    markup <- unixFilter "./node_modules/.bin/katex" (opts mode) $ body
+		    unsafeCompiler $ LRU.insert chunk markup cache
+		    return markup
       return $ RawInline (Format "html") markup
     katexify other = return other
     opts DisplayMath = ["-d"]
     opts InlineMath = []
 
-thePandocCompiler = pandocCompilerWithTransformM readerOptions writerOptions katexFilter
+makePandocCompiler = do
+    katexCache <- LRU.newAtomicLRU (Just 50)
+    return $ pandocCompilerWithTransformM readerOptions writerOptions (katexFilter katexCache)
     where
         mathExtensions = extensionsFromList [
                           Ext_tex_math_dollars,
@@ -148,7 +160,7 @@ thePandocCompiler = pandocCompilerWithTransformM readerOptions writerOptions kat
                           , writerHTMLMathMethod =  KaTeX  "https://nonexistent.example/"
                         }
         readerOptions = defaultHakyllReaderOptions { readerExtensions = newExtensions }
-        katexFilter = transformer readerOptions writerOptions
+        katexFilter cache = transformer cache readerOptions writerOptions
 
 
 --------------------------------------------------------------------------------
