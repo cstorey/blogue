@@ -3825,6 +3825,10 @@ source-sans-pro@^2.20.2:
   version "2.20.2"
   resolved "https://registry.yarnpkg.com/source-sans-pro/-/source-sans-pro-2.20.2.tgz#ee24a6f9680af4e05736be9c1afee3d714618782"
 
+source-serif-pro@^2.0.7:
+  version "2.0.7"
+  resolved "https://registry.yarnpkg.com/source-serif-pro/-/source-serif-pro-2.0.7.tgz#42cb815e14043610c0033a895b83c872aab26e94"
+
 split-string@^3.0.1, split-string@^3.0.2:
   version "3.1.0"
   resolved "https://registry.yarnpkg.com/split-string/-/split-string-3.1.0.tgz#7cb09dda3a86585705c64b39a6466038682e8fe2"
