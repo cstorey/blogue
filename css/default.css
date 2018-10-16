@@ -65,11 +65,6 @@ html {
 h1, h2, h3, h4, h5, h6, header, th, dt, a:link {
     font-family: var(--title-enh-fonts);
 }
-.title-loaded {
-  h1, h2, h3, h4, h5, h6, header, th, dt, a:link {
-    font-family: var(--title-enh-fonts);
-  }
-}
 
 header {
     z-index: 10;
@@ -205,10 +200,6 @@ html { height: 100% }
       font-family: var(--meta-enh-fonts);
   }
 
-  .sans-loaded .info, .sans-loaded .subtitle, .sans-loaded #footer, html.sans-loaded {
-      font-family: var(--body-enh-fonts);
-  }
-
   pre {
     white-space: pre;
     padding: 1ex;
@@ -233,10 +224,6 @@ html { height: 100% }
   code, kbd, pre, samp {
     font-family: var(--mono-enh-fonts);
     white-space: pre-wrap;
-  }
-
-  .mono-loaded code, .mono-loaded kbd, .mono-loaded pre, .mono-loaded samp {
-    font-family: var(--mono-enh-fonts);
   }
 
   th {
