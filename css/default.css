@@ -199,6 +199,9 @@ html { height: 100% }
       font-style: italic;
       font-family: var(--meta-enh-fonts);
   }
+  blockquote {
+      font-family: var(--meta-enh-fonts);
+  }
 
   pre {
     white-space: pre;
