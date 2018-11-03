@@ -6,10 +6,6 @@ description: 'When to just die quietly in a corner...'
 ---
 I've been writing a fairly significant amount of [Go](https://golang.org/) for work recently, and whilst I was fully prepared to hate it, it's basically workable. But the limited expressiveness of the language, particularly around error handling, does throw a few roadblocks in the way.<!--more-->
 
-<!--
-One thing I try to do is help folks to write code that better expresses it's intent, or put another way, describes how it supports some desired outcome (eg: buying some more teabags, say). However, It's clear that Go was designed to be picked up very quickly by average university graduates expected to write production code, but this comes at the cost of some expressiveness.
--->
-
 ## Go
 
 Go's approach to simplicity (in the sense of there's one way to do something) is clearly a big driver for the language's design. The most obvious approach of this how idiomatic Go handles errors. Here's one example [from golang.org](https://talks.golang.org/2012/splash.article#TOC_16.):
@@ -55,8 +51,8 @@ The rust compiler also has a mechanism to warn when certain types go-unused, as 
 
 Given what we've said above about there only being a few places where we want to really care about errors, this makes a reasonable trade-off between being explicit (as in Go) and the implicit approach taken with exceptions. It's possible to see that the operation can fail, but it doesn't interrupt the visual flow of the code.
 
-This is a good example of the kind of simplicity that rust focussess on, the sense of embodying a single concept well where you need it, and having it be unobtrusive otherwise.
+This is a good example of the kind of simplicity that rust focuses on, the sense of embodying a single concept well where you need it, and having it be unobtrusive otherwise.
 
 ## Conclusion
 
-Given that Go takes an awful lot from C, I can understand why it's chosen to throw error handling rignt in your face, but the absence of a built-in compiler warning for un-used error results does seem like an odd choice.
+Given that Go takes an awful lot from C, I can understand why it's chosen to throw error handling right in your face, but the absence of a built-in compiler warning for un-used error results does seem like an odd choice.
