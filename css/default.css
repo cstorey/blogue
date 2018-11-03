@@ -65,7 +65,9 @@ html {
 h1, h2, h3, h4, h5, h6, header, th, dt, a:link {
     font-family: var(--title-enh-fonts);
 }
-
+header, th, dt, a:link {
+    font-size: 0.95em;
+}
 header {
     z-index: 10;
     h1 {
@@ -227,6 +229,7 @@ html { height: 100% }
   code, kbd, pre, samp {
     font-family: var(--mono-enh-fonts);
     white-space: pre-wrap;
+    font-size: 0.95em;
   }
 
   th {
