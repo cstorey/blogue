@@ -5,9 +5,7 @@ title: "Avoiding lost updates in PostgreSQL logs"
 description: 'Ensuring the past holds no nasty surprises'
 ---
 
-One of the several things I'm [idly fiddling with](https://github.com/cstorey) is the notion of using [events as the primary record](https://martinfowler.com/eaaDev/EventSourcing.html) for an application. And to do this, you need a [commit log](https://engineering.linkedin.com/distributed-systems/log-what-every-software-engineer-should-know-about-real-time-datas-unifying) implementation of some description.
-
-<!--more-->
+One of the several things I'm [idly fiddling with](https://github.com/cstorey) is the notion of using [events as the primary record](https://martinfowler.com/eaaDev/EventSourcing.html) for an application. And to do this, you need a [commit log](https://engineering.linkedin.com/distributed-systems/log-what-every-software-engineer-should-know-about-real-time-datas-unifying) implementation of some description. <!--more-->
 
 # Background
 
