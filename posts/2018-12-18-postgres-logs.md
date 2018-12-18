@@ -30,7 +30,7 @@ PostgreSQL will provide [snapshot isolation](https://en.wikipedia.org/wiki/Snaps
 
 However, the main issue is that the order in which rows have their value of `seq_id` assumed may not be the same as which they commit. For example:
 
-![Sequence diagram for faulty event sequence](/images/2018-12-09-postgres-logs/Ordered Logs.svg)
+![Sequence diagram for faulty event sequence](/images/2018-12-18-postgres-logs/Ordered Logs.svg)
 
 * Client _A_: Starts a transaction, allocates sequence number 1.
 * Client _B_: Starts a transaction, allocates sequence number 2.
@@ -58,7 +58,7 @@ The sequencer is in charge assigning positions to clients. However, in because c
 
 While the protocol would normally run over a cluster of storage units, we can assume a single storage unit:
 
-![Hole filling in CORFU](/images/2018-12-09-postgres-logs/CORFU Commits.svg)
+![Hole filling in CORFU](/images/2018-12-18-postgres-logs/CORFU Commits.svg)
 
 As above, Client A has crashed before writing it's record at position 1, and client B has written at position 2. In this case^[... and I can't claim it's entirely faithful to the original], the consumer notices that position 2 was written before position 1, and runs a recovery protocol. In this case, it writes a dummy record at 1. Because we can't tell whether a client is running slowly or just crashed, we may to pause before we fill the hole.
 
