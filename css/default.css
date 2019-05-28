@@ -64,6 +64,7 @@ html {
 
 h1, h2, h3, h4, h5, h6, header, th, dt, a:link {
     font-family: var(--title-enh-fonts);
+    font-weight:normal;
 }
 header, th, dt, a:link {
     font-size: 0.95em;
