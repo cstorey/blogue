@@ -206,12 +206,6 @@ html { height: 100% }
       font-family: var(--meta-enh-fonts);
   }
 
-  pre {
-    white-space: pre;
-    padding: 1ex;
-    background: var(--light-bg);
-    font-size: 0.8rem;
-  }
 
   blockquote {
     padding: 1ex;
@@ -227,10 +221,15 @@ html { height: 100% }
     margin-top: 1rem;
   }
 
+  pre {
+    white-space: pre-wrap;
+    background: var(--light-bg);
+    padding: 1ex;
+  }
+
   code, kbd, pre, samp {
     font-family: var(--mono-enh-fonts);
-    white-space: pre-wrap;
-    font-size: 0.95em;
+    font-size: 0.8rem;
   }
 
   th {
