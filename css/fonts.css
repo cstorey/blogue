@@ -1,6 +1,5 @@
 @import "source-sans-pro/source-sans-pro.css";
 @import "source-serif-pro/source-serif-pro.css";
-@import "@typopro/web-gidole/TypoPRO-Gidole.css";
 @import "@typopro/web-iosevka/TypoPRO-Iosevka.css";
 
 :root {
@@ -9,8 +8,8 @@
 --body-base-fonts: serif;
 --body-enh-fonts: "Source Serif Pro", var(--body-base-fonts);
 
---title-base-fonts: var(--body-base-fonts);
---title-enh-fonts: TypoPRO Gidole, var(--title-base-fonts);
+--title-base-fonts: var(--meta-base-fonts);
+--title-enh-fonts: var(--meta-enh-fonts);
 
 --mono-base-fonts: Menlo, Consolas, "Liberation Mono",Courier,monospace;
 --mono-enh-fonts: "TypoPRO Iosevka Term", var(--mono-base-fonts);
