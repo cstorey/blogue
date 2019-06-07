@@ -12,13 +12,9 @@ const plugins = [
 ];
 
 module.exports = {
-  entry: [
-    path.resolve(__dirname, "css/default.css"),
-  ],
+  entry: [path.resolve(__dirname, "css/default.css")],
   optimization: {
-    minimizer: [
-      new OptimizeCSSAssetsPlugin({})
-    ]
+    minimizer: [new OptimizeCSSAssetsPlugin({})]
   },
   module: {
     rules: [
@@ -26,9 +22,9 @@ module.exports = {
         test: /\.css$/,
         use: [
           MiniCssExtractPlugin.loader,
-            { loader: "css-loader", options: { importLoaders: 0 } },
-            "postcss-loader"
-          ]
+          { loader: "css-loader", options: { importLoaders: 0 } },
+          "postcss-loader"
+        ]
       },
       {
         test: /\.woff2?$|\.ttf$|\.otf$|\.svg$|\.eot$/,
@@ -42,7 +38,7 @@ module.exports = {
   },
   output: {
     path: path.join(__dirname, "out"),
-    filename: "[name].[chunkhash].js",
+    filename: "[name].[chunkhash].js"
   },
   plugins: plugins
 };
