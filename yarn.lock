@@ -3456,9 +3456,9 @@ source-sans-pro@^2.20.2:
   version "2.20.2"
   resolved "https://registry.yarnpkg.com/source-sans-pro/-/source-sans-pro-2.20.2.tgz#ee24a6f9680af4e05736be9c1afee3d714618782"
 
-source-serif-pro@^2.0.7:
-  version "2.0.7"
-  resolved "https://registry.yarnpkg.com/source-serif-pro/-/source-serif-pro-2.0.7.tgz#42cb815e14043610c0033a895b83c872aab26e94"
+source-serif-pro@^2.10.0:
+  version "2.10.0"
+  resolved "https://registry.yarnpkg.com/source-serif-pro/-/source-serif-pro-2.10.0.tgz#88e7cca71c4dff81367376771fdde648fea3a631"
 
 split-string@^3.0.1, split-string@^3.0.2:
   version "3.1.0"
