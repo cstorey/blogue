@@ -29,7 +29,7 @@ main =
 
     "py-install" ~> do
       let reqs = "requirements.txt"
-      need [reqs]
+      need [venv </> "bin/python", reqs]
       cmd_ (venv </> "bin/pip") "install -r" reqs
 
     "images/*/*.svg" %> \out -> do

@@ -10,3 +10,4 @@ blogue.cabal
 .shake
 yarn-error.log
 images/2018-09-07-streaming-histograms/*.svg
+.venv
