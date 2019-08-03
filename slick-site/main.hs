@@ -37,7 +37,6 @@ main =
       Stdout content <- cmd [".venv/bin/python", script]
       writeFile' out content
 
-
     "yarn-build" ~> do
       need ["out/manifest.json"]
 
@@ -51,6 +50,13 @@ main =
       need svgs
       need ["out/manifest.json"]
       cmd_ ["stack", "exec", "site", "build"]
+
+    "clean" ~> do
+      svgs <- pySvgs
+      liftIO $ removeFiles "." $ svgs ++ [pyDepsInstalled]
+      liftIO $ removeFiles "out" ["*"]
+      liftIO $ removeFiles "_site" ["*"]
+
   where
   venv = ".venv"
 

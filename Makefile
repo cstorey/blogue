@@ -9,17 +9,8 @@ STACK_BUILD = .done.stack-build
 
 all: site-build
 
-clean: clean-wp clean-flags clean-site clean-gen
-clean-flags:
-	rm -f $(wildcard .done.*)
-
-clean-wp:
-	rm -rf out
-
-clean-site:
-	rm -rf _site _cache
-clean-gen:
-	rm -rf $(PY_SVGS)
+clean: $(STACK_BUILD)
+	stack exec -- slick clean
 
 nodrafts:
 	find posts -type l -exec rm -vf {} \+
