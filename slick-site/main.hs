@@ -11,8 +11,6 @@ srcToBuild path = "build" </> dropDirectory1 path
 main :: IO ()
 main =
   shakeArgs shakeOptions $ do
-    "build" ~> do
-      need ["out/manifest.json"]
     "yarn-install" ~> do
       need ["package.json", "yarn.lock"]
       cmd_  "yarn" ["install"]

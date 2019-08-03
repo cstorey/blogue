@@ -16,7 +16,7 @@ PY_SVGS = $(patsubst %.svg.py,%.svg,$(PY_SVG_GEN))
 PY_VENV = ./.venv
 PYTHON = $(PY_VENV)/bin/python
 
-all: site-build slick-build
+all: site-build
 
 clean: clean-wp clean-flags clean-site clean-gen
 clean-flags:
@@ -70,8 +70,6 @@ $(PY_SVGS): %.svg : %.svg.py $(PY_SETUP)
 
 site-build site-rebuild: site-%: $(STACK_BUILD) $(YARN_BUILD) posts/*.md $(PY_SVGS)
 	stack exec -- site $*
-slick-build slick-rebuild: slick-%: $(STACK_BUILD) $(YARN_BUILD) posts/*.md $(PY_SVGS)
-	stack exec -- slick $*
 
 watchexec-%:
 	watchexec -- $(MAKE) $*
