@@ -24,7 +24,16 @@ main =
       need $ jsConfFiles ++ cssFiles
       cmd_ "yarn" ["run", "build"]
 
+    venv </> "bin/python" %> \_ -> do
+      cmd_ "virtualenv -p python2" venv
+
+    "py-install" ~> do
+      let reqs = "requirements.txt"
+      need [reqs]
+      cmd_ (venv </> "bin/pip") "install -r" reqs
+
     "images/*/*.svg" %> \out -> do
+      need ["py-install"]
       let script = out <.> ".py"
       need [out <.> ".py"]
       Stdout content <- cmd [".venv/bin/python", script]
@@ -46,6 +55,7 @@ main =
   pySvgs = do
     pys <- getDirectoryFiles "." ["images//*.svg.py"]
     return $ map dropExtension pys
+  venv = ".venv"
 
 jsConfFiles :: [String]
 jsConfFiles =

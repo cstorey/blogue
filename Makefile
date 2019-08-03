@@ -6,10 +6,6 @@
 SETUP=.done.setup
 
 STACK_BUILD = .done.stack-build
-PY_SETUP = .done.py-setup
-
-PY_VENV = ./.venv
-PYTHON = $(PY_VENV)/bin/python
 
 all: site-build
 
@@ -39,14 +35,7 @@ $(STACK_BUILD): $(SETUP) package.yaml stack.yaml \
 	stack build
 	touch $@
 
-$(PYTHON):
-	virtualenv -p python2 $(PY_VENV)
-
-$(PY_SETUP): $(PYTHON) requirements.txt
-	$(PY_VENV)/bin/pip install -r requirements.txt
-	touch $@
-
-site-build site-rebuild: site-%: $(STACK_BUILD) posts/*.md $(PY_SETUP)
+site-build site-rebuild: site-%: $(STACK_BUILD) posts/*.md
 	stack exec -- slick site-$*
 
 watchexec-%:
