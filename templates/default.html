@@ -1,29 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-	<meta name="viewport" content="width=device-width,initial-scale=1">
-        <meta name="google-site-verification" content="7BuuhGQuvEafcnNeOO-fwRt3QBVVJhb3ML9W6nnQIvQ" />
-        <title>$title$</title>
-        <link rel="alternate" type="application/rss+xml"
-            title="Post syndication feed" href="/atom.xml" />
-        <!-- Substuted from manifest -->
-        <link rel="stylesheet" type="text/css" href="main.css" />
-    </head>
-    <body class="site">
-        <header>
-            <h1>$title$</h1>
-        </header>
-        <main class="main-body">
-            $if(description)$ <p class='subtitle'>$description$</p> $endif$
-            $body$
-        </main>
-        <footer id="header">
-            <nav id="navigation">
-                <a href="/">Home</a>
-                <a href="/about.html">About</a>
-                <a href="/archive.html">Archive</a>
-            </nav>
-        </footer>
-    </body>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta
+      name="google-site-verification"
+      content="7BuuhGQuvEafcnNeOO-fwRt3QBVVJhb3ML9W6nnQIvQ"
+    />
+    <title>$title$</title>
+    <link
+      rel="alternate"
+      type="application/rss+xml"
+      title="Post syndication feed"
+      href="/atom.xml"
+    />
+    <!-- Substuted from manifest -->
+    <link rel="stylesheet" type="text/css" href="main.css" />
+  </head>
+  <body class="site">
+    <header>
+      <h1>$title$</h1>
+    </header>
+    <main class="main-body">
+      $if(description)$
+      <p class="subtitle">$description$</p>
+      $endif$ $body$
+    </main>
+    <footer id="header">
+      <nav id="navigation">
+        <a href="/">Home</a>
+        <a href="/about.html">About</a>
+        <a href="/archive.html">Archive</a>
+      </nav>
+    </footer>
+  </body>
 </html>

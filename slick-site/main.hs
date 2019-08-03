@@ -13,9 +13,9 @@ main =
   shakeArgs shakeOptions $ do
     want ["site-build"]
 
-    [webpackExe] &%> \_ -> do
+    [nodeBin </> "*"] &%> \outf -> do
       need ["package.json", "yarn.lock"]
-      cmd_  "yarn" ["install"]
+      cmd_ "yarn" ["install"]
 
     ["out/*"] &%> \_ -> do
       need [webpackExe]
@@ -52,6 +52,11 @@ main =
       need svgs
       need ["out/manifest.json"]
       cmd_ ["stack", "exec", "site", "build"]
+    "prettier" ~> do
+      js <- getDirectoryFiles "." ["*.js"]
+      css <- getDirectoryFiles "." ["css/*.js"]
+      html <- getDirectoryFiles "." ["templates/*.html"]
+      cmd_ (nodeBin </> "prettier") "--write" js css html
 
     "clean" ~> do
       svgs <- pySvgs
@@ -68,8 +73,11 @@ main =
     pys <- getDirectoryFiles "." ["images//*.svg.py"]
     return $ map dropExtension pys
 
+  nodeBin :: FilePath
+  nodeBin = "node_modules/.bin"
+
   webpackExe :: FilePath
-  webpackExe = "node_modules/.bin/webpack"
+  webpackExe = nodeBin </> "webpack"
 
   jsConfFiles :: [String]
   jsConfFiles =
