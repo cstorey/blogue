@@ -15,6 +15,15 @@ main =
       need ["package.json", "yarn.lock"]
       cmd_  "yarn" ["install"]
 
+    "yarn-build" ~> do
+      need ["out/manifest.json"]
+
+    "out/manifest.json" %> \_ -> do
+      need ["yarn-install"]
+      cssFiles <- getDirectoryFiles "." ["css/*.css"]
+      need $ jsConfFiles ++ cssFiles
+      cmd_ "yarn" ["run", "build"]
+
 jsConfFiles :: [String]
 jsConfFiles =
   ["postcss.config.js"
