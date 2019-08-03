@@ -6,3 +6,4 @@ out
 ._*
 .DS_Store
 blogue.cabal
+.done.*
