@@ -51,17 +51,19 @@ main =
       need ["out/manifest.json"]
       cmd_ ["stack", "exec", "site", "build"]
   where
+  venv = ".venv"
+
   pySvgs :: Action [FilePath]
   -- These should really be derived from the links in the post.
   pySvgs = do
     pys <- getDirectoryFiles "." ["images//*.svg.py"]
     return $ map dropExtension pys
-  venv = ".venv"
+
   webpackExe :: FilePath
   webpackExe = "node_modules/.bin/webpack"
 
-jsConfFiles :: [String]
-jsConfFiles =
-  ["postcss.config.js"
-  ,"webpack.config.js"]
+  jsConfFiles :: [String]
+  jsConfFiles =
+    ["postcss.config.js"
+    ,"webpack.config.js"]
 
