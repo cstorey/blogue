@@ -25,8 +25,10 @@ main =
       cmd_ "yarn" ["run", "build"]
 
     "site-rebuild" ~> do
+      need ["out/manifest.json"]
       cmd_ ["stack", "exec", "site", "rebuild"]
     "site-build" ~> do
+      need ["out/manifest.json"]
       cmd_ ["stack", "exec", "site", "build"]
 
 jsConfFiles :: [String]
