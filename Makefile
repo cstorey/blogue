@@ -49,7 +49,7 @@ $(YARN_BUILD): $(YARN_INSTALL) webpack.config.js postcss.config.js $(wildcard cs
 out/manifest.json: $(YARN_BUILD)
 	test -f $@
 
-$(STACK_BUILD): $(SETUP) package.yaml stack.yaml site.hs $(wildcard src/*.hs)
+$(STACK_BUILD): $(SETUP) package.yaml stack.yaml hakyll-site/main.hs $(wildcard src/*.hs)
 	stack build
 	touch $@
 
