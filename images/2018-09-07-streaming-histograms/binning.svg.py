@@ -158,3 +158,4 @@ svg.append(chart_area)
 #          '{%s}%s' % (XL_NS, 'href'): 'http://tile.openstreetmap.org/%d/%d/%d.png' % (z, x+xoff, y+yoff)
 #          }))
 print lxml.etree.tostring(svg, pretty_print=True)
+

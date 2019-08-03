@@ -122,3 +122,4 @@ chart_area = S.g(
 svg.append(chart_area)
 
 print lxml.etree.tostring(svg, pretty_print=True)
+

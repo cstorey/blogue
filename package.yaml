@@ -16,7 +16,16 @@ dependencies:
 - directory >= 0.2.0.5
 - cryptohash-sha256 >= 0.11.101.0
 - base16-bytestring >= 0.1.1.6
+
+- shake
+- slick
+
 executables:
   site:
-    main: site.hs
+    source-dirs: hakyll-site/
+    main: main.hs
+    ghc-options: -threaded
+  slick:
+    source-dirs: slick-site/
+    main: main.hs
     ghc-options: -threaded
