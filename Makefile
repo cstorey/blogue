@@ -37,8 +37,8 @@ $(SETUP):
 	stack setup
 	touch $@
 
-$(YARN_INSTALL): package.json
-	yarn install
+$(YARN_INSTALL): package.json $(STACK_BUILD)
+	stack exec -- slick yarn-install
 	touch $@
 
 $(YARN_BUILD): $(YARN_INSTALL) webpack.config.js postcss.config.js $(wildcard css/*) $(wildcard js/*)
