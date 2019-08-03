@@ -7,7 +7,8 @@ SETUP=.done.setup
 
 STACK_BUILD = .done.stack-build
 
-all: site-build
+all: $(STACK_BUILD)
+	stack exec -- slick
 
 clean: $(STACK_BUILD)
 	stack exec -- slick clean

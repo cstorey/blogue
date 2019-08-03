@@ -11,6 +11,8 @@ srcToBuild path = "build" </> dropDirectory1 path
 main :: IO ()
 main =
   shakeArgs shakeOptions $ do
+    want ["site-build"]
+
     [webpackExe] &%> \_ -> do
       need ["package.json", "yarn.lock"]
       cmd_  "yarn" ["install"]
