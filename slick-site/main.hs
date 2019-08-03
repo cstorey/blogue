@@ -24,6 +24,11 @@ main =
       need $ jsConfFiles ++ cssFiles
       cmd_ "yarn" ["run", "build"]
 
+    "site-rebuild" ~> do
+      cmd_ ["stack", "exec", "site", "rebuild"]
+    "site-build" ~> do
+      cmd_ ["stack", "exec", "site", "build"]
+
 jsConfFiles :: [String]
 jsConfFiles =
   ["postcss.config.js"

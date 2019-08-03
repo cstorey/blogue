@@ -60,7 +60,7 @@ $(PY_SVGS): %.svg : %.svg.py $(PY_SETUP)
 	mv -v "$$tmp" $@
 
 site-build site-rebuild: site-%: $(STACK_BUILD) out/manifest.json posts/*.md $(PY_SVGS)
-	stack exec -- site $*
+	stack exec -- slick site-$*
 
 watchexec-%:
 	watchexec -- $(MAKE) $*
