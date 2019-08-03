@@ -8,3 +8,4 @@ out
 blogue.cabal
 .done.*
 .shake
+yarn-error.log
