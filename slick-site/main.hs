@@ -24,13 +24,14 @@ main =
     venv </> "bin/python" %> \_ -> do
       cmd_ "virtualenv -p python2" venv
 
-    "py-install" ~> do
+    pyDepsInstalled %> \out -> do
       let reqs = "requirements.txt"
       need [venv </> "bin/python", reqs]
       cmd_ (venv </> "bin/pip") "install -r" reqs
+      writeFile' out ""
 
     "images/*/*.svg" %> \out -> do
-      need ["py-install"]
+      need [pyDepsInstalled]
       let script = out <.> ".py"
       need [out <.> ".py"]
       Stdout content <- cmd [".venv/bin/python", script]
@@ -67,3 +68,5 @@ main =
     ["postcss.config.js"
     ,"webpack.config.js"]
 
+  pyDepsInstalled :: FilePath
+  pyDepsInstalled = venv </> ".installed"
