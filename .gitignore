@@ -7,3 +7,4 @@ out
 .DS_Store
 blogue.cabal
 .done.*
+.shake

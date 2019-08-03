@@ -16,7 +16,7 @@ PY_SVGS = $(patsubst %.svg.py,%.svg,$(PY_SVG_GEN))
 PY_VENV = ./.venv
 PYTHON = $(PY_VENV)/bin/python
 
-all: site-build
+all: site-build slick-build
 
 clean: clean-wp clean-flags clean-site clean-gen
 clean-flags:
@@ -49,7 +49,10 @@ $(YARN_BUILD): $(YARN_INSTALL) webpack.config.js postcss.config.js $(wildcard cs
 out/manifest.json: $(YARN_BUILD)
 	test -f $@
 
-$(STACK_BUILD): $(SETUP) package.yaml stack.yaml hakyll-site/main.hs $(wildcard src/*.hs)
+$(STACK_BUILD): $(SETUP) package.yaml stack.yaml \
+	 hakyll-site/main.hs \
+	 slick-site/main.hs \
+	 $(wildcard src/*.hs)
 	stack build
 	touch $@
 
@@ -67,6 +70,8 @@ $(PY_SVGS): %.svg : %.svg.py $(PY_SETUP)
 
 site-build site-rebuild: site-%: $(STACK_BUILD) $(YARN_BUILD) posts/*.md $(PY_SVGS)
 	stack exec -- site $*
+slick-build slick-rebuild: slick-%: $(STACK_BUILD) $(YARN_BUILD) posts/*.md $(PY_SVGS)
+	stack exec -- slick $*
 
 watchexec-%:
 	watchexec -- $(MAKE) $*
