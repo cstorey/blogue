@@ -36,7 +36,6 @@ watchexec-%:
 serve: $(STACK_BUILD)
 	stack exec -- site server --host 0.0.0.0
 
-
 prettier:
 	yarn run prettier
 
