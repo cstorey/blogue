@@ -35,11 +35,6 @@ $(SETUP):
 	stack setup
 	touch $@
 
-out/manifest.json: webpack.config.js postcss.config.js $(wildcard css/*) $(wildcard js/*)
-	stack exec -- slick $@
-# Assert that the file was created by the rule.
-	test -f $@
-
 $(STACK_BUILD): $(SETUP) package.yaml stack.yaml \
 	 hakyll-site/main.hs \
 	 slick-site/main.hs \
@@ -59,7 +54,7 @@ $(PY_SVGS): %.svg : %.svg.py $(PY_SETUP)
 	$(PYTHON) $< > "$$tmp" && \
 	mv -v "$$tmp" $@
 
-site-build site-rebuild: site-%: $(STACK_BUILD) out/manifest.json posts/*.md $(PY_SVGS)
+site-build site-rebuild: site-%: $(STACK_BUILD) posts/*.md $(PY_SVGS)
 	stack exec -- slick site-$*
 
 watchexec-%:
