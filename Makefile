@@ -8,9 +8,6 @@ SETUP=.done.setup
 STACK_BUILD = .done.stack-build
 PY_SETUP = .done.py-setup
 
-PY_SVG_GEN = $(wildcard images/*/*.svg.py)
-PY_SVGS = $(patsubst %.svg.py,%.svg,$(PY_SVG_GEN))
-
 PY_VENV = ./.venv
 PYTHON = $(PY_VENV)/bin/python
 
@@ -49,12 +46,7 @@ $(PY_SETUP): $(PYTHON) requirements.txt
 	$(PY_VENV)/bin/pip install -r requirements.txt
 	touch $@
 
-$(PY_SVGS): %.svg : %.svg.py $(PY_SETUP)
-	tmp=$$(mktemp) && \
-	$(PYTHON) $< > "$$tmp" && \
-	mv -v "$$tmp" $@
-
-site-build site-rebuild: site-%: $(STACK_BUILD) posts/*.md $(PY_SVGS)
+site-build site-rebuild: site-%: $(STACK_BUILD) posts/*.md $(PY_SETUP)
 	stack exec -- slick site-$*
 
 watchexec-%:

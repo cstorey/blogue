@@ -18,18 +18,34 @@ main =
     "yarn-build" ~> do
       need ["out/manifest.json"]
 
-    "out/manifest.json" %> \_ -> do
+    ["out/*"] &%> \_ -> do
       need ["yarn-install"]
       cssFiles <- getDirectoryFiles "." ["css/*.css"]
       need $ jsConfFiles ++ cssFiles
       cmd_ "yarn" ["run", "build"]
 
+    "images/*/*.svg" %> \out -> do
+      let script = out <.> ".py"
+      need [out <.> ".py"]
+      Stdout content <- cmd [".venv/bin/python", script]
+      writeFile' out content
+
     "site-rebuild" ~> do
+      svgs <- pySvgs
+      need svgs
       need ["out/manifest.json"]
       cmd_ ["stack", "exec", "site", "rebuild"]
     "site-build" ~> do
+      svgs <- pySvgs
+      need svgs
       need ["out/manifest.json"]
       cmd_ ["stack", "exec", "site", "build"]
+  where
+  pySvgs :: Action [FilePath]
+  -- These should really be derived from the links in the post.
+  pySvgs = do
+    pys <- getDirectoryFiles "." ["images//*.svg.py"]
+    return $ map dropExtension pys
 
 jsConfFiles :: [String]
 jsConfFiles =
