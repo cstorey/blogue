@@ -11,18 +11,15 @@ srcToBuild path = "build" </> dropDirectory1 path
 main :: IO ()
 main =
   shakeArgs shakeOptions $ do
-    "yarn-install" ~> do
+    [webpackExe] &%> \_ -> do
       need ["package.json", "yarn.lock"]
       cmd_  "yarn" ["install"]
 
-    "yarn-build" ~> do
-      need ["out/manifest.json"]
-
     ["out/*"] &%> \_ -> do
-      need ["yarn-install"]
+      need [webpackExe]
       cssFiles <- getDirectoryFiles "." ["css/*.css"]
       need $ jsConfFiles ++ cssFiles
-      cmd_ "yarn" ["run", "build"]
+      cmd_ webpackExe
 
     venv </> "bin/python" %> \_ -> do
       cmd_ "virtualenv -p python2" venv
@@ -38,6 +35,10 @@ main =
       need [out <.> ".py"]
       Stdout content <- cmd [".venv/bin/python", script]
       writeFile' out content
+
+
+    "yarn-build" ~> do
+      need ["out/manifest.json"]
 
     "site-rebuild" ~> do
       svgs <- pySvgs
@@ -56,8 +57,11 @@ main =
     pys <- getDirectoryFiles "." ["images//*.svg.py"]
     return $ map dropExtension pys
   venv = ".venv"
+  webpackExe :: FilePath
+  webpackExe = "node_modules/.bin/webpack"
 
 jsConfFiles :: [String]
 jsConfFiles =
   ["postcss.config.js"
   ,"webpack.config.js"]
+
