@@ -13,7 +13,7 @@ import           Text.Pandoc.Options
 import           Text.Pandoc
 import           Text.Pandoc.Walk (walkM)
 import qualified Data.Text as T
-import		 System.Directory
+import           System.Directory
 import qualified Crypto.Hash.SHA256 as SHA256
 import qualified Data.ByteString.Char8 as C
 import qualified Data.ByteString.Base16 as B16
@@ -71,52 +71,52 @@ main = do
     manifestDep <- makePatternDependency "out/manifest.json"
     rulesExtraDependencies [manifestDep] $ do
       match (fromList ["about.md"]) $ do
-	  route   $ setExtension "html"
-	  compile $ thePandocCompiler
-	      >>= loadAndApplyTemplate "templates/page.html"    postCtx
-	      >>= loadAndApplyTemplate "templates/default.html" mainContext
-	      >>= updateFromManifest
-	      >>= relativizeUrls
+          route   $ setExtension "html"
+          compile $ thePandocCompiler
+              >>= loadAndApplyTemplate "templates/page.html"    postCtx
+              >>= loadAndApplyTemplate "templates/default.html" mainContext
+              >>= updateFromManifest
+              >>= relativizeUrls
 
       match "posts/*" $ do
-	  route $ setExtension "html"
-	  compile $ thePandocCompiler
-	      >>= saveSnapshot "content"
-	      >>= loadAndApplyTemplate "templates/post.html"    postCtx
-	      >>= loadAndApplyTemplate "templates/default.html" postCtx
-	      >>= updateFromManifest
-	      >>= relativizeUrls
+          route $ setExtension "html"
+          compile $ thePandocCompiler
+              >>= saveSnapshot "content"
+              >>= loadAndApplyTemplate "templates/post.html"    postCtx
+              >>= loadAndApplyTemplate "templates/default.html" postCtx
+              >>= updateFromManifest
+              >>= relativizeUrls
 
       create ["archive.html"] $ do
-	  route idRoute
-	  compile $ do
-	      posts <- recentFirst =<< loadAll "posts/*"
-	      let archiveCtx =
-		      listField "posts" postCtx (return posts) <>
-		      constField "title" "Archives"            <>
-		      mainContext
+          route idRoute
+          compile $ do
+              posts <- recentFirst =<< loadAll "posts/*"
+              let archiveCtx =
+                      listField "posts" postCtx (return posts) <>
+                      constField "title" "Archives"            <>
+                      mainContext
 
-	      makeItem ""
-		  >>= loadAndApplyTemplate "templates/archive.html" archiveCtx
-		  >>= loadAndApplyTemplate "templates/page.html"    postCtx
-		  >>= loadAndApplyTemplate "templates/default.html" archiveCtx
-		  >>= updateFromManifest
-		  >>= relativizeUrls
+              makeItem ""
+                  >>= loadAndApplyTemplate "templates/archive.html" archiveCtx
+                  >>= loadAndApplyTemplate "templates/page.html"    postCtx
+                  >>= loadAndApplyTemplate "templates/default.html" archiveCtx
+                  >>= updateFromManifest
+                  >>= relativizeUrls
 
       create ["index.html"] $ do
-	  route idRoute
-	  compile $ do
-	      posts <- fmap (take 5) $ recentFirst =<< loadAll "posts/*"
-	      let archiveCtx =
-		      listField "posts" indexCtx (return posts) <>
-		      constField "title" "Home"            <>
-		      mainContext
+          route idRoute
+          compile $ do
+              posts <- fmap (take 5) $ recentFirst =<< loadAll "posts/*"
+              let archiveCtx =
+                      listField "posts" indexCtx (return posts) <>
+                      constField "title" "Home"            <>
+                      mainContext
 
-	      makeItem ""
-		  >>= loadAndApplyTemplate "templates/home.html" archiveCtx
-		  >>= loadAndApplyTemplate "templates/default.html" archiveCtx
-		  >>= updateFromManifest
-		  >>= relativizeUrls
+              makeItem ""
+                  >>= loadAndApplyTemplate "templates/home.html" archiveCtx
+                  >>= loadAndApplyTemplate "templates/default.html" archiveCtx
+                  >>= updateFromManifest
+                  >>= relativizeUrls
 
     match "templates/*" $ compile templateCompiler
 
@@ -140,11 +140,11 @@ transformer reader_opts writer_opts pandoc = walkM katexify pandoc
     katexify chunk@(Math mode body) = do
       cachedp <- cacheGet chunk
       markup <- case cachedp of
-		  Just markup -> return markup
-		  Nothing -> do
-		    markup <- unixFilter "./node_modules/.bin/katex" (opts mode) $ body
-		    cachePut chunk markup
-		    return markup
+                  Just markup -> return markup
+                  Nothing -> do
+                    markup <- unixFilter "./node_modules/.bin/katex" (opts mode) $ body
+                    cachePut chunk markup
+                    return markup
       return $ RawInline (Format "html") markup
     katexify other = return other
     opts DisplayMath = ["-d"]
@@ -155,8 +155,8 @@ transformer reader_opts writer_opts pandoc = walkM katexify pandoc
       let fn = pathFor chunk
       existsp <- doesFileExist fn
       if existsp
-	then Just <$> readFile fn
-	else return Nothing
+        then Just <$> readFile fn
+        else return Nothing
 
     cachePut :: Inline -> String -> Compiler ()
     cachePut chunk markup = unsafeCompiler $ atomicWriteFile (pathFor chunk) markup
