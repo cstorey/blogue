@@ -72,6 +72,7 @@ main =
       liftIO $ removeFiles "." $ svgs ++ [pyDepsInstalled]
       liftIO $ removeFiles "out" ["*"]
       liftIO $ removeFiles "_site" ["*"]
+      liftIO $ removeFiles "_cache" ["*"]
       liftIO $ removeFiles distDir ["*"]
 
   where
