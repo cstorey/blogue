@@ -26,8 +26,8 @@ main =
 
     wpOut </> "manifest.json" %> \_ -> do
       need [webpackExe]
-      cssFiles <- getDirectoryFiles "." ["css/*.css"]
-      need $ jsConfFiles ++ cssFiles
+      deps <- getDirectoryFiles "." ["css/*.css", "js/*.js"]
+      need $ jsConfFiles ++ deps
       cmd_ webpackExe
     wpOut </> "*" %> \outf -> do
       need ["out/manifest.json"]
@@ -63,7 +63,7 @@ main =
         -- liftIO $ putStrLn $ show ("copyFileChanged/_site", (hakyllOut </> file), (distDir </> file))
         copyFileChanged (hakyllOut </> file) (distDir </> file)
 
-    distDir </> "out/main.css" %> \out -> do
+    [distDir </> "out/main.css", distDir </> "out/main.js"] |%> \out -> do
         let manifestPath = webpackOut </>  "manifest.json"
         need [manifestPath]
         manifestData <- liftIO $ B.readFile manifestPath
@@ -115,6 +115,7 @@ main =
       posts <- postHtmls
       need $ ["copy-hakyll", "copy-webpack",
             distDir </> "out/main.css",
+            distDir </> "out/main.js",
             distDir </> "about.html"
            ] <> posts
 
