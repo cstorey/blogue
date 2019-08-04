@@ -19,11 +19,13 @@ main =
       need ["package.json", "yarn.lock"]
       cmd_ "yarn" ["install"]
 
-    ["out/*"] &%> \_ -> do
+    "out/manifest.json" %> \_ -> do
       need [webpackExe]
       cssFiles <- getDirectoryFiles "." ["css/*.css"]
       need $ jsConfFiles ++ cssFiles
       cmd_ webpackExe
+    "out/*" %> \outf -> do
+      need ["out/manifest.json"]
 
     venv </> "bin/python" %> \_ -> do
       cmd_ "virtualenv -p python3" venv
