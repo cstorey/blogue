@@ -66,14 +66,6 @@ main = do
 
     manifestDep <- makePatternDependency "out/manifest.json"
     rulesExtraDependencies [manifestDep] $ do
-      match (fromList ["about.md"]) $ do
-          route   $ setExtension "html"
-          compile $ thePandocCompiler
-              >>= loadAndApplyTemplate "templates/page.hakyll.html"    postCtx
-              >>= loadAndApplyTemplate "templates/default.hakyll.html" mainContext
-              >>= updateFromManifest
-              >>= relativizeUrls
-
       match "posts/*" $ do
           route $ setExtension "html"
           compile $ thePandocCompiler

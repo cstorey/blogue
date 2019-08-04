@@ -8,6 +8,7 @@ import System.Posix.Files (createSymbolicLink)
 import Development.Shake
 import Development.Shake.FilePath
 import Data.Foldable
+import Slick
 
 -- convert a source filepath to a build filepath
 -- e.g. site/css/style.css -> build/css/style.css
@@ -79,8 +80,26 @@ main =
         liftIO $ removeFiles "." [out]
         liftIO $ createSymbolicLink src out
 
+    distDir </> "about.html" %> \out -> do
+--      error $ "about:" ++ out
+      let srcPath = (dropDirectory1 out) -<.> "md"
+      need [srcPath]
+      fileContents <- readFile' srcPath
+      -- Load a markdown source file into an Aeson Value
+      -- The 'content' key contains an html-rendered string
+      -- Any metadata from a yaml block is loaded into the appropriate keys in the Aeson object
+      -- e.g. author, date, tags, etc.
+      postData <- markdownToHTML . T.pack $ fileContents
+      -- Load a mustache template using using cache if available
+      need ["templates/page.html"]
+      pageT <- compileTemplate' "templates/page.html"
+      -- Fill in the template using the post metadata/content
+      writeFile' out . T.unpack $ substitute pageT postData
+
     distDir ~> do
-      need ["copy-hakyll", "copy-webpack", distDir </> "out/main.css"]
+      need ["copy-hakyll", "copy-webpack",
+            distDir </> "out/main.css",
+            distDir </> "about.html"]
 
     "copy-hakyll" ~> do
       need [hakyllOut </> "index.html"]
