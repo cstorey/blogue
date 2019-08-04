@@ -73,8 +73,8 @@ main = do
       match (fromList ["about.md"]) $ do
           route   $ setExtension "html"
           compile $ thePandocCompiler
-              >>= loadAndApplyTemplate "templates/page.html"    postCtx
-              >>= loadAndApplyTemplate "templates/default.html" mainContext
+              >>= loadAndApplyTemplate "templates/page.hakyll.html"    postCtx
+              >>= loadAndApplyTemplate "templates/default.hakyll.html" mainContext
               >>= updateFromManifest
               >>= relativizeUrls
 
@@ -82,8 +82,8 @@ main = do
           route $ setExtension "html"
           compile $ thePandocCompiler
               >>= saveSnapshot "content"
-              >>= loadAndApplyTemplate "templates/post.html"    postCtx
-              >>= loadAndApplyTemplate "templates/default.html" postCtx
+              >>= loadAndApplyTemplate "templates/post.hakyll.html"    postCtx
+              >>= loadAndApplyTemplate "templates/default.hakyll.html" postCtx
               >>= updateFromManifest
               >>= relativizeUrls
 
@@ -97,9 +97,9 @@ main = do
                       mainContext
 
               makeItem ""
-                  >>= loadAndApplyTemplate "templates/archive.html" archiveCtx
-                  >>= loadAndApplyTemplate "templates/page.html"    postCtx
-                  >>= loadAndApplyTemplate "templates/default.html" archiveCtx
+                  >>= loadAndApplyTemplate "templates/archive.hakyll.html" archiveCtx
+                  >>= loadAndApplyTemplate "templates/page.hakyll.html"    postCtx
+                  >>= loadAndApplyTemplate "templates/default.hakyll.html" archiveCtx
                   >>= updateFromManifest
                   >>= relativizeUrls
 
@@ -113,8 +113,8 @@ main = do
                       mainContext
 
               makeItem ""
-                  >>= loadAndApplyTemplate "templates/home.html" archiveCtx
-                  >>= loadAndApplyTemplate "templates/default.html" archiveCtx
+                  >>= loadAndApplyTemplate "templates/home.hakyll.html" archiveCtx
+                  >>= loadAndApplyTemplate "templates/default.hakyll.html" archiveCtx
                   >>= updateFromManifest
                   >>= relativizeUrls
 
