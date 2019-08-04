@@ -4,8 +4,6 @@ orig_url: http://www.lshift.net/blog/2013/08/31/posix-threads-and-fork2-on-not-c
 title: "POSIX Threads and fork(2): on not crossing the streams"
 description: New Jersey's revenge.
 ---
-<div class="content" html="http://www.w3.org/1999/xhtml">
-
 You’ve maybe heard that with C and C++, it’s rarely a good idea to mix
 usage of the POSIX threading library, and `fork(2)` based concurrency.
 I’d heard this myself, but to be honest, I never quite understood why.
@@ -65,5 +63,3 @@ correctly, the
 was simple, just move the username lookups to the parent process.
 
 Anyway, I hope this is illuminating for you as it was for me.
-
-</div>
