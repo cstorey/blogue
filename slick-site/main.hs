@@ -1,3 +1,4 @@
+{-# LANGUAGE DeriveGeneric #-}
 import System.Directory
 
 import qualified Data.Text as T
@@ -11,11 +12,23 @@ import Data.Foldable
 import Slick
 import           Text.Pandoc.Options
 import           Text.Pandoc
+import GHC.Generics (Generic)
 
 -- convert a source filepath to a build filepath
 -- e.g. site/css/style.css -> build/css/style.css
 srcToBuild :: FilePath -> FilePath
 srcToBuild path = "build" </> dropDirectory1 path
+
+
+data Post = Post
+  { title :: String
+  , content :: String
+  , date :: String
+  , description :: String
+  } deriving (Generic, Eq, Ord, Show)
+
+instance FromJSON Post
+instance ToJSON Post
 
 main :: IO ()
 main =
@@ -96,7 +109,7 @@ main =
       need ["templates/page.html"]
       pageT <- compileTemplate' "templates/page.html"
       -- Fill in the template using the post metadata/content
-      writeFile' out . T.unpack $ substitute pageT postData
+      writeFile' out . T.unpack $ substitute pageT $ toJSON postData
 
     distDir </> "tmp" </> "posts" </> "*.html" %> \out -> do
       let srcPath = dropDirectory1 (dropDirectory1 out) -<.> "md"
@@ -106,7 +119,7 @@ main =
       -- Load a mustache template using using cache if available
       need ["templates/page.html"]
       pageT <- compileTemplate' "templates/page.html"
-      writeFile' out . T.unpack $ substitute pageT postData
+      writeFile' out . T.unpack $ substitute pageT $ toJSON postData
 
     distDir ~> do
       posts <- postHtmls
@@ -199,17 +212,19 @@ main =
     names <- postNames
     return $ (\f -> distDir </> "tmp" </> f -<.> ".html") <$> names
 
-  renderMarkdown :: T.Text -> Action Value
-  renderMarkdown t =
-    loadUsing (readMarkdown readerOptions) (writeHtml5String writerOptions) t
+  renderMarkdown :: T.Text -> Action Post
+  renderMarkdown t = do
+    p <- loadUsing (readMarkdown readerOptions) (writeHtml5String writerOptions) t
+    convert p
     where
       mathExtensions = extensionsFromList [
                         Ext_tex_math_dollars,
                         Ext_tex_math_double_backslash,
                         Ext_latex_macros]
-      newExtensions = writerExtensions def `mappend` mathExtensions
-      writerOptions = def {
-                        writerExtensions = newExtensions
+      writerOptions = html5Options {
+                        writerExtensions = writerExtensions html5Options <> mathExtensions
                         , writerHTMLMathMethod =  KaTeX  "https://nonexistent.example/"
                       }
-      readerOptions = def { readerExtensions = newExtensions }
+      readerOptions = markdownOptions {
+        readerExtensions = readerExtensions markdownOptions `mappend` mathExtensions
+      }
