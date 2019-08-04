@@ -82,13 +82,13 @@ main =
     distDir </> wpOut </> "*" %> \out -> do
         let file = dropDirectory1 out
         liftIO $ createDirectoryIfMissing True distDir
-        -- liftIO $ putStrLn $ show ("copyFileChanged/out", file, (distDir </> file))
+        -- putLoud $ show ("copyFileChanged/out", file, (distDir </> file))
         copyFileChanged file (distDir </> file)
 
     ["dist/posts/*.html", "dist/*.xml", "dist//*.svg"] |%> \out -> do
         let file = dropDirectory1 out
         liftIO $ createDirectoryIfMissing True distDir
-        -- liftIO $ putStrLn $ show ("copyFileChanged/_site", (hakyllOut </> file), (distDir </> file))
+        -- putLoud $ show ("copyFileChanged/_site", (hakyllOut </> file), (distDir </> file))
         copyFileChanged (hakyllOut </> file) (distDir </> file)
 
     [distDir </> "out/main.css", distDir </> "out/main.js"] |%> \out -> do
@@ -96,17 +96,17 @@ main =
         need [manifestPath]
         manifestData <- liftIO $ B.readFile manifestPath
         let manifest = (maybe M.empty id $ decode manifestData) :: M.Map String String
-        liftIO $ putStrLn $ show manifest
+        putLoud $ show manifest
         let stem = dropDirectory1 $ dropDirectory1 out
         src <- maybe
           (fail ("Missing item in manifest.json: " ++ stem)) return $
           M.lookup stem manifest
         need [distDir </> webpackOut </> src]
-        liftIO $ putStrLn $ show $ src
-        liftIO $ putStrLn $ show $ ("need",distDir </> webpackOut </> src)
-        liftIO $ putStrLn $ show $ ("createSymbolicLink", src, out)
+        putLoud $ show $ src
+        putLoud $ show $ ("need",distDir </> webpackOut </> src)
+        putLoud $ show $ ("createSymbolicLink", src, out)
         liftIO $ removeFiles "." [out]
-        liftIO $ createSymbolicLink src out
+        traced "symlink" $ createSymbolicLink src out
 
     distDir </> "about.html" %> \out -> do
 --      error $ "about:" ++ out
