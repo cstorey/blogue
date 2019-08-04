@@ -1,5 +1,6 @@
-import lxml.etree
+from lxml import etree
 from lxml.builder import ElementMaker
+import sys, os
 
 SVG_NS = "http://www.w3.org/2000/svg"
 XL_NS = "http://www.w3.org/1999/xlink"
@@ -157,5 +158,6 @@ svg.append(chart_area)
 #          'width': (iy1-iy0),
 #          '{%s}%s' % (XL_NS, 'href'): 'http://tile.openstreetmap.org/%d/%d/%d.png' % (z, x+xoff, y+yoff)
 #          }))
-print lxml.etree.tostring(svg, pretty_print=True)
 
+with os.fdopen(sys.stdout.fileno(), 'wb', closefd=False) as of:
+  etree.ElementTree(svg).write(of, pretty_print=True)
