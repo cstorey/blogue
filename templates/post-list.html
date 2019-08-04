@@ -1,0 +1,18 @@
+<dl class="post-summaries">
+  {{#posts}}
+  <dt>
+    <a href="{{ url }}" title="{{ description }}">{{title}}</a>
+  </dt>
+  <dd class="post">
+    {{#description}}
+    <p class="info"><span class="subtitle">{{description}}</span>ー{{date}}</p>
+    {{/description}}
+    {{#teaser}}
+    <aside class="teaser">
+      {{teaser}}
+      <a href="{{ url }}" title="{{description}}">…</a>
+    </aside>
+    {{/teaser}}
+  </dd>
+  {{/posts}}
+</dl>

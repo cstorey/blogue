@@ -75,22 +75,6 @@ main = do
               >>= updateFromManifest
               >>= relativizeUrls
 
-      create ["archive.html"] $ do
-          route idRoute
-          compile $ do
-              posts <- recentFirst =<< loadAll "posts/*"
-              let archiveCtx =
-                      listField "posts" postCtx (return posts) <>
-                      constField "title" "Archives"            <>
-                      mainContext
-
-              makeItem ""
-                  >>= loadAndApplyTemplate "templates/archive.hakyll.html" archiveCtx
-                  >>= loadAndApplyTemplate "templates/page.hakyll.html"    postCtx
-                  >>= loadAndApplyTemplate "templates/default.hakyll.html" archiveCtx
-                  >>= updateFromManifest
-                  >>= relativizeUrls
-
     match "templates/*" $ compile templateCompiler
 
     create ["atom.xml"] $ do

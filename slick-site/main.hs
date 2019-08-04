@@ -144,13 +144,26 @@ main =
       -- Fill in the template using the post metadata/content
       writeFile' out . T.unpack $ substitute pageT $ toJSON idx
 
+    distDir </> "archive.html" %> \out -> do
+      postns <- postNames
+      allPosts <- postNames >>= traverse loadPost
+      let posts = reverse $ sortOn date allPosts
+      let title = "Archive"
+      let idx = Index {title,posts}
+
+      need ["templates/archive.html"]
+      pageT <- compileTemplate' "templates/archive.html"
+      -- Fill in the template using the post metadata/content
+      writeFile' out . T.unpack $ substitute pageT $ toJSON idx
+
     distDir ~> do
       posts <- postHtmls
       need $ ["copy-hakyll", "copy-webpack",
             distDir </> "out/main.css",
             distDir </> "out/main.js",
             distDir </> "about.html",
-            distDir </> "index.html"
+            distDir </> "index.html",
+            distDir </> "archive.html"
            ] <> posts
 
     "copy-hakyll" ~> do
