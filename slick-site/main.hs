@@ -44,13 +44,13 @@ main =
 
     "site-rebuild" ~> do
       svgs <- pySvgs
-      need svgs
-      need ["out/manifest.json"]
+      hakyllSrc <- getDirectoryFiles "." ["posts/**", "templates/*"]
+      need $ svgs <> ["out/manifest.json"] <> hakyllSrc
       cmd_ ["stack", "exec", "site", "rebuild"]
     "site-build" ~> do
       svgs <- pySvgs
-      need svgs
-      need ["out/manifest.json"]
+      hakyllSrc <- getDirectoryFiles "." ["posts/**", "templates/*"]
+      need $ svgs <> ["out/manifest.json"] <> hakyllSrc
       cmd_ ["stack", "exec", "site", "build"]
     "prettier" ~> do
       js <- getDirectoryFiles "." ["*.js"]
