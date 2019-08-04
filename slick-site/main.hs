@@ -9,6 +9,8 @@ import Development.Shake
 import Development.Shake.FilePath
 import Data.Foldable
 import Slick
+import           Text.Pandoc.Options
+import           Text.Pandoc
 
 -- convert a source filepath to a build filepath
 -- e.g. site/css/style.css -> build/css/style.css
@@ -100,15 +102,10 @@ main =
       let srcPath = dropDirectory1 (dropDirectory1 out) -<.> "md"
       need [srcPath]
       fileContents <- readFile' srcPath
-      -- Load a markdown source file into an Aeson Value
-      -- The 'content' key contains an html-rendered string
-      -- Any metadata from a yaml block is loaded into the appropriate keys in the Aeson object
-      -- e.g. author, date, tags, etc.
-      postData <- markdownToHTML . T.pack $ fileContents
+      postData <- renderMarkdown . T.pack $ fileContents
       -- Load a mustache template using using cache if available
       need ["templates/page.html"]
       pageT <- compileTemplate' "templates/page.html"
-      -- Fill in the template using the post metadata/content
       writeFile' out . T.unpack $ substitute pageT postData
 
     distDir ~> do
@@ -201,3 +198,18 @@ main =
   postHtmls = do
     names <- postNames
     return $ (\f -> distDir </> "tmp" </> f -<.> ".html") <$> names
+
+  renderMarkdown :: T.Text -> Action Value
+  renderMarkdown t =
+    loadUsing (readMarkdown readerOptions) (writeHtml5String writerOptions) t
+    where
+      mathExtensions = extensionsFromList [
+                        Ext_tex_math_dollars,
+                        Ext_tex_math_double_backslash,
+                        Ext_latex_macros]
+      newExtensions = writerExtensions def `mappend` mathExtensions
+      writerOptions = def {
+                        writerExtensions = newExtensions
+                        , writerHTMLMathMethod =  KaTeX  "https://nonexistent.example/"
+                      }
+      readerOptions = def { readerExtensions = newExtensions }
