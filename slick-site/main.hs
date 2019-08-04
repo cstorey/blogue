@@ -59,14 +59,18 @@ main =
         copyFileChanged (hakyllOut </> file) (distDir </> file)
 
     distDir ~> do
+      need ["copy-hakyll", "copy-webpack"]
+
+    "copy-hakyll" ~> do
       need [hakyllOut </> "index.html"]
       files <- getDirectoryFiles hakyllOut ["//*.html", "/*.xml", "//*.svg"]
       need $ (hakyllOut </>) <$> files
       need $ (distDir </>) <$> files
 
+    "copy-webpack" ~> do
       need ["out/manifest.json"]
       files <- getDirectoryFiles "." $
-          (wpOut </>) <$> ["*.css", "*.woff", "*.otf", "*.ttf"]
+          (wpOut </>) <$> ["*.css", "*.woff2", "*.woff", "*.otf", "*.ttf"]
       need $ files
       need $ (distDir </>) <$> files
 
