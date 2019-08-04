@@ -24,7 +24,7 @@ main =
       cmd_ webpackExe
 
     venv </> "bin/python" %> \_ -> do
-      cmd_ "virtualenv -p python2" venv
+      cmd_ "virtualenv -p python3" venv
 
     pyDepsInstalled %> \out -> do
       let reqs = "requirements.txt"
