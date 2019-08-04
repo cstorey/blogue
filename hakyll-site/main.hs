@@ -91,21 +91,6 @@ main = do
                   >>= updateFromManifest
                   >>= relativizeUrls
 
-      create ["index.html"] $ do
-          route idRoute
-          compile $ do
-              posts <- fmap (take 5) $ recentFirst =<< loadAll "posts/*"
-              let archiveCtx =
-                      listField "posts" indexCtx (return posts) <>
-                      constField "title" "Home"            <>
-                      mainContext
-
-              makeItem ""
-                  >>= loadAndApplyTemplate "templates/home.hakyll.html" archiveCtx
-                  >>= loadAndApplyTemplate "templates/default.hakyll.html" archiveCtx
-                  >>= updateFromManifest
-                  >>= relativizeUrls
-
     match "templates/*" $ compile templateCompiler
 
     create ["atom.xml"] $ do

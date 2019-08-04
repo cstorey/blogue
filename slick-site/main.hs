@@ -1,4 +1,7 @@
 {-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE NamedFieldPuns #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+
 import System.Directory
 
 import qualified Data.Text as T
@@ -15,6 +18,7 @@ import Slick
 import           Text.Pandoc.Options
 import           Text.Pandoc
 import GHC.Generics (Generic)
+import Data.List
 
 -- convert a source filepath to a build filepath
 -- e.g. site/css/style.css -> build/css/style.css
@@ -27,10 +31,17 @@ data Post = Post
   , content :: String
   , date :: String
   , description :: String
+  , url :: String
   } deriving (Generic, Eq, Ord, Show)
-
 instance FromJSON Post
 instance ToJSON Post
+
+data Index = Index
+  { title :: String
+  , posts :: [Post]
+  } deriving (Generic, Eq, Ord, Show)
+instance FromJSON Index
+instance ToJSON Index
 
 main :: IO ()
 main =
@@ -74,7 +85,7 @@ main =
         -- liftIO $ putStrLn $ show ("copyFileChanged/out", file, (distDir </> file))
         copyFileChanged file (distDir </> file)
 
-    ["dist/*.html","dist/posts/*.html", "dist/*.xml", "dist//*.svg"] |%> \out -> do
+    ["dist/posts/*.html", "dist/*.xml", "dist//*.svg"] |%> \out -> do
         let file = dropDirectory1 out
         liftIO $ createDirectoryIfMissing True distDir
         -- liftIO $ putStrLn $ show ("copyFileChanged/_site", (hakyllOut </> file), (distDir </> file))
@@ -121,16 +132,29 @@ main =
       pageT <- compileTemplate' "templates/page.html"
       writeFile' out . T.unpack $ substitute pageT $ toJSON postData
 
+    distDir </> "index.html" %> \out -> do
+      postns <- postNames
+      allPosts <- postNames >>= traverse loadPost
+      let posts = take 5 $ reverse $ sortOn date allPosts
+      let title = "Home"
+      let idx = Index {title,posts}
+
+      need ["templates/home.html"]
+      pageT <- compileTemplate' "templates/home.html"
+      -- Fill in the template using the post metadata/content
+      writeFile' out . T.unpack $ substitute pageT $ toJSON idx
+
     distDir ~> do
       posts <- postHtmls
       need $ ["copy-hakyll", "copy-webpack",
             distDir </> "out/main.css",
             distDir </> "out/main.js",
-            distDir </> "about.html"
+            distDir </> "about.html",
+            distDir </> "index.html"
            ] <> posts
 
     "copy-hakyll" ~> do
-      need [hakyllOut </> "index.html"]
+      need [hakyllOut </> "atom.xml"]
       files <- getDirectoryFiles hakyllOut ["//*.html", "/*.xml", "//*.svg"]
       need $ (hakyllOut </>) <$> files
       need $ (distDir </>) <$> files
