@@ -1,4 +1,5 @@
 ---
+date: '2016-12-13'
 title: Adventures in TCP latency measurement
 description: There and back in quantifiable time.
 ---
