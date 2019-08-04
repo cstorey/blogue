@@ -1,6 +1,10 @@
 import System.Directory
 
 import qualified Data.Text as T
+import qualified Data.Map as M
+import           Data.Aeson
+import qualified Data.ByteString.Lazy as B
+import System.Posix.Files (createSymbolicLink)
 import Development.Shake
 import Development.Shake.FilePath
 import Data.Foldable
@@ -58,8 +62,25 @@ main =
         -- liftIO $ putStrLn $ show ("copyFileChanged/_site", (hakyllOut </> file), (distDir </> file))
         copyFileChanged (hakyllOut </> file) (distDir </> file)
 
+    distDir </> "out/main.css" %> \out -> do
+        let manifestPath = webpackOut </>  "manifest.json"
+        need [manifestPath]
+        manifestData <- liftIO $ B.readFile manifestPath
+        let manifest = (maybe M.empty id $ decode manifestData) :: M.Map String String
+        liftIO $ putStrLn $ show manifest
+        let stem = dropDirectory1 $ dropDirectory1 out
+        src <- maybe
+          (fail ("Missing item in manifest.json: " ++ stem)) return $
+          M.lookup stem manifest
+        need [distDir </> webpackOut </> src]
+        liftIO $ putStrLn $ show $ src
+        liftIO $ putStrLn $ show $ ("need",distDir </> webpackOut </> src)
+        liftIO $ putStrLn $ show $ ("createSymbolicLink", src, out)
+        liftIO $ removeFiles "." [out]
+        liftIO $ createSymbolicLink src out
+
     distDir ~> do
-      need ["copy-hakyll", "copy-webpack"]
+      need ["copy-hakyll", "copy-webpack", distDir </> "out/main.css"]
 
     "copy-hakyll" ~> do
       need [hakyllOut </> "index.html"]
@@ -119,6 +140,8 @@ main =
 
   webpackExe :: FilePath
   webpackExe = nodeBin </> "webpack"
+  webpackOut :: FilePath
+  webpackOut = "out"
 
   jsConfFiles :: [String]
   jsConfFiles =
