@@ -57,7 +57,7 @@ main =
         -- liftIO $ putStrLn $ show ("copyFileChanged/out", file, (distDir </> file))
         copyFileChanged file (distDir </> file)
 
-    ["dist//*.html", "dist/*.xml", "dist//*.svg"] |%> \out -> do
+    ["dist/*.html","dist/posts/*.html", "dist/*.xml", "dist//*.svg"] |%> \out -> do
         let file = dropDirectory1 out
         liftIO $ createDirectoryIfMissing True distDir
         -- liftIO $ putStrLn $ show ("copyFileChanged/_site", (hakyllOut </> file), (distDir </> file))
@@ -96,10 +96,27 @@ main =
       -- Fill in the template using the post metadata/content
       writeFile' out . T.unpack $ substitute pageT postData
 
+    distDir </> "tmp" </> "posts" </> "*.html" %> \out -> do
+      let srcPath = dropDirectory1 (dropDirectory1 out) -<.> "md"
+      need [srcPath]
+      fileContents <- readFile' srcPath
+      -- Load a markdown source file into an Aeson Value
+      -- The 'content' key contains an html-rendered string
+      -- Any metadata from a yaml block is loaded into the appropriate keys in the Aeson object
+      -- e.g. author, date, tags, etc.
+      postData <- markdownToHTML . T.pack $ fileContents
+      -- Load a mustache template using using cache if available
+      need ["templates/page.html"]
+      pageT <- compileTemplate' "templates/page.html"
+      -- Fill in the template using the post metadata/content
+      writeFile' out . T.unpack $ substitute pageT postData
+
     distDir ~> do
-      need ["copy-hakyll", "copy-webpack",
+      posts <- postHtmls
+      need $ ["copy-hakyll", "copy-webpack",
             distDir </> "out/main.css",
-            distDir </> "about.html"]
+            distDir </> "about.html"
+           ] <> posts
 
     "copy-hakyll" ~> do
       need [hakyllOut </> "index.html"]
@@ -113,7 +130,6 @@ main =
           (wpOut </>) <$> ["*.css", "*.woff2", "*.woff", "*.otf", "*.ttf"]
       need $ files
       need $ (distDir </>) <$> files
-
 
     "yarn-build" ~> do
       need ["out/manifest.json"]
@@ -176,3 +192,11 @@ main =
   hakyllOut = "_site"
   wpOut :: FilePath
   wpOut = "out"
+
+  postNames :: Action [FilePath]
+  postNames =  getDirectoryFiles "." ["posts/*.md"]
+
+  postHtmls :: Action [FilePath]
+  postHtmls = do
+    names <- postNames
+    return $ (\f -> distDir </> "tmp" </> f -<.> ".html") <$> names
