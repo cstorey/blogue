@@ -4,6 +4,8 @@ import System.Directory
 import qualified Data.Text as T
 import qualified Data.Map as M
 import           Data.Aeson
+import Control.Lens (at, (?~))
+import Data.Aeson.Lens
 import qualified Data.ByteString.Lazy as B
 import System.Posix.Files (createSymbolicLink)
 import Development.Shake
@@ -113,9 +115,7 @@ main =
 
     distDir </> "tmp" </> "posts" </> "*.html" %> \out -> do
       let srcPath = dropDirectory1 (dropDirectory1 out) -<.> "md"
-      need [srcPath]
-      fileContents <- readFile' srcPath
-      postData <- renderMarkdown . T.pack $ fileContents
+      postData <- loadPost srcPath
       -- Load a mustache template using using cache if available
       need ["templates/page.html"]
       pageT <- compileTemplate' "templates/page.html"
@@ -211,6 +211,14 @@ main =
   postHtmls = do
     names <- postNames
     return $ (\f -> distDir </> "tmp" </> f -<.> ".html") <$> names
+
+  loadPost :: FilePath -> Action Post
+  loadPost srcPath = do
+    need [srcPath]
+    let url = T.pack $ srcPath -<.> "html"
+    postData <- readFile' srcPath >>= markdownToHTML . T.pack
+    let withURL = _Object . at (T.pack "url") ?~ String url
+    convert . withURL $ postData
 
   renderMarkdown :: T.Text -> Action Post
   renderMarkdown t = do
