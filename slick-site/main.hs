@@ -19,12 +19,12 @@ main =
       need ["package.json", "yarn.lock"]
       cmd_ "yarn" ["install"]
 
-    "out/manifest.json" %> \_ -> do
+    wpOut </> "manifest.json" %> \_ -> do
       need [webpackExe]
       cssFiles <- getDirectoryFiles "." ["css/*.css"]
       need $ jsConfFiles ++ cssFiles
       cmd_ webpackExe
-    "out/*" %> \outf -> do
+    wpOut </> "*" %> \outf -> do
       need ["out/manifest.json"]
 
     venv </> "bin/python" %> \_ -> do
@@ -46,15 +46,30 @@ main =
     [hakyllOut </> "*"] &%> \_ -> do
       runHakyll "build"
 
+    distDir </> wpOut </> "*" %> \out -> do
+        let file = dropDirectory1 out
+        liftIO $ createDirectoryIfMissing True distDir
+        -- liftIO $ putStrLn $ show ("copyFileChanged/out", file, (distDir </> file))
+        copyFileChanged file (distDir </> file)
+
+    ["dist//*.html", "dist/*.xml", "dist//*.svg"] |%> \out -> do
+        let file = dropDirectory1 out
+        liftIO $ createDirectoryIfMissing True distDir
+        -- liftIO $ putStrLn $ show ("copyFileChanged/_site", (hakyllOut </> file), (distDir </> file))
+        copyFileChanged (hakyllOut </> file) (distDir </> file)
+
     distDir ~> do
       need [hakyllOut </> "index.html"]
-      files <- getDirectoryFiles hakyllOut ["**"]
-      -- liftIO $ putStrLn $ show ("files", hakyllOut, files)
+      files <- getDirectoryFiles hakyllOut ["//*.html", "/*.xml", "//*.svg"]
       need $ (hakyllOut </>) <$> files
-      forM_ files $ \file -> do
-        liftIO $ createDirectoryIfMissing True $ takeDirectory file
-        -- liftIO $ putStrLn $ show ("copyFileChanged", (hakyllOut </> file), (distDir </> file))
-        copyFileChanged (hakyllOut </> file) (distDir </> file)
+      need $ (distDir </>) <$> files
+
+      need ["out/manifest.json"]
+      files <- getDirectoryFiles "." $
+          (wpOut </>) <$> ["*.css", "*.woff", "*.otf", "*.ttf"]
+      need $ files
+      need $ (distDir </>) <$> files
+
 
     "yarn-build" ~> do
       need ["out/manifest.json"]
@@ -113,3 +128,5 @@ main =
   distDir = "dist"
   hakyllOut :: FilePath
   hakyllOut = "_site"
+  wpOut :: FilePath
+  wpOut = "out"

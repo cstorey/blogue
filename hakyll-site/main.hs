@@ -64,10 +64,6 @@ main = do
         route   idRoute
         compile copyFileCompiler
 
-    match (fromGlob $ bundlePrefix ++ "*") $ do
-        route   idRoute
-        compile copyFileCompiler
-
     manifestDep <- makePatternDependency "out/manifest.json"
     rulesExtraDependencies [manifestDep] $ do
       match (fromList ["about.md"]) $ do
