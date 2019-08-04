@@ -1,3 +1,5 @@
+import System.Directory
+
 import qualified Data.Text as T
 import Development.Shake
 import Development.Shake.FilePath
@@ -11,7 +13,7 @@ srcToBuild path = "build" </> dropDirectory1 path
 main :: IO ()
 main =
   shakeArgs shakeOptions $ do
-    want ["site-build"]
+    want [distDir]
 
     [nodeBin </> "*"] &%> \outf -> do
       need ["package.json", "yarn.lock"]
@@ -39,19 +41,26 @@ main =
       Stdout content <- cmd [".venv/bin/python", script]
       writeFile' out content
 
+    [hakyllOut </> "*"] &%> \_ -> do
+      runHakyll "build"
+
+    distDir ~> do
+      need [hakyllOut </> "index.html"]
+      files <- getDirectoryFiles hakyllOut ["**"]
+      -- liftIO $ putStrLn $ show ("files", hakyllOut, files)
+      need $ (hakyllOut </>) <$> files
+      forM_ files $ \file -> do
+        liftIO $ createDirectoryIfMissing True $ takeDirectory file
+        -- liftIO $ putStrLn $ show ("copyFileChanged", (hakyllOut </> file), (distDir </> file))
+        copyFileChanged (hakyllOut </> file) (distDir </> file)
+
     "yarn-build" ~> do
       need ["out/manifest.json"]
 
     "site-rebuild" ~> do
-      svgs <- pySvgs
-      hakyllSrc <- getDirectoryFiles "." ["posts/**", "templates/*"]
-      need $ svgs <> ["out/manifest.json"] <> hakyllSrc
-      cmd_ ["stack", "exec", "site", "rebuild"]
+      runHakyll "rebuild"
     "site-build" ~> do
-      svgs <- pySvgs
-      hakyllSrc <- getDirectoryFiles "." ["posts/**", "templates/*"]
-      need $ svgs <> ["out/manifest.json"] <> hakyllSrc
-      cmd_ ["stack", "exec", "site", "build"]
+      runHakyll "build"
     "prettier" ~> do
       js <- getDirectoryFiles "." ["*.js"]
       css <- getDirectoryFiles "." ["css/*.js"]
@@ -63,6 +72,7 @@ main =
       liftIO $ removeFiles "." $ svgs ++ [pyDepsInstalled]
       liftIO $ removeFiles "out" ["*"]
       liftIO $ removeFiles "_site" ["*"]
+      liftIO $ removeFiles distDir ["*"]
 
   where
   venv = ".venv"
@@ -72,6 +82,15 @@ main =
   pySvgs = do
     pys <- getDirectoryFiles "." ["images//*.svg.py"]
     return $ map dropExtension pys
+
+  runHakyll :: String -> Action ()
+  runHakyll cmd = do
+      svgs <- pySvgs
+      hakyllSrc <- getDirectoryFiles "." ["posts/**", "templates/*"]
+      need $ svgs
+        <> ["out/manifest.json"]
+        <> hakyllSrc
+      cmd_ ["stack", "exec", "site", cmd]
 
   nodeBin :: FilePath
   nodeBin = "node_modules/.bin"
@@ -86,3 +105,8 @@ main =
 
   pyDepsInstalled :: FilePath
   pyDepsInstalled = venv </> ".installed"
+
+  distDir :: FilePath
+  distDir = "dist"
+  hakyllOut :: FilePath
+  hakyllOut = "_site"
