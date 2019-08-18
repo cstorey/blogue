@@ -7,6 +7,7 @@ jobs:
     steps:
       - checkout
       - run: git merge master
+      - run: apt-get update && apt-get install time
 
       - restore_cache:
           key: stack
