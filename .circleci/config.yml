@@ -8,6 +8,4 @@ jobs:
       - checkout
       - run: git merge master
 
-      - run:
-          name: Greeting
-          command: echo Hi!
+      - run: ./bin/build.sh
