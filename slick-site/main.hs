@@ -263,13 +263,11 @@ main =
     p <- loadUsing (readMarkdown readerOptions)
       (writeHtml5String writerOptions)
       t
-    traceShowM ("postData", p)
 
     content <- maybe (fail "Missing content?") pure $
                 p ^? key (T.pack "content") . _String
 
     let (teaser,_) = T.breakOn (T.pack "<!--more-->") content
-    traceShowM ("teaser", teaser)
 
     let withURL = _Object . at (T.pack "url") ?~ String url
     let withTeaser = _Object . at (T.pack "teaser") ?~ String teaser
