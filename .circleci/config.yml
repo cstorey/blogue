@@ -18,3 +18,7 @@ jobs:
           paths:
             - ~/.stack
             - .stack-work
+
+      - store_artifacts:
+          path: dist
+          destination: dist
