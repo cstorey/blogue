@@ -5,7 +5,7 @@ title: "Conventions of safety"
 description: 'Paving cowpaths to avoid sharp edges'
 ---
 
-Thanks to discussion in my team recently, I've been thinking recently about how design conventions can help or harm safety.<!--more--> One place this comes up is in application layout, and what kinds of behaviour we put where.
+Thanks to some discussions in my team recently, I've been thinking recently about how design conventions can help or harm safety.<!--more--> One place this comes up is in application layout, and what kinds of behaviour we put where.
 
 To my mind, the biggest value in having conventions around service layout is to lower the cost of change. Let's say we have a component that listens for events from others. In that case, you might have a habit of putting those listeners into a file named `listener.rs`. If this becomes a habit, you will know to look at the listener file, instead of needing to search for it.
 
@@ -35,4 +35,4 @@ The example of numbering documents is quite a low stakes task. In a bank though,
 
 Now, these may seem like mistakes that are simple to avoid, but in complex systems, [things go wrong all the time](https://how.complexsystems.fail). So it's wise to design assuming that mistakes will happen, both from machines and people. For example, a tired, or rushed developer may not know to hold a lock while calling the new number routine. Having the routine fail in that case will mean that at they discover their mistake quickly.
 
-So we should design our components and interfaces to be safe, and error resistant. And precisely because conventions are so very useful, we should design them to encourage safe ways of working.
+So we should design our components and interfaces to be safe, and error resistant. And precisely because conventions can be so powerful, we should design them to encourage safe ways of working.
