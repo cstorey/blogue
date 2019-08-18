@@ -1,0 +1,17 @@
+<dl class="post-summaries">
+  $for(posts)$
+  <dt>
+    <a href="$url$" title="$description$">$title$</a>
+  </dt>
+  <dd class="post">
+    $if(description)$
+    <p class="info"><span class="subtitle">$description$</span>ー$date$</p>
+    $endif$ $if(teaser)$
+    <aside class="teaser">
+      $teaser$
+      <a href="$url$" title="$description$">…</a>
+    </aside>
+    $endif$
+  </dd>
+  $endfor$
+</dl>

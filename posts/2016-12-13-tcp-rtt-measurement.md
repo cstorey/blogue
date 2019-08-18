@@ -1,4 +1,5 @@
 ---
+date: '2016-12-13'
 title: Adventures in TCP latency measurement
 description: There and back in quantifiable time.
 ---
@@ -12,7 +13,8 @@ One of the ways to measure round-trip latency is described in [TCP Extensions fo
 
 In normal operation, each packet that a computer sends will have two timestamp values attached, a value from the local clock, and an echo of the latest timestamp value seen from the remote side of the connection. 
 
-On example from the RFC looks like this:
+One example from the RFC looks like this:
+
 ```
              TCP  A                                     TCP B
                              <A,TSval=1,TSecr=120> -->

@@ -19,6 +19,7 @@ jobs:
 
       - restore_cache:
           keys:
+            - home-stack-{{ checksum "stack.yaml" }}-{{checksum "package.yaml" }}
             - home-stack-{{ checksum "stack.yaml" }}
       - restore_cache:
           keys:
@@ -27,7 +28,7 @@ jobs:
 
       - run: env time -v stack build -j 8
       - save_cache:
-          key: home-stack-{{ checksum "stack.yaml" }}
+          key: home-stack-{{ checksum "stack.yaml" }}-{{checksum "package.yaml" }}
           paths:
             - ~/.stack
       - save_cache:
@@ -37,6 +38,7 @@ jobs:
 
       - run: stack exec -- slick
 
+      - run: tar Jcvf dist.tar.xz dist
+
       - store_artifacts:
-          path: dist
-          destination: dist
+          path: dist.tar.xz

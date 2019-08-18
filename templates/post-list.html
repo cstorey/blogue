@@ -1,17 +1,18 @@
 <dl class="post-summaries">
-  $for(posts)$
+  {{#posts}}
   <dt>
-    <a href="$url$" title="$description$">$title$</a>
+    <a href="{{ url }}" title="{{ description }}">{{title}}</a>
   </dt>
   <dd class="post">
-    $if(description)$
-    <p class="info"><span class="subtitle">$description$</span>ー$date$</p>
-    $endif$ $if(teaser)$
+    {{#description}}
+    <p class="info"><span class="subtitle">{{description}}</span>ー{{date}}</p>
+    {{/description}}
+    {{#teaser}}
     <aside class="teaser">
-      $teaser$
-      <a href="$url$" title="$description$">…</a>
+      {{{teaser}}}
+      <a href="{{ url }}" title="{{description}}">…</a>
     </aside>
-    $endif$
+    {{/teaser}}
   </dd>
-  $endfor$
+  {{/posts}}
 </dl>

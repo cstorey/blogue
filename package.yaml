@@ -19,6 +19,9 @@ dependencies:
 
 - shake
 - slick
+- unix
+- lens-aeson
+- lens
 
 executables:
   site:
