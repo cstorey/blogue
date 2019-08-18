@@ -12,13 +12,14 @@ jobs:
       - restore_cache:
           key: stack
 
-      - run: time -v ./bin/build.sh
-
+      - run: env time -v stack build -j 8
       - save_cache:
           key: stack-{{ .BuildNum }}
           paths:
             - ~/.stack
             - .stack-work
+
+      - run: stack exec -- slick
 
       - store_artifacts:
           path: dist
