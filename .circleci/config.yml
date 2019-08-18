@@ -11,7 +11,7 @@ jobs:
       - restore_cache:
           key: stack
 
-      - run: ./bin/build.sh
+      - run: time -v ./bin/build.sh
 
       - save_cache:
           key: stack-{{ .BuildNum }}
