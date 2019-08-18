@@ -165,7 +165,8 @@ main =
             distDir </> "out/main.js",
             distDir </> "about.html",
             distDir </> "index.html",
-            distDir </> "archive.html"
+            distDir </> "archive.html",
+            distDir </> "atom.xml"
            ] <> posts
 
     "copy-hakyll" ~> do
