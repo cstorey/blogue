@@ -11,7 +11,7 @@ To my mind, the biggest value in having conventions around service layout is to 
 
 When we write a service then change it rarely afterwards, this habit can be very useful. If you are unfamiliar with a section of the codebase, these kinds of _affordances_ can make life easier. This results in less time sifting through code, and so makes it easier to change.
 
-Another way to lower the cost of change is to have clear roles for each module within it. (And these roles themselves can follow clear patterns). Even them, these roles serve to hide some detail from the rest of the system.
+Another way to lower the cost of change is to have clear roles for each module within it. (And these roles themselves can follow clear patterns). Even then, these roles serve to hide some detail from the rest of the system.
 
 A good interface means that a caller express intent clearly, and let someone else worry about the details. For example, a database library lets you can pose _queries_ and get results back. Without it, you'd need to know exactly how to turn your application's data into something the database understands, and vica versa.
 
