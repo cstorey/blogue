@@ -1,6 +1,17 @@
 {{>templates/default.header.html}}
 
 <p>Here you can find all my previous posts:</p>
-{{>templates/post-list.html}}
+<dl class="post-summaries">
+  {{#posts}}
+  <dt>
+    <a href="{{ url }}" title="{{ description }}">{{title}}</a>
+  </dt>
+  <dd class="post">
+    {{#description}}
+    <p class="info"><span class="subtitle">{{description}}</span>ー{{date}}</p>
+    {{/description}}
+  </dd>
+  {{/posts}}
+</dl>
 
 {{>templates/default.footer.html}}
