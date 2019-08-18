@@ -18,13 +18,23 @@ jobs:
           apt-get install -y time virtualenv nodejs yarn graphviz
 
       - restore_cache:
-          key: stack
+          keys:
+            - home-stack-{{ checksum "stack.yaml" }}
+            - stack
+      - restore_cache:
+          keys:
+            - work-stack-{{ checksum "stack.yaml" }}-{{checksum "package.yaml" }}
+            - stack
+      - run: stack setup
 
       - run: env time -v stack build -j 8
       - save_cache:
-          key: stack-{{ .BuildNum }}
+          key: home-stack-{{ checksum "stack.yaml" }}
           paths:
             - ~/.stack
+      - save_cache:
+          key: work-stack-{{ checksum "stack.yaml" }}-{{checksum "package.yaml" }}
+          paths:
             - .stack-work
 
       - run: stack exec -- slick
