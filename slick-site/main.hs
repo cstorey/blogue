@@ -7,7 +7,7 @@ import System.Directory
 import qualified Data.Text as T
 import qualified Data.Map as M
 import           Data.Aeson
-import Control.Lens (at, (?~))
+import Control.Lens hiding ((<.>), Index)
 import Data.Aeson.Lens
 import qualified Data.ByteString.Lazy as B
 import System.Posix.Files (createSymbolicLink)
@@ -19,6 +19,7 @@ import           Text.Pandoc.Options
 import           Text.Pandoc
 import GHC.Generics (Generic)
 import Data.List
+import Debug.Trace
 
 -- convert a source filepath to a build filepath
 -- e.g. site/css/style.css -> build/css/style.css
@@ -32,6 +33,7 @@ data Post = Post
   , date :: String
   , description :: String
   , url :: String
+  , teaser :: String
   } deriving (Generic, Eq, Ord, Show)
 instance FromJSON Post
 instance ToJSON Post
@@ -253,14 +255,25 @@ main =
   loadPost srcPath = do
     need [srcPath]
     let url = T.pack $ srcPath -<.> "html"
-    postData <- readFile' srcPath >>= markdownToHTML . T.pack
-    let withURL = _Object . at (T.pack "url") ?~ String url
-    convert . withURL $ postData
+    postData <- readFile' srcPath >>= renderMarkdown url . T.pack
+    return postData
 
-  renderMarkdown :: T.Text -> Action Post
-  renderMarkdown t = do
-    p <- loadUsing (readMarkdown readerOptions) (writeHtml5String writerOptions) t
-    convert p
+  renderMarkdown :: T.Text -> T.Text -> Action Post
+  renderMarkdown url t = do
+    p <- loadUsing (readMarkdown readerOptions)
+      (writeHtml5String writerOptions)
+      t
+    traceShowM ("postData", p)
+
+    content <- maybe (fail "Missing content?") pure $
+                p ^? key (T.pack "content") . _String
+
+    let (teaser,_) = T.breakOn (T.pack "<!--more-->") content
+    traceShowM ("teaser", teaser)
+
+    let withURL = _Object . at (T.pack "url") ?~ String url
+    let withTeaser = _Object . at (T.pack "teaser") ?~ String teaser
+    convert . withURL . withTeaser $ p
     where
       mathExtensions = extensionsFromList [
                         Ext_tex_math_dollars,
