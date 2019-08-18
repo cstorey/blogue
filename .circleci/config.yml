@@ -20,11 +20,9 @@ jobs:
       - restore_cache:
           keys:
             - home-stack-{{ checksum "stack.yaml" }}
-            - stack
       - restore_cache:
           keys:
             - work-stack-{{ checksum "stack.yaml" }}-{{checksum "package.yaml" }}
-            - stack
       - run: stack setup
 
       - run: env time -v stack build -j 8
