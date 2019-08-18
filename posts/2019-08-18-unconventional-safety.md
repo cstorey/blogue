@@ -13,7 +13,7 @@ When we write a service then change it rarely afterwards, this habit can be very
 
 Another way to lower the cost of change is to have clear roles for each module within it. (And these roles themselves can follow clear patterns). Even then, these roles serve to hide some detail from the rest of the system.
 
-A good interface means that a caller express intent clearly, and let someone else worry about the details. For example, a database library lets you can pose _queries_ and get results back. Without it, you'd need to know exactly how to turn your application's data into something the database understands, and vica versa.
+A good interface means that a caller can express intent clearly, and let someone else worry about the details. For example, a database library lets you can pose _queries_ and get results back. Without it, you'd need to know exactly how to turn your application's data into something the database understands, and vica versa.
 
 A good interface should also make clear what it needs. Let's say some people in an office want to number documents. We can keep a logbook with the last number used. We can read the previous value we gave out, write down the next number, and use that for our document.
 
