@@ -10,22 +10,33 @@ This is an adaptation of something I wrote on Slack, when discussing the pros an
 
 ---
 
-Okay, I see what you mean, although I think it'd be interesting to find out which parts of this are deliberate choice, and which have emerged accidentally over time.
 
-To my mind, the biggest value in having local customs around service layout is to lower the cost of change, in the sense that people will know where to look for a certain kind of behaviour, thus reducing the amount of time spent sifting through the code.
+To my mind, the biggest value in having local customs around service layout is to lower the cost of change.
 
-Another good way to lower the cost of change is to have modules that have well-defined contracts, and provide more value than just being a facade (John Ousterhout talks about how modules should be deep). And ideally, each module should be able to fulfil that contract while minimising the details that the caller needs to know about.
+Let's say we have a component that listens for events from others. In that case, you might have a habit of putting those listeners into a file named `listener.rs`. If this becomes a habit, you will know to look at the listener file, instead of needing to search for it.
 
-In this case, the contract for the `dao.IncrementCounterThing()` is “*Assuming that the caller holds a given lock*, we return a unique monotonic integer”. The “assuming” clause there represents some detail that the *caller* needs to know for the called function to do it's job correctly.
+When we write a service then change it rarely afterwards, this habit can be very useful. If you are unfamiliar with a section of the codebase, these kinds of affordances can make life easier. This results in less time sifting through code, and so makes it easier to change.
 
-If we consider in terms of people, then it's like having a machine (eg: mechanical saw) where a the person working the machine feeds the work pieces past the saw. *But*, they also rely on whoever passed that work to them to ensure that the safety guards are in place. Also, to extend the metaphor, the person working the machine doesn't have an easy way to check that the safety features *are actually in place*, so is entirely reliant on the requestor.
+ Another way to lower the cost of change is to have clear roles for each module within it. (And these roles themselves can follow clear patterns). Even them, these roles serve to hide some detail from the rest of the system.
 
-A big part of designing safe systems is understanding how things go right over the long term. A big part of this is to ensure that it's easy to do the right thing safely, and *really hard* to do do things unsafely.
+A good interface means that a caller express precise intent, and let someone else worry about  the details. For example, the rust postgres library lets you can ask questions and get data back. Without it, you'd need to know exactly how to format queries, and parameters in the way the database understands, and then parse the replies.
 
-Now, with our metaphor it might well be that they have a habit of having the one person manage safety for the person working the machine, but it does however that the workers are exposed to risks that could otherwise be avoided.
+A good interface will also make clear what it depends on. Let's say some people in an office want to number documents. We can keep a logbook with the last number used. We can read the previous value we gave out, write down the next number, and use that for our document.
 
-Likewise, in our case, the risk isn't a threat to life and limb, but one of confusion–eg: if we allocate the same external ID to two requests, we may think we've fulfilled both, and not provide information that's legally mandated, resulting in an incident. It's not likely in the short term, but most accidents in complex systems arise out of multiple things going wrong. Having spent a long time dealing with systems other folks have designed, I'm really very keen to make it easy for folks working with this down the line to do things safely.
+If lots of people want to number documents at the same time, then we encounter a problem. What if two people read then write the same numbers, and have the same number for their documents? People shouldn't make this mistake, as they'll notice that someone else is holding the book, and won't race to write in it before the other has finished. Some people describe this as “common sense”.
 
-(There's also a lot to be said about how we think about domain-specific logic vs. logic mandated by the technologies, but that's one for another day)
+Computers don't have common sense. This is why we need to spell everything out to them in exacting detail. If they have read the last document number, they won't know to check no-one else has changed it when they write down the new number, either.
 
-Hopefully, if nothing else, this helps elucidate where i'm coming from.
+So, in a distributed system we can use a centralised lock service to solve this problem. With this, the computer will take the lock, update the number and release the lock. Even then, if the new number routine does not know anything about the lock mechanism, it's still possible to make the same mistake. A programmer might forget that they need to take the lock to call the new number routine, for example.
+
+So, we have ways to solve this. One is we make the new number routine manage the lock itself. This is fine as long as it controls everything itself, but once we have other routines that use locks involved, then things get more complicated. This is okay if the lock for the new number is only for that new number. But if we share it with other routines, we risk problems like deadlocks.
+
+Another solution is to inform the new number routine that we hold the lock, and have the routine fail if we do not. For example, the lock server may provide a token the routine can verify. (https://martin.kleppmann.com/2016/02/08/how-to-do-distributed-locking.html).
+
+The logical conclusion to this is in the rust standard library. The `Mutex<T>` type holds a value of some type T, and will only permit access via a guard that guarantees we hold the lock.
+
+A big part of designing safe systems is understanding how things go right over the long term. A big part of this is to ensure that it's easy to do the safe thing, and *very hard* to do something unsafe.
+
+The example of numbering documents is quite a low stakes task. In a bank though, we need to number payment cards, so we know whose account to charge. Having two cards with the same card number may mean one person can spend another's money. This is obviously bad for the customer, and leaves the bank liable for the mistake.
+
+Now, these may seem like mistakes that are simple to avoid, but in complex systems, things go wrong all the time (https://how.complexsystems.fail). So it's wise to design assuming that failures will happen. For example, a tired, or rushed developer may not know to hold a lock while calling the new number routine. Having the routine fail in that case will mean that at they discover their mistake quickly.
