@@ -15,7 +15,7 @@ jobs:
           echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
           echo deb https://deb.nodesource.com/node_12.x buster main | tee /etc/apt/sources.list.d/nodesource.list
           apt-get update
-          apt-get install -y time virtualenv nodejs yarn
+          apt-get install -y time virtualenv nodejs yarn graphviz
 
       - restore_cache:
           key: stack
