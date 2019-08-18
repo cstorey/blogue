@@ -6,6 +6,7 @@ jobs:
 
     steps:
       - checkout
+      - run: git merge master
 
       - run:
           name: Greeting
