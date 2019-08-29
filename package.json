@@ -27,7 +27,7 @@
     "prettier": "^1.18.2",
     "style-loader": "^1.0.0",
     "sugarss": "^2.0.0",
-    "webpack": "^4.39.2",
+    "webpack": "^4.39.3",
     "webpack-cli": "^3.3.7",
     "webpack-manifest-plugin": "^2.0.4"
   },
