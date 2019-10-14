@@ -3975,10 +3975,10 @@ source-sans-pro@^3.6.0:
   resolved "https://registry.yarnpkg.com/source-sans-pro/-/source-sans-pro-3.6.0.tgz#f4167065ebf096136b1b4f141dbd48886dda1486"
   integrity sha512-C1RFUGu+YASuqpgDRInTM7Y6OwqeWNOuKn7v0P/4Kh66epTI4PYWwPWP5kdA4l/VqzBAWiqoz5dk0trof73R7w==
 
-source-serif-pro@^3.0.0:
-  version "3.0.0"
-  resolved "https://registry.yarnpkg.com/source-serif-pro/-/source-serif-pro-3.0.0.tgz#c2e91f4c6e2cf42770320be6dd141ffe52e74fce"
-  integrity sha512-HOM9W1NKNjEWgM7dQPCfik6H2XNc2ArvJiUauKS2WmvhOO5wbPJMQVKzCwjeaVQgNBKufAUIBdDPxRVs/pGOiw==
+source-serif-pro@^3.1.0:
+  version "3.1.0"
+  resolved "https://registry.yarnpkg.com/source-serif-pro/-/source-serif-pro-3.1.0.tgz#22e4916c537a610d27cfa3b51a7f2057d06963ef"
+  integrity sha512-b4/f5JilgkEGbFjLh7M9safsjWTovyfvpiQIgGY8pigRkH5lAfO+9jLxbRnKoekBQqmnhacWxiRsCJu4JB4Qhg==
 
 split-string@^3.0.1, split-string@^3.0.2:
   version "3.1.0"
