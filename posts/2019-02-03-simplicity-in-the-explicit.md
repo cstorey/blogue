@@ -6,7 +6,7 @@ description: 'When simplicity is more complex than you might expect'
 ---
 
 
-Software developers have seem to love describing things as “complex” or “simple”, but it's really quite rare to find someone defining these terms.<!--more-->
+Software developers seem to love describing things as “complex” or “simple”, but it's really quite rare to find someone defining these terms.<!--more-->
 
 John Ousterhout in “A Philosophy of Software Design” comes the closest to this I've seen, in the sense that he defines it as “... anything related to the structure of a software system that makes it hard to understand and modify the system”, going on to talk about the size of the interface compared to the implementation as one metric.
 
