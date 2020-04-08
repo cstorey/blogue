@@ -3,14 +3,14 @@
 @import "@typopro/web-iosevka/TypoPRO-Iosevka.css";
 
 :root {
---meta-base-fonts: serif;
---meta-enh-fonts: "Source Sans Pro", var(--meta-base-fonts);
---body-base-fonts: serif;
---body-enh-fonts: "Source Serif Pro", var(--body-base-fonts);
+  --meta-base-fonts: serif;
+  --meta-enh-fonts: "Source Sans Pro", var(--meta-base-fonts);
+  --body-base-fonts: serif;
+  --body-enh-fonts: "Source Serif Pro", var(--body-base-fonts);
 
---title-base-fonts: var(--meta-base-fonts);
---title-enh-fonts: var(--meta-enh-fonts);
+  --title-base-fonts: var(--meta-base-fonts);
+  --title-enh-fonts: var(--meta-enh-fonts);
 
---mono-base-fonts: Menlo, Consolas, "Liberation Mono",Courier,monospace;
---mono-enh-fonts: "TypoPRO Iosevka Term", var(--mono-base-fonts);
+  --mono-base-fonts: Menlo, Consolas, "Liberation Mono", Courier, monospace;
+  --mono-enh-fonts: "TypoPRO Iosevka Term", var(--mono-base-fonts);
 }

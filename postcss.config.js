@@ -6,6 +6,6 @@ module.exports = {
     "postcss-nested": {},
     "postcss-simple-vars": {},
     "postcss-preset-env": {},
-    cssnano: {}
-  }
+    cssnano: {},
+  },
 };

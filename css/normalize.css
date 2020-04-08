@@ -39,7 +39,8 @@ main, /* 2 */
 menu,
 nav,
 section,
-summary { /* 1 */
+summary {
+  /* 1 */
   display: block;
 }
 
@@ -274,7 +275,8 @@ optgroup {
 
 button,
 input, /* 1 */
-select { /* 2 */
+select {
+  /* 2 */
   overflow: visible;
 }
 
@@ -286,7 +288,8 @@ select { /* 2 */
 button,
 input,
 select,
-textarea { /* 1 */
+textarea {
+  /* 1 */
   margin: 0;
 }
 
@@ -296,7 +299,8 @@ textarea { /* 1 */
  */
 
 button,
-select { /* 1 */
+select {
+  /* 1 */
   text-transform: none;
 }
 
