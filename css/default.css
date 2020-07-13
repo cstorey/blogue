@@ -18,6 +18,8 @@ $text-breakpoint: calc($text-width + 2rem);
 body {
   margin: 0px 1rem 0px 1rem;
   text-rendering: optimizeLegibility;
+  line-height: 1.25;
+  letter-spacing: -0.025em;
 }
 
 /* Anchor to the left on wider screens */
