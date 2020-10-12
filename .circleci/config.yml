@@ -6,7 +6,11 @@ jobs:
 
     steps:
       - checkout
-      - run: git merge master
+      - run: |
+          upstream=${CIRCLE_REPOSITORY_URL:-$(git remote  get-url origin)}
+          git config --global user.email "circleci@invalid.example"
+          git config --global user.name "CircleCI build for ${upstream}"
+          git merge --no-edit --no-ff origin/master
       - run: |
           set -euxo pipefail
           apt-get update && apt-get install -y apt-transport-https
