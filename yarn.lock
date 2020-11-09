@@ -2141,9 +2141,9 @@ nan@^2.12.1:
   version "2.14.0"
   resolved "https://registry.yarnpkg.com/nan/-/nan-2.14.0.tgz#7818f722027b2459a86f0295d434d1fc2336c52c"
 
-nanoid@^3.1.12:
-  version "3.1.12"
-  resolved "https://registry.yarnpkg.com/nanoid/-/nanoid-3.1.12.tgz#6f7736c62e8d39421601e4a0c77623a97ea69654"
+nanoid@^3.1.16:
+  version "3.1.16"
+  resolved "https://registry.yarnpkg.com/nanoid/-/nanoid-3.1.16.tgz#b21f0a7d031196faf75314d7c65d36352beeef64"
 
 nanomatch@^1.2.9:
   version "1.2.13"
@@ -3107,13 +3107,13 @@ postcss@^7.0.0, postcss@^7.0.1, postcss@^7.0.14, postcss@^7.0.17, postcss@^7.0.2
     source-map "^0.6.1"
     supports-color "^6.1.0"
 
-postcss@^8.1.0, postcss@^8.1.1:
-  version "8.1.2"
-  resolved "https://registry.yarnpkg.com/postcss/-/postcss-8.1.2.tgz#9731fcaa4f7b0bef47121821bdae9eeb609a324c"
+postcss@^8.1.1, postcss@^8.1.6:
+  version "8.1.6"
+  resolved "https://registry.yarnpkg.com/postcss/-/postcss-8.1.6.tgz#b022ba2cfb8701da234d073ed3128c5a384c35ff"
   dependencies:
     colorette "^1.2.1"
     line-column "^1.0.2"
-    nanoid "^3.1.12"
+    nanoid "^3.1.16"
     source-map "^0.6.1"
 
 prettier@^2.1.2:
@@ -3631,11 +3631,11 @@ stylehacks@^4.0.0:
     postcss "^7.0.0"
     postcss-selector-parser "^3.0.0"
 
-sugarss@^3.0.1:
-  version "3.0.1"
-  resolved "https://registry.yarnpkg.com/sugarss/-/sugarss-3.0.1.tgz#1e4e315b3b321eec477ef9617c8964bcf3833b0c"
+sugarss@^3.0.3:
+  version "3.0.3"
+  resolved "https://registry.yarnpkg.com/sugarss/-/sugarss-3.0.3.tgz#bb2489961b98fbd15e4e35d6b9f4f2ee5547a6cb"
   dependencies:
-    postcss "^8.1.0"
+    postcss "^8.1.6"
 
 supports-color@^5.3.0, supports-color@^5.4.0:
   version "5.5.0"
