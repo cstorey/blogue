@@ -3105,7 +3105,7 @@ postcss@^7.0.0, postcss@^7.0.1, postcss@^7.0.14, postcss@^7.0.17, postcss@^7.0.2
     source-map "^0.6.1"
     supports-color "^6.1.0"
 
-postcss@^8.1.0, postcss@^8.1.4:
+postcss@^8.1.4, postcss@^8.1.6:
   version "8.1.6"
   resolved "https://registry.yarnpkg.com/postcss/-/postcss-8.1.6.tgz#b022ba2cfb8701da234d073ed3128c5a384c35ff"
   dependencies:
@@ -3629,11 +3629,11 @@ stylehacks@^4.0.0:
     postcss "^7.0.0"
     postcss-selector-parser "^3.0.0"
 
-sugarss@^3.0.1:
-  version "3.0.1"
-  resolved "https://registry.yarnpkg.com/sugarss/-/sugarss-3.0.1.tgz#1e4e315b3b321eec477ef9617c8964bcf3833b0c"
+sugarss@^3.0.3:
+  version "3.0.3"
+  resolved "https://registry.yarnpkg.com/sugarss/-/sugarss-3.0.3.tgz#bb2489961b98fbd15e4e35d6b9f4f2ee5547a6cb"
   dependencies:
-    postcss "^8.1.0"
+    postcss "^8.1.6"
 
 supports-color@^5.3.0, supports-color@^5.4.0:
   version "5.5.0"
