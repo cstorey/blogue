@@ -25,7 +25,6 @@
     "postcss-url": "^9.0.0",
     "prettier": "^2.1.2",
     "style-loader": "^2.0.0",
-    "sugarss": "^3.0.3",
     "webpack": "4.44.2",
     "webpack-cli": "^4.2.0",
     "webpack-manifest-plugin": "^2.2.0"
