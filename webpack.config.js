@@ -1,6 +1,6 @@
 const path = require("path");
 const webpack = require("webpack");
-const ManifestPlugin = require("webpack-manifest-plugin");
+const { WebpackManifestPlugin } = require('webpack-manifest-plugin');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 
@@ -8,7 +8,7 @@ const plugins = [
   new MiniCssExtractPlugin({
     filename: "[name].[chunkhash].[contenthash].css",
   }),
-  new ManifestPlugin(),
+  new WebpackManifestPlugin(),
 ];
 
 module.exports = {
