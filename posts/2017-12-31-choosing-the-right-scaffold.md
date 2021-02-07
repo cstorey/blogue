@@ -1,6 +1,5 @@
 ---
 date: '2017-12-31'
-orig_url: "https://tech.labs.oliverwyman.com/blog/2018/01/03/choosing-the-right-scaffold/"
 title: "Choosing the right scaffold"
 description: 'Tooling for mere mortals'
 ---

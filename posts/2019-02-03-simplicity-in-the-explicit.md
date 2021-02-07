@@ -1,6 +1,5 @@
 ---
 date: '2019-02-03'
-orig_url: null
 title: "Explicit relationships and the principle of least surprise"
 description: 'When simplicity is more complex than you might expect'
 ---

@@ -1,6 +1,5 @@
 ---
 date: '2018-09-07'
-orig_url: null
 title: "Streaming Approximate Histograms"
 description: 'Self Driving Buckets'
 ---

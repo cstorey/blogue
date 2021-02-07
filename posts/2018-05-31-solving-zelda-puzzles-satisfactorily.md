@@ -1,6 +1,5 @@
 ---
 date: '2018-05-31'
-orig_url: "https://tech.labs.oliverwyman.com/blog/2018/06/01/solving-zelda-puzzles-satisfactorily/"
 title: "Solving Zelda Puzzles Satisfactorily"
 description: 'The other kind of laziness'
 ---

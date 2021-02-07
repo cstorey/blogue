@@ -1,6 +1,5 @@
 ---
 date: '2019-08-18'
-orig_url: null
 title: "Conventions of safety"
 description: 'Paving cowpaths to avoid sharp edges'
 ---

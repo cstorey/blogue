@@ -1,6 +1,5 @@
 ---
 date: '2016-01-27'
-orig_url: http://www.lshift.net/blog/2016/01/27/rules-based-mio-chat-example
 title: Rules-based Network programming with Mio and Rust
 description: Making the non-deterministic, less so.
 ---

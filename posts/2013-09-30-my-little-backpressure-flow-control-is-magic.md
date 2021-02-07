@@ -1,6 +1,5 @@
 ---
 date: '2013-09-30'
-orig_url: http://www.lshift.net/blog/2013/09/30/my-little-backpressure-flow-control-is-magic
 title: 'My little Backpressure: Flow Control is magic'
 description: Avoiding congestion and I/O stuffiness.
 ---

@@ -1,6 +1,5 @@
 ---
 date: '2013-04-28'
-orig_url: http://www.lshift.net/blog/2013/04/28/mutant-refactoring-powers
 title: Mutant Refactoring powers
 description: Knowing your tests are actually worth something.
 ---

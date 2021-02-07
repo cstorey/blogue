@@ -1,6 +1,5 @@
 ---
 date: '2017-03-20'
-orig_url: https://tech.labs.oliverwyman.com/blog/2017/03/20/a-taste-of-cloudformation/
 title: A Taste Of Cloudformation.
 description: Carving with clouds.
 ---

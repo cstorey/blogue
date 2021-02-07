@@ -1,6 +1,5 @@
 ---
 date: '2014-10-31'
-orig_url: http://www.lshift.net/blog/2014/10/31/clojure-component-patterns
 title: More Clojure component patterns
 description: Parking the cart before putting the horse to bed.
 ---

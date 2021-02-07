@@ -1,6 +1,5 @@
 ---
 date: '2013-09-28'
-orig_url: http://www.lshift.net/blog/2013/09/28/precise-scheduling-with-rabbitmq
 title: Precise scheduling with RabbitMQ
 description: The things we'll do to avoid dependencies.
 ---
