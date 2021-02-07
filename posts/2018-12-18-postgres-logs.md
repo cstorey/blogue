@@ -1,6 +1,5 @@
 ---
 date: '2018-12-18'
-orig_url: null
 title: "Avoiding lost updates in PostgreSQL logs"
 description: 'Ensuring the past holds no nasty surprises'
 ---

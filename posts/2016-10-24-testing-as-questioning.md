@@ -1,7 +1,6 @@
 ---
 date: '2016-10-24'
 title: Testing as question asking or Hypothesis Driven Development
-orig_url: http://www.lshift.net/blog/2016/10/24/testing-as-question-asking-or-hypothesis-driven-development/
 description: The praxis of What-who-where-when-why .
 ---
 So, my co-worker Ian asks the question “[Why bother testing](http://www.lshift.net/blog/2016/09/14/why-bother-testing/)?”. I think that an under-asked question is how do we think about testing. <!--more--> I would wager, that a sizable majority of programmers (myself included) will usually learn one or two techniques for testing, and then graviated towards those same set of answers for most problems. As an example, just think of how many long-running WebDriver based test suites exist in how many projects, and consider what kind of habits lead to that kind of inertia.

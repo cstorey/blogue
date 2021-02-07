@@ -1,6 +1,5 @@
 ---
 date: '2017-05-30'
-orig_url: https://tech.labs.oliverwyman.com/blog/2017/05/30/die-hard-statefully/
 title: Die-hard Statefully
 description: Puzzling quickcheck
 ---

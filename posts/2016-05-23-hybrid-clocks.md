@@ -1,6 +1,5 @@
 ---
 date: '2016-05-23'
-orig_url: http://www.lshift.net/blog/2016/05/23/its-all-happened-before/
 title: It's all happened before
 description: How a little counter can avoid calamitous causal confusion.
 ---

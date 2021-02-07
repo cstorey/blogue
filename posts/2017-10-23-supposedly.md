@@ -1,6 +1,5 @@
 ---
 date: '2017-10-23'
-orig_url: 'https://tech.labs.oliverwyman.com/blog/2017/11/08/supposedly-a-property-test-library/'
 title: "Supposedly a Property test library"
 description: 'Supposing that my code works...'
 ---
