@@ -21,22 +21,23 @@ jobs:
           apt-get update
           apt-get install -y time virtualenv nodejs yarn graphviz
 
+      - run: echo 1 > ~/cache-version
       - restore_cache:
           keys:
-            - home-stack-{{ checksum "stack.yaml" }}-{{checksum "package.yaml" }}
-            - home-stack-{{ checksum "stack.yaml" }}
+            - home-stack-{{ checksum "~/cache-version" }}-{{ checksum "stack.yaml" }}-{{checksum "package.yaml" }}
+            - home-stack-{{ checksum "~/cache-version" }}-{{ checksum "stack.yaml" }}
       - restore_cache:
           keys:
-            - work-stack-{{ checksum "stack.yaml" }}-{{checksum "package.yaml" }}
+            - work-stack-{{ checksum "~/cache-version" }}-{{ checksum "stack.yaml" }}-{{checksum "package.yaml" }}
       - run: stack setup
 
       - run: env time -v stack build -j 8
       - save_cache:
-          key: home-stack-{{ checksum "stack.yaml" }}-{{checksum "package.yaml" }}
+          key: home-stack-{{ checksum "~/cache-version" }}-{{ checksum "stack.yaml" }}-{{checksum "package.yaml" }}
           paths:
             - ~/.stack
       - save_cache:
-          key: work-stack-{{ checksum "stack.yaml" }}-{{checksum "package.yaml" }}
+          key: work-stack-{{ checksum "~/cache-version" }}-{{ checksum "stack.yaml" }}-{{checksum "package.yaml" }}
           paths:
             - .stack-work
 
