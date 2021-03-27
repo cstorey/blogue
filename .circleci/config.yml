@@ -2,7 +2,7 @@ version: 2
 jobs:
   build:
     docker:
-      - image: haskell:8.4 # Based on debian stretch
+      - image: haskell:8.8 # Based on debian buster
 
     steps:
       - checkout
