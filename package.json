@@ -14,7 +14,7 @@
   "license": "UNLICENSED",
   "devDependencies": {
     "css-loader": "^5.2.0",
-    "cssnano": "^4.1.10",
+    "cssnano": "^4.1.11",
     "file-loader": "^6.2.0",
     "mini-css-extract-plugin": "^1.4.0",
     "optimize-css-assets-webpack-plugin": "^5.0.4",
