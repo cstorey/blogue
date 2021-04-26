@@ -1810,9 +1810,9 @@ json5@^2.1.2:
   dependencies:
     minimist "^1.2.5"
 
-katex@^0.13.2:
-  version "0.13.2"
-  resolved "https://registry.yarnpkg.com/katex/-/katex-0.13.2.tgz#4075b9144e6af992ec9a4b772fa3754763be5f26"
+katex@^0.13.3:
+  version "0.13.3"
+  resolved "https://registry.yarnpkg.com/katex/-/katex-0.13.3.tgz#b7b1f4a8de496ea8bfe60ab0b5e1822864288f00"
   dependencies:
     commander "^6.0.0"
 
