@@ -31,7 +31,7 @@
   },
   "dependencies": {
     "@typopro/web-iosevka": "^3.7.5",
-    "katex": "^0.13.11",
+    "katex": "^0.13.13",
     "postcss-loader": "^3.0.0",
     "prettier": "^2.3.2",
     "prettify": "^0.1.7",
