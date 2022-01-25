@@ -68,18 +68,14 @@ h2,
 h3,
 h4,
 h5,
-h6,
-header,
-th,
-dt,
-a:link {
+h6 {
   font-family: var(--title-enh-fonts);
   font-weight: normal;
 }
 header,
-th,
-dt,
-a:link {
+th {
+  font-family: var(--title-enh-fonts);
+  font-weight: normal;
   font-size: 0.95em;
 }
 header {
@@ -254,7 +250,7 @@ html {
   }
 
   .post-summaries dt {
-    font-size: 1.1em;
+    /* font-size: 1.1em; */
   }
   .post-summaries dd {
     margin-left: 0px;
