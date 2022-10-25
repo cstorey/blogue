@@ -33,7 +33,7 @@
   },
   "dependencies": {
     "@typopro/web-iosevka": "^3.7.5",
-    "katex": "^0.16.2",
+    "katex": "^0.16.3",
     "source-sans-pro": "^3.6.0",
     "source-serif-pro": "^3.1.0"
   }
