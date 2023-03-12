@@ -208,10 +208,6 @@
   version "4.0.0"
   resolved "https://registry.yarnpkg.com/@types/parse-json/-/parse-json-4.0.0.tgz#2f8bb441434d163b35fb8ffdccd7138927ffb8c0"
 
-"@typopro/web-iosevka@^3.7.5":
-  version "3.7.5"
-  resolved "https://registry.yarnpkg.com/@typopro/web-iosevka/-/web-iosevka-3.7.5.tgz#53933c679ffce2ddf2dd248100dd822be880ba2f"
-
 "@webassemblyjs/ast@1.9.0":
   version "1.9.0"
   resolved "https://registry.yarnpkg.com/@webassemblyjs/ast/-/ast-1.9.0.tgz#bd850604b4042459a5a41cd7d338cbed695ed964"
@@ -3260,6 +3256,11 @@ snapdragon@^0.8.1:
     source-map "^0.5.6"
     source-map-resolve "^0.5.0"
     use "^3.1.0"
+
+source-code-pro@^2.38.0:
+  version "2.38.0"
+  resolved "https://registry.yarnpkg.com/source-code-pro/-/source-code-pro-2.38.0.tgz#85c57689f7386bb9d0515fb00ba4845bfb7b485b"
+  integrity sha512-JMXu7l3XrLREG17eEwY66ANG9716WTu6OeNvZfRKQKANEvbSERDZjk5AYTHeV6owQNPQTeiiW3ri2Ou93XFGvg==
 
 source-list-map@^2.0.0, source-list-map@^2.0.1:
   version "2.0.1"
