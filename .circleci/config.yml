@@ -43,6 +43,9 @@ jobs:
 
       - run: stack exec -- slick
 
+      - store_artifacts:
+          path: dist/
+
       - run: tar Jcvf dist.tar.xz dist
 
       - store_artifacts:
