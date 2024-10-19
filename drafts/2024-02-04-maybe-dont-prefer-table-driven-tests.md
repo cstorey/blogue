@@ -5,6 +5,8 @@ title: "Why you shouldn't always prefer table driven tests"
 description: '… and a little refactoring wouldn't go amiss, either.'
 ---
 
+Notes:
+* [Why are non-DRY specs more maintainable?](https://thedailydeveloper.substack.com/p/why-are-non-dry-specs-more-maintainable) — the notion of “locality”.
 
 <!--
 TODO:
